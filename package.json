@@ -9,16 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@code-hike/mdx": "0.7.4",
     "@tabler/icons": "1.101.0",
+    "gray-matter": "4.0.3",
     "next": "12.3.1",
+    "next-mdx-remote": "4.1.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "shiki": "0.11.1"
   },
   "devDependencies": {
-    "@code-hike/mdx": "0.7.4",
-    "@mdx-js/loader": "2.1.3",
-    "@mdx-js/react": "2.1.3",
-    "@next/mdx": "12.3.1",
     "@tailwindcss/typography": "0.5.7",
     "@types/node": "18.7.23",
     "@types/react": "18.0.21",
@@ -27,10 +27,7 @@
     "daisyui": "2.31.0",
     "eslint": "8.24.0",
     "eslint-config-next": "12.3.1",
-    "gray-matter": "4.0.3",
-    "next-mdx-remote": "4.1.0",
     "postcss": "8.4.17",
-    "shiki": "0.11.1",
     "tailwindcss": "3.1.8",
     "typescript": "4.8.4"
   }
