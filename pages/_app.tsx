@@ -11,15 +11,15 @@ import { useEffect, useState } from 'react'
 const usePageLoading = () => {
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
-    Router.events.on("routeChangeStart", (url)=>{
+    Router.events.on("routeChangeStart", ()=>{
       setIsLoading(true)
     });
 
-    Router.events.on("routeChangeComplete", (url)=>{
+    Router.events.on("routeChangeComplete", ()=>{
       setIsLoading(false)
     });
 
-    Router.events.on("routeChangeError", (url) =>{
+    Router.events.on("routeChangeError", () =>{
       setIsLoading(false)
     });
   }, [])
@@ -57,7 +57,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </div>
       <footer className="max-w-3xl w-full md:w-2/3 mt-auto mx-auto py-4 px-4 md:py-8 md:px-8">
         <div className='flex justify-center'>
-          <a href="https://github.com/makotot" className='inline-flex' target="_blank" rel="noreferrer">
+          <a href="https://github.com/makotot/makotot.dev" className='inline-flex' target="_blank" rel="noreferrer">
             <IconBrandGithub />
           </a>
         </div>
