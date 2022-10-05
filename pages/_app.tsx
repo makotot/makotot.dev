@@ -1,36 +1,36 @@
-import '../styles/globals.css'
+import "../styles/globals.css"
 
-import type { AppProps } from 'next/app'
-import Head from 'next/head'
+import type { AppProps } from "next/app"
+import Head from "next/head"
 import "@code-hike/mdx/dist/index.css"
-import Link from 'next/link'
-import { IconBrandGithub, IconCircleDotted } from '@tabler/icons'
-import { Router } from 'next/router'
-import { useEffect, useState } from 'react'
+import Link from "next/link"
+import { IconBrandGithub, IconCircleDotted } from "@tabler/icons"
+import { Router } from "next/router"
+import { useEffect, useState } from "react"
 
 const usePageLoading = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
   useEffect(() => {
-    Router.events.on("routeChangeStart", ()=>{
+    Router.events.on("routeChangeStart", () => {
       setIsLoading(true)
-    });
+    })
 
-    Router.events.on("routeChangeComplete", ()=>{
+    Router.events.on("routeChangeComplete", () => {
       setIsLoading(false)
-    });
+    })
 
-    Router.events.on("routeChangeError", () =>{
+    Router.events.on("routeChangeError", () => {
       setIsLoading(false)
-    });
+    })
   }, [])
 
   return {
-    isLoading
+    isLoading,
   }
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const{isLoading} = usePageLoading()
+  const { isLoading } = usePageLoading()
 
   return (
     <>
@@ -40,14 +40,16 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className="max-w-3xl w-full md:w-2/3 mx-auto py-4 px-4 md:py-8 md:px-8">
-        <div className='flex gap-2 items-center'>
+        <div className="flex gap-2 items-center">
           <Link href="/">
-            <a className='inline-flex justify-center items-center w-8 h-8 border border-solid border-primary text-primary hover:bg-primary hover:text-base-100 hover:border-primary-focus'>
+            <a className="inline-flex justify-center items-center w-8 h-8 border border-solid border-primary text-primary hover:bg-primary hover:text-base-100 hover:border-primary-focus">
               {isLoading ? (
-                <span className='animate-spin text-primary hover:bg-primary hover:text-base-100 hover:border-primary-focus'>
+                <span className="animate-spin text-primary hover:bg-primary hover:text-base-100 hover:border-primary-focus">
                   <IconCircleDotted size={16} />
                 </span>
-              ) : 'M'}
+              ) : (
+                "M"
+              )}
             </a>
           </Link>
         </div>
@@ -56,8 +58,13 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </div>
       <footer className="max-w-3xl w-full md:w-2/3 mt-auto mx-auto py-4 px-4 md:py-8 md:px-8">
-        <div className='flex justify-center'>
-          <a href="https://github.com/makotot/makotot.dev" className='inline-flex' target="_blank" rel="noreferrer">
+        <div className="flex justify-center">
+          <a
+            href="https://github.com/makotot/makotot.dev"
+            className="inline-flex"
+            target="_blank"
+            rel="noreferrer"
+          >
             <IconBrandGithub />
           </a>
         </div>
