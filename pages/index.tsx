@@ -14,27 +14,21 @@ export const getStaticProps = async () => {
 
 const Home = ({posts}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <div>
-
-      <main>
-        <h1 className='text-4xl'>Posts</h1>
-        <ul className='mt-4'>
-          {posts.map((post) => (
-            <li key={post.slug}>
-              <Link href={`/posts/${post.slug}`}>
-                <a className='underline hover:text-primary'>
-                  <span>{post.data.title}</span>
-                </a>
-              </Link>
-              <span className='text-sm'> - {post.data.date}</span>
-            </li>
-          ))}
-        </ul>
-      </main>
-
-      <footer>
-      </footer>
-    </div>
+    <main>
+      <h1 className='text-4xl'>Posts</h1>
+      <ul className='mt-4'>
+        {posts.map((post) => (
+          <li key={post.slug}>
+            <Link href={`/posts/${post.slug}`}>
+              <a className='underline hover:text-primary'>
+                <span>{post.data.title}</span>
+              </a>
+            </Link>
+            <span className='text-sm'> - {post.data.date}</span>
+          </li>
+        ))}
+      </ul>
+    </main>
   )
 }
 
