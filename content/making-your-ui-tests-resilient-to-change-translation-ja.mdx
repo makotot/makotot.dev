@@ -1,0 +1,143 @@
+---
+title: 変更に強いUIテストの実現
+draft: false
+date: "2022-10-05"
+tags: ['testing']
+---
+
+これは、[Kent C. Dodds氏](https://kentcdodds.com/)のブログ記事である[Making your UI tests resilient to change](https://kentcdodds.com/blog/making-your-ui-tests-resilient-to-change)を日本語訳してみたものです。
+
+誤訳などあれば[Issue](https://github.com/makotot/makotot.dev/issues/new)やPRを頂けると幸いです。
+
+---
+
+あなたは開発者で壊れたログイン体験をリリースしたくないので、そうならないことを確認するためにいくつかテストを書くものとします。
+そのような[フォームの例](https://github.com/kentcdodds/testing-workshop/blob/1938d6fc2048e55362679905f700f938a3b497c4/client/src/screens/login.js#L50-L82)を見てみましょう：
+
+<img src="/login.webp" />
+
+```tsx
+const form = (
+  <form onSubmit={handleSubmit}>
+    <div>
+      <label htmlFor="username">Username</label>
+      <input id="username" className="username-field" />
+    </div>
+    <div>
+      <label htmlFor="password">Password</label>
+      <input id="password" type="password" className="password-field" />
+    </div>
+    <div>
+      <button type="submit" className="btn">
+        Login
+      </button>
+    </div>
+  </form>
+)
+```
+このフォームをテストするとしら、ユーザー名とパスワードの入力欄を埋めてフォームを送信したいでしょう。それを適切に行うには、フォームをレンダリングしてドキュメントを検索してそれらのnodeを見つけて操作する必要があります。そのために以下のようなことを試みるかもしれません。
+
+```js
+const usernameField = rootNode.querySelector('.username-field')
+const passwordField = rootNode.querySelector('.password-field')
+const submitButton = rootNode.querySelector('.btn')
+```
+ここで問題が生じます。
+もう1つ別のボタンを追加するとしたらどうなるでしょう？ ”Login”ボタンの前に”Sign up”ボタンを追加するとしたら？
+
+```tsx focus=12:14
+const form = (
+  <form onSubmit={handleSubmit}>
+    <div>
+      <label htmlFor="username">Username</label>
+      <input id="username" className="username-field" />
+    </div>
+    <div>
+      <label htmlFor="password">Password</label>
+      <input id="password" type="password" className="password-field" />
+    </div>
+    <div>
+      <button type="submit" className="btn">
+        Sign up
+      </button>
+      <button type="submit" className="btn">
+        Login
+      </button>
+    </div>
+  </form>
+)
+```
+おっと、これではテストが壊れてしまいます。ただ、修正することは簡単ですよね？
+
+```js
+// change this:
+const submitButton = rootNode.querySelector('.btn')
+// to this:
+const submitButton = rootNode.querySelectorAll('.btn')[1]
+```
+これでもう大丈夫ですね！それでは、フォームのスタイリングにCSS-in-JSを使い始めることになりusername-fieldとpassword-fieldのクラス名がもはや不要になったら、それらを削除するべきでしょうか？それともテストで利用しているのでそのままにするべきでしょうか？うーん。。。。🤔
+
+## それでは変化に強いセレクタをどう書くのでしょう？
+
+[”テストがソフトウェアの使われ方に似てくるほど、より信頼性が高まる”](https://twitter.com/kentcdodds/status/977018512689455106)ことを考えると、どのようなクラス名でもユーザが気にしないことを考えるのは賢明です。
+
+では、チームに手動テスターがいて、そのテスターにページをテストしてもらうための手順を書いているとしましょう。その手順には何が書かれていますか？
+
+1. `username-field`というクラス名の要素を取得します
+2. ...
+
+”待ってください”とテスターは言います。”`username-field`というクラス名の要素をどうやって見つけるんですか？”と。
+
+”ああ、devtoolsを開いて、それから...”
+
+”でもユーザーはそうしないでしょう。`username`というラベルのついた入力欄を見つければいいんじゃないでしょうか？”
+
+”ああ、そうですね、いい考えですね。”
+
+[Testing Library](https://testing-library.com/)が持つクエリの理由はここにあります。このクエリはユーザが見つけるのと同じようにして要素を見つけることの助けとなります。
+[role](https://testing-library.com/docs/queries/byrole)、[ラベルのテキスト](https://testing-library.com/docs/queries/bylabeltext)、[プレースホルダのテキスト](https://testing-library.com/docs/queries/byplaceholdertext)、[テキストのコンテンツ](https://testing-library.com/docs/queries/bytext)、[表示されている値](https://testing-library.com/docs/queries/bydisplayvalue)、[altのテキスト](https://testing-library.com/docs/queries/byalttext)、[タイトル](https://testing-library.com/docs/queries/bytitle)、[test ID](https://testing-library.com/docs/queries/bytestid)などによって要素を探すことができます。
+
+実はこれは[推奨](https://testing-library.com/docs/queries/about/#priority)の順番です。これらのアプローチにトレードオフがあることも確かですが、このクエリを用いて手動テスターに向けて手順を書くとしたら、以下のようになると思います。
+
+1. `username`とラベルつけれらた入力欄に偽の名前を入力します
+2. `password`とラベルつけられた入力欄に偽のパスワードを入力します
+3. `sign in`というテキストのボタンをクリックします
+
+```js
+const usernameField = rootNode.getByRole('textbox', {name: /username/i})
+const passwordField = rootNode.getByLabelText('password')
+const submitButton = rootNode.getByRole('button', {name: /sign in/i})
+```
+そうすると、可能な限りソフトウェアが利用されるのと同じようにテストすることにつながります。テストからより多くの価値を得られるでしょう。
+
+## `data-testid`クエリはどうしたんでしょうか？
+他のどのクエリでも要素を選択できないことが時としてあります。そのような場合に`data-testid`を利用することが推奨されます（ただ、最初に適切な`role`属性の指定漏れなどないかを確かめる必要があります）。
+
+この状況に直面した多くの人は`getByClassName`クエリを含まない理由を不思議に思います。クラス名をセレクタに利用することを私が嫌う理由は、通常、クラス名をスタイリングのためのものと考えるからです。
+そのため、それ以外の目的で多くのクラス名をを追加し始めると、そのクラス名が何のためにあるのかも、いつそのクラス名を削除できるのかも<strong><em>一層</em></strong>分からなくなります。
+
+また、すでにスタイリングのために使っているクラス名をただ再利用しようとしても上述のボタンのような問題に直面します。
+そして、*”リファクタリングや機能追加の度にテストを修正しなければならないのであれば、テストが脆いことの表れとなります”*。問題の核心はテストとソースコードの関係があまりにも暗黙的であることです。**両者の関係をより明示的にする**ことでこの問題を克服できます。
+
+もし選択しようとしている要素にメタデータを追加できるのであれば、問題を解決できます。聞いてください！実はこのためのAPIが存在します！それは`data-*`属性です！例えば：
+
+```tsx
+function UsernameDisplay({user}) {
+  return <strong data-testid="username">{user.username}</strong>
+}
+```
+そしてテストはこうなります：
+```js
+const usernameEl = getByTestId('username')
+```
+
+これは[E2Eテスト](https://github.com/kentcdodds/jest-cypress-react-babel-webpack/blob/1c842dff85cd83953e86a6f1a48653b15fb3a4d5/cypress/e2e/register.js#L20)にも最適です。なので、そちらでも使用することをお勧めします。
+ただし、このような属性を本番環境に公開することに懸念があると伝えてきた人もいます。もしあなたもそうなら、本当にそれが実際のところ問題かどうか考えてみてください（なぜなら正直言ってあなたが考えているほど大きな問題ではないでしょうから）。
+それでも本当にそうしたいのであれば、[`babel-plugin-react-remove-properties`](https://www.npmjs.com/package/babel-plugin-react-remove-properties)でそのような属性を取り除いてコンパイルすることができます。
+
+## 結論
+
+ソフトウェアが使われるのと同じようにアプリケーションをテストすると、変更に強いだけではなく、より多くの価値を提供してくれることに気づくでしょう。
+これに関してより学びたければ、私のブログ記事である[Testing Implementation Details](https://kentcdodds.com/blog/testing-implementation-details)をお勧めします。
+
+この記事がお役に立てば幸いです。幸運を祈ります！
