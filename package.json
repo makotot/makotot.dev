@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "format-check": "prettier --check .",
+    "format": "prettier --write .",
+    "check-format": "prettier --check .",
     "lint": "next lint"
   },
   "dependencies": {
