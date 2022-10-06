@@ -29,13 +29,21 @@ const usePageLoading = () => {
   }
 }
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps<{
+  source: any
+  frontMatter: {
+    title: string
+    draft: boolean
+    date: string
+    tags: string[]
+  }
+} | {}>) {
   const { isLoading } = usePageLoading()
 
   return (
     <>
       <Head>
-        <title>makotot.dev</title>
+        <title>{'frontMatter' in pageProps ? `${pageProps.frontMatter.title} | makotot.dev` : 'makotot.dev'}</title>
         <meta name="description" content="" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
