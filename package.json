@@ -8,7 +8,8 @@
     "start": "next start",
     "format": "prettier --write .",
     "check-format": "prettier --check .",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate-post": "node ./scripts/generatePost.mjs"
   },
   "dependencies": {
     "@code-hike/mdx": "0.7.4",
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "0.5.7",
+    "@types/inquirer": "9.0.2",
     "@types/node": "18.7.23",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
@@ -30,6 +32,7 @@
     "eslint": "8.24.0",
     "eslint-config-next": "12.3.1",
     "eslint-config-prettier": "8.5.0",
+    "inquirer": "9.1.3",
     "postcss": "8.4.17",
     "prettier": "2.7.1",
     "tailwindcss": "3.1.8",
