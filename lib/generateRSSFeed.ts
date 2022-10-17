@@ -13,7 +13,6 @@ export const generateRSSFeed = async () => {
 
   const feed = new Feed({
     title: SITE_NAME,
-    description: "",
     id: SITE_URL,
     link: SITE_URL,
     copyright: `All rights reserved ${date.getFullYear()}, ${AUTHOR}`,
@@ -26,6 +25,7 @@ export const generateRSSFeed = async () => {
       title: post.data.title,
       id: postUrl,
       link: postUrl,
+      description: post.data.title,
       date: new Date(post.data.date),
     })
   })
