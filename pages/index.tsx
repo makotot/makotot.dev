@@ -1,9 +1,12 @@
 import type { InferGetStaticPropsType } from "next"
 import Link from "next/link"
+import { generateRSSFeed } from "../lib/generateRSSFeed"
 import { getPosts } from "../utils/getPosts"
 
 export const getStaticProps = async () => {
-  const posts = getPosts(5)
+  await generateRSSFeed()
+
+  const posts = getPosts()
 
   return {
     props: {

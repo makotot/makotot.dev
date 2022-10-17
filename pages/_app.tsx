@@ -7,6 +7,7 @@ import Link from "next/link"
 import { IconBrandGithub, IconCircleDotted } from "@tabler/icons"
 import { Router } from "next/router"
 import { useEffect, useState } from "react"
+import { REPO_URL, SITE_NAME } from "../config"
 
 const usePageLoading = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -51,8 +52,8 @@ function MyApp({
       <Head>
         <title>
           {"frontMatter" in pageProps
-            ? `${pageProps.frontMatter.title} | makotot.dev`
-            : "makotot.dev"}
+            ? `${pageProps.frontMatter.title} | ${SITE_NAME}`
+            : SITE_NAME}
         </title>
         <meta name="description" content="" />
         <link rel="icon" href="/favicon.ico" />
@@ -78,7 +79,7 @@ function MyApp({
       <footer className="max-w-3xl w-full md:w-2/3 mt-auto mx-auto py-4 px-4 md:py-8 md:px-8">
         <div className="flex justify-center">
           <a
-            href="https://github.com/makotot/makotot.dev"
+            href={REPO_URL}
             className="inline-flex"
             target="_blank"
             rel="noreferrer"
