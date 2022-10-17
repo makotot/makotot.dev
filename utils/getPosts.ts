@@ -1,9 +1,9 @@
-import fs from "fs"
-import path from "path"
+import fs from "node:fs"
+import path from "node:path"
 import matter from "gray-matter"
 import { Post } from "../types/Post"
 
-export const getPosts = (pageIndex: number): Post[] => {
+export const getPosts = (): Post[] => {
   const dirFiles = fs.readdirSync(path.join(process.cwd(), "content"), {
     withFileTypes: true,
   })
