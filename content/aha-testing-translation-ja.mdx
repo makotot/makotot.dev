@@ -1,0 +1,468 @@
+---
+title: AHAテスト 💡
+draft: false
+date: "2022-10-23"
+tags: ['testing']
+---
+
+これは、[Kent C. Dodds 氏](https://kentcdodds.com/)のブログ記事である[AHA Testing 💡](https://kentcdodds.com/blog/aha-testing)を日本語訳してみたものです。
+
+誤訳などあれば[Issue](https://github.com/makotot/makotot.dev/issues/new)や PR を頂けると幸いです。
+
+---
+
+[AHA プログラミング原則](https://kentcdodds.com/blog/aha-programming)は”Avoid Hasty Abstraction（性急な抽象化を避けよ）”の略です。私には、メンテナブルなテストを書く上でこれをどのように適用するかということの具体的な思いがあります。
+私が実際に見てきたテストのほとんどが抽象の分布の片方に偏ったものでした：ANA（”Absolutely No Abstraction” - 全く抽象化しない）か完全に DRY（Don't Repeat Yourself - 繰り返しを避ける）か。（ANA はたった今作りました。）
+
+<div style={{width: '100%', marginTop: 10, marginBottom: 40, overflow: "auto"}}>
+  <div
+    style={{
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'space-between',
+      fontSize: '1.5em',
+      textAlign: 'center',
+      lineHeight: 1.2,
+      marginBottom: 4,
+    }}
+  >
+    <div style={{color: 'rgb(94, 49, 220)'}}>
+      <strong style={{display: 'block'}}>ANA</strong>
+      <small style={{display: 'block', fontSize: '0.5em'}}>{`(Absolutely No Abstraction)`}</small>
+    </div>
+    <div style={{color: 'rgb(71,67,220)'}}>
+      <strong style={{display: 'block'}}>AHA</strong>
+      <small style={{display: 'block', fontSize: '0.5em'}}>{`(Avoid Hasty Abstraction)`}</small>
+    </div>
+    <div style={{color: 'rgb(49, 85, 220)'}}>
+      <strong style={{display: 'block'}}>DRY</strong>
+      <small style={{display: 'block', fontSize: '0.5em'}}>{`(Don't Repeat Yourself)`}</small>
+    </div>
+  </div>
+  <div
+    style={{
+      width: '100%',
+      height: 20,
+      backgroundImage:
+        'linear-gradient(-213deg, rgb(94, 49, 220) 0%, rgb(49, 85, 220) 100%)',
+    }}
+  />
+  <div
+    style={{
+      marginTop: 10,
+      color: 'rgb(71,67,220)',
+      background:
+        'linear-gradient(-213deg, rgb(94, 49, 220) 0%, rgb(49, 85, 220) 100%)',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      display: 'flex',
+      justifyContent: 'space-between',
+      fontSize: '1.8em',
+    }}
+  >
+    <strong>T</strong>
+    <strong>h</strong>
+    <strong>e</strong>
+    <strong />
+    <strong>S</strong>
+    <strong>p</strong>
+    <strong>e</strong>
+    <strong>c</strong>
+    <strong>t</strong>
+    <strong>r</strong>
+    <strong>u</strong>
+    <strong>m</strong>
+    <strong />
+    <strong>o</strong>
+    <strong>f</strong>
+    <strong />
+    <strong>A</strong>
+    <strong>b</strong>
+    <strong>s</strong>
+    <strong>t</strong>
+    <strong>r</strong>
+    <strong>a</strong>
+    <strong>c</strong>
+    <strong>t</strong>
+    <strong>i</strong>
+    <strong>o</strong>
+    <strong>n</strong>
+  </div>
+</div>
+
+抽象化の分布の中間のスイートスポットを見つけることがメンテナブルなテストを開発する鍵となります。
+
+## ANA テスト
+
+私が見てきたテストにおける”全く抽象化しない”最も良い例は[ExpressJS のルートのハンドラー](https://expressjs.com/en/guide/routing.html)です。
+”ANA がテストに向いていない”と私が言うことが何を意味しているかを理解してもらうために、典型的なテストファイルを用意してそのコードベースとテストをメンテナンスするふりをしてみましょう。
+このルートがどのように動作するかを理解していることが重要です。あなたは、何か壊してしまわないようにするためのテストがあることで安心します。それであなたはルートハンドラのニュアンスを理解するためにテストを利用することにします。
+
+このテストを読んで、2 つの間の微妙な差異を理解してみましょう。
+
+> 時間をかけ過ぎないように。。。
+
+```js
+import * as blogPostController from '../blog-post'
+
+// データベース用のアプリケーション全体でのモックを読み込みます。
+// これはANNA（Almost Absolutely No Abstraction - ほぼ全く抽象化しない）を
+// 意味するかもしれませんが、データベースのモックの全てをこのブログ記事に
+// 書きたくありません 😅
+jest.mock('../../lib/db')
+
+test('lists blog posts for the logged in user', async () => {
+  const req = {
+    locale: {
+      source: 'default',
+      language: 'en',
+      region: 'GB',
+    },
+    user: {
+      guid: '0336397b-e29d-4b63-b94d-7e68a6fa3747',
+      isActive: false,
+      picture: 'http://placehold.it/32x32',
+      age: 30,
+      name: {
+        first: 'Francine',
+        last: 'Oconnor',
+      },
+      company: 'ACME',
+      email: 'francine.oconnor@ac.me',
+      latitude: 51.507351,
+      longitude: -0.127758,
+      favoriteFruit: 'banana',
+    },
+    body: {},
+    cookies: {},
+    query: {},
+    params: {
+      bucket: 'photography',
+    },
+    header(name) {
+      return {
+        Authorization: 'Bearer TEST_TOKEN',
+      }[name]
+    },
+  }
+  const res = {
+    clearCookie: jest.fn(),
+    cookie: jest.fn(),
+    end: jest.fn(),
+    locals: {
+      content: {},
+    },
+    json: jest.fn(),
+    send: jest.fn(),
+    sendStatus: jest.fn(),
+    set: jest.fn(),
+  }
+  const next = jest.fn()
+
+  await blogPostController.loadBlogPosts(req, res, next)
+
+  expect(res.json).toHaveBeenCalledTimes(1)
+  expect(res.json).toHaveBeenCalledWith({
+    posts: expect.arrayContaining([
+      expect.objectContaining({
+        title: 'Test Post 1',
+        subtitle: 'This is the subtitle of Test Post 1',
+        body: 'The is the body of Test Post 1',
+      }),
+    ]),
+  })
+})
+
+test('returns an empty list when there are no blog posts', async () => {
+  const req = {
+    locale: {
+      source: 'default',
+      language: 'en',
+      region: 'GB',
+    },
+    user: {
+      guid: '0336397b-e29d-4b63-b94d-7e68a6fa3747',
+      isActive: false,
+      picture: 'http://placehold.it/32x32',
+      age: 30,
+      name: {
+        first: 'Francine',
+        last: 'Oconnor',
+      },
+      company: 'ACME',
+      email: 'francine.oconnor@ac.me',
+      latitude: 31.230416,
+      longitude: 121.473701,
+      favoriteFruit: 'banana',
+    },
+    body: {},
+    cookies: {},
+    query: {},
+    params: {
+      bucket: 'photography',
+    },
+    header(name) {
+      return {
+        Authorization: 'Bearer TEST_TOKEN',
+      }[name]
+    },
+  }
+  const res = {
+    clearCookie: jest.fn(),
+    cookie: jest.fn(),
+    end: jest.fn(),
+    locals: {
+      content: {},
+    },
+    json: jest.fn(),
+    send: jest.fn(),
+    sendStatus: jest.fn(),
+    set: jest.fn(),
+  }
+  const next = jest.fn()
+
+  await blogPostController.loadBlogPosts(req, res, next)
+
+  expect(res.json).toHaveBeenCalledTimes(1)
+  expect(res.json).toHaveBeenCalledWith({
+    posts: [],
+  })
+})
+```
+
+違いを見つけられましたか？そう！最初の方では記事を見つけることを想定して、2 つ目の方ではそうではないことを想定しています。いいですね！よくできました。でも、、、何が原因でしょうか？
+なぜ`blogPostController.loadBlogPosts(req, res, next)`が`res.json`で最初の方はブログ記事を返して 2 つ目ではそうならないのでしょうか？
+
+もし分からなくても後でお伝えするので、気を悪くしたり心配したりしないでも大丈夫です。もし分かるのだとしたらあなたは恐らく[”ウォーリーを探せ”](https://en.wikipedia.org/wiki/Where%27s_Wally%3F)が得意で、
+そしてそれが私の主張したいことです。このようなテストはテストを理解してメンテナンスすることを必要以上に難しくします。
+
+では 1 つのファイルにこのようなテストが 20 個あることを想像してください。恐ろしくありませんか？そうです、とても酷いです。そのようなテストを 1 度も見たことがありませんか？あなたはとても幸運です！
+私は幾度となく目にしておきました。その経緯はこのようなものです：
+
+1. エンジニアのジョーがチームにジョインします
+1. ジョーはテストを追加する必要に迫られます
+1. ジョーは必要としたものによく似た以前からあるテストをコピーして、ユースケースに合わせて修正します
+1. レビュアーはテストが通ることを確認して、ジョーが会話を理解していると考えます
+1. PR がマージされます
+
+これがリトマス試験紙です：
+
+> 2 つの類似したテストのアサーションの違いを判断するのはどれくらい簡単で、その違いが何から生じますか？
+
+全く抽象化しないテストはこれを非常に難しくします。
+
+## DRY テスト
+
+今は`DRY`なテストの良い例を出す時間がありません。何にでも`DRY`を適用するとこのようなプロセスのためにメンテナンスが難しくなっていくことがよくあるのを知ってください：
+
+1. エンジニアのジョーがチームにジョインします
+1. ジョーはテストを追加する必要に迫られます
+1. ジョーは基本的に必要としたものによく似た以前からあるテストをコピーして、状況に合わせてテストのユーティリティーに他の`if`文を追加します
+1. レビュアーはテストが通ることを確認して、ジョーが会話を理解していると考えます
+1. PR がマージされます
+
+私が DRY なテストでよく目にするもう 1 つのものは、`describe`と`it`のネスト + `beforeEach`の濫用です。ネストしてテスト間で変数を共有すればするほど、ロジックを追いかけるのが困難になります。
+[Test Isolation with React](https://kentcdodds.com/blog/test-isolation-with-react)においてこの問題について少し書いてあるので読んでみるといいかもしれません。
+
+## AHA テスト
+
+最初のテストは確実に抽象化のための悲鳴を上げています（これは AHA プログラミングの指針となるものです）。そこで、思慮深く抽象化したものを書いてみましょう。これらのテストで何が違いを生んでいるかを考えてください：
+
+```js
+import * as blogPostController from '../blog-post'
+
+// データベース用のアプリケーション全体でのモックを読み込みます。
+jest.mock('../../lib/db')
+
+function setup(overrides = {}) {
+  const req = {
+    locale: {
+      source: 'default',
+      language: 'en',
+      region: 'GB',
+    },
+    user: {
+      guid: '0336397b-e29d-4b63-b94d-7e68a6fa3747',
+      isActive: false,
+      picture: 'http://placehold.it/32x32',
+      age: 30,
+      name: {
+        first: 'Francine',
+        last: 'Oconnor',
+      },
+      company: 'ACME',
+      email: 'francine.oconnor@ac.me',
+      latitude: 51.507351,
+      longitude: -0.127758,
+      favoriteFruit: 'banana',
+    },
+    body: {},
+    cookies: {},
+    query: {},
+    params: {
+      bucket: 'photography',
+    },
+    header(name) {
+      return {
+        Authorization: 'Bearer TEST_TOKEN',
+      }[name]
+    },
+    ...overrides,
+  }
+
+  const res = {
+    clearCookie: jest.fn(),
+    cookie: jest.fn(),
+    end: jest.fn(),
+    locals: {
+      content: {},
+    },
+    json: jest.fn(),
+    send: jest.fn(),
+    sendStatus: jest.fn(),
+    set: jest.fn(),
+  }
+  const next = jest.fn()
+
+  return {req, res, next}
+}
+
+test('lists blog posts for the logged in user', async () => {
+  const {req, res, next} = setup()
+
+  await blogPostController.loadBlogPosts(req, res, next)
+
+  expect(res.json).toHaveBeenCalledTimes(1)
+  expect(res.json).toHaveBeenCalledWith({
+    posts: expect.arrayContaining([
+      expect.objectContaining({
+        title: 'Test Post 1',
+        subtitle: 'This is the subtitle of Test Post 1',
+        body: 'The is the body of Test Post 1',
+      }),
+    ]),
+  })
+})
+
+test('returns an empty list when there are no blog posts', async () => {
+  const {req, res, next} = setup()
+  req.user.latitude = 31.230416
+  req.user.longitude = 121.473701
+
+  await blogPostController.loadBlogPosts(req, res, next)
+
+  expect(res.json).toHaveBeenCalledTimes(1)
+  expect(res.json).toHaveBeenCalledWith({
+    posts: [],
+  })
+})
+```
+
+お分かり頂けたでしょうか？最初のテストと 2 つ目のテストとの違いは何でしょうか？最初のテストではユーザーがロンドンにいて、2 つ目のテストではユーザーが上海にいます！
+うーん、同僚が私たちは位置情報に基づくブログプラットフォームに取り組んでいると言ってくれたら良かったのに（ちょっと、これは面白いプロダクトのアイディアですよね 🤔）。
+
+少しの心がけで抽象化することで、入力と出力の違いで何が重要かより明確になって、より意味のあるメンテナンスしやすいテストとなりました。
+
+## React の AHA テスト
+
+React では、私はここでの`setup`関数のように振る舞う`renderFoo`関数を用意することが時々あります。以下が簡単な例です：
+
+```tsx
+import * as React from 'react'
+import {render, screen} from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import LoginForm from '../login-form'
+
+function renderLoginForm(props) {
+  render(<LoginForm {...props} />)
+  const usernameInput = screen.getByLabelText(/username/i)
+  const passwordInput = screen.getByLabelText(/password/i)
+  const submitButton = screen.getByText(/submit/i)
+  return {
+    usernameInput,
+    passwordInput,
+    submitButton,
+    changeUsername: value => userEvent.type(usernameInput, value),
+    changePassword: value => userEvent.type(passwordInput, value),
+    submitForm: () => userEvent.click(submitButton),
+  }
+}
+
+test('submit calls the submit handler', () => {
+  const handleSubmit = jest.fn()
+  const {changeUsername, changePassword, submitForm} = renderLoginForm({
+    onSubmit: handleSubmit,
+  })
+  const username = 'chucknorris'
+  const password = 'ineednopassword'
+  changeUsername(username)
+  changePassword(password)
+  submitForm()
+  expect(handleSubmit).toHaveBeenCalledTimes(1)
+  expect(handleSubmit).toHaveBeenCalledWith({username, password})
+})
+```
+
+> 注意：これを使用するテストが 1 つのファイルにおいて 2 つか 3 つしかなく短いものである場合、私はこれを時期早々の抽象化だと考えるでしょう。ただし、テストしているのがいくつかの微妙な差異を持つ場合（例えばエラーの状態のようなもの）、
+> このような抽象化は素晴らしいものとなります。
+
+## ネスト
+
+[Avoid Nesting in Tests](https://kentcdodds.com/blog/avoid-nesting-when-youre-testing)を一度読んでみてください。
+
+## jest-in-case と test.each
+
+純粋な関数に対してテストを書いている場合、大抵最もテストしやすいものなのでついています。非常に明確な形で入力と出力を呼び出す簡単な抽象化によってテストを簡潔にできます。
+
+（作為的な）例：
+
+```js
+import add from '../add'
+
+test('adds one and two to equal three', () => {
+  expect(add(1, 2)).toBe(3)
+})
+
+test('adds three and four to equal seven', () => {
+  expect(add(3, 4)).toBe(7)
+})
+
+test('adds one hundred and two to equal one hundred two', () => {
+  expect(add(100, 2)).toBe(102)
+})
+```
+
+非常にシンプルですが`jest-in-case`で改善できます。
+
+```js
+import cases from 'jest-in-case'
+import add from '../add'
+
+cases(
+  'add',
+  ({first, second, result}) => {
+    expect(add(first, second)).toBe(result)
+  },
+  [
+    {first: 1, second: 2, result: 3},
+    {first: 3, second: 4, result: 7},
+    {first: 100, second: 2, result: 102},
+  ],
+)
+```
+
+このような簡単な例でわざわざこのようなことをしないかもしれませんが、配列にただ要素を追加するだけでとても簡単にテストケースを追加できることが魅力です。
+このコンセプトの好例（jest-in-case を使っていないもの）は[`rtl-css-js`のテスト](https://github.com/kentcdodds/rtl-css-js/blob/b148865ce6a4c994eba292015b8f44b5dae7edaa/src/__tests__/index.js)です。
+このコードベースへのコントリビューターはこの構造で新しいテストケースを追加するのが非常に簡単であることがわかります。
+
+これは純粋ではない関数やモジュールにも適用できますが、もう少し手間がかかります。
+（[全く誇れるものではないですがそんなに悪くもないテストがこちらです](https://github.com/kentcdodds/kcd-scripts/blob/7bc29e41e46e73b4b57c0f975648a90a75c24c80/src/scripts/__tests__/lint.js)）。
+
+私は個人的に[jest-in-case](https://github.com/atlassian/jest-in-case)が好みですが、Jest にはビルトインの[`test.each`](https://jestjs.io/docs/api#testeachtable-name-fn-timeout)の機能があり便利かもしれません。
+
+## 結論
+
+確かにテストはより良い名前やコメントによって改善できていましたが、単純な`setup`の抽象化（ちなみにこれは”Test Object Factory”と呼ばれます）ではそれが必要ありません。
+つまり私が伝えたいのは：**注意深く抽象化を適用したテストはテストを書いてメンテナンスする手間が少なく済むということです。**
+
+お役に立てれば幸いです！幸運を祈ります！
