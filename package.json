@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@code-hike/mdx": "0.7.4",
-    "@tabler/icons": "1.106.0",
+    "@tabler/icons": "1.107.0",
     "feed": "4.2.2",
     "gray-matter": "4.0.3",
     "next": "12.3.1",
