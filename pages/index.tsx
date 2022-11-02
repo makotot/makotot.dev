@@ -22,10 +22,11 @@ const Home = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
       <ul className="mt-4">
         {posts.map((post) => (
           <li key={post.slug}>
-            <Link href={`/posts/${post.slug}`}>
-              <a className="underline hover:text-primary">
-                <span>{post.data.title}</span>
-              </a>
+            <Link
+              href={`/posts/${post.slug}`}
+              className="underline hover:text-primary"
+            >
+              <span>{post.data.title}</span>
             </Link>
             <span className="text-sm"> - {post.data.date}</span>
           </li>

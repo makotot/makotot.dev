@@ -60,16 +60,17 @@ function MyApp({
       </Head>
       <header className="max-w-3xl w-full md:w-2/3 mx-auto py-4 px-4 md:py-8 md:px-8">
         <div className="flex gap-2 items-center">
-          <Link href="/">
-            <a className="inline-flex justify-center items-center w-8 h-8 border border-solid border-primary text-primary hover:bg-primary hover:text-base-100 hover:border-primary-focus">
-              {isLoading ? (
-                <span className="animate-spin text-primary hover:bg-primary hover:text-base-100 hover:border-primary-focus">
-                  <IconCircleDotted size={16} />
-                </span>
-              ) : (
-                "M"
-              )}
-            </a>
+          <Link
+            href="/"
+            className="inline-flex justify-center items-center w-8 h-8 border border-solid border-primary text-primary hover:bg-primary hover:text-base-100 hover:border-primary-focus"
+          >
+            {isLoading ? (
+              <span className="animate-spin text-primary hover:bg-primary hover:text-base-100 hover:border-primary-focus">
+                <IconCircleDotted size={16} />
+              </span>
+            ) : (
+              "M"
+            )}
           </Link>
         </div>
       </header>
