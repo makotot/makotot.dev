@@ -53,7 +53,6 @@ function MyApp({
     }
 >) {
   const { isLoading } = usePageLoading()
-  console.log(pageProps)
 
   return (
     <>
