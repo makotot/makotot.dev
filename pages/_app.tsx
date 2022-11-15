@@ -8,6 +8,7 @@ import { IconBrandGithub, IconCircleDotted, IconRss } from "@tabler/icons"
 import { Router } from "next/router"
 import { useEffect, useState } from "react"
 import { REPO_URL, SITE_NAME } from "../config"
+import { Post } from "../types/Post"
 
 const usePageLoading = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -35,7 +36,11 @@ function MyApp({
   pageProps,
 }: AppProps<
   | {
-      source: any
+      source: {
+        compiledSource: string
+        frontMatter: Record<string, unknown>
+        scope: Post["data"]
+      }
       frontMatter: {
         title: string
         draft: boolean
@@ -43,9 +48,12 @@ function MyApp({
         tags: string[]
       }
     }
-  | {}
+  | {
+      posts: Post[]
+    }
 >) {
   const { isLoading } = usePageLoading()
+  console.log(pageProps)
 
   return (
     <>
