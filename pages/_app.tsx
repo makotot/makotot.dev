@@ -4,7 +4,7 @@ import type { AppProps } from "next/app"
 import Head from "next/head"
 import "@code-hike/mdx/dist/index.css"
 import Link from "next/link"
-import { IconBrandGithub, IconCircleDotted } from "@tabler/icons"
+import { IconBrandGithub, IconCircleDotted, IconRss } from "@tabler/icons"
 import { Router } from "next/router"
 import { useEffect, useState } from "react"
 import { REPO_URL, SITE_NAME } from "../config"
@@ -78,7 +78,10 @@ function MyApp({
         <Component {...pageProps} />
       </div>
       <footer className="max-w-3xl w-full md:w-2/3 mt-auto mx-auto py-4 px-4 md:py-8 md:px-8">
-        <div className="flex justify-center">
+        <div className="flex justify-center gap-2">
+          <a href="/rss/feed.json" className="inline-flex">
+            <IconRss />
+          </a>
           <a
             href={REPO_URL}
             className="inline-flex"
