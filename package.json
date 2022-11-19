@@ -10,6 +10,7 @@
     "format": "prettier --write .",
     "check-format": "prettier --check .",
     "lint": "next lint",
+    "tsc": "tsc",
     "test:e2e": "playwright test"
   },
   "dependencies": {
