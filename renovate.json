@@ -5,7 +5,8 @@
   "packageRules": [
     {
       "matchUpdateTypes": ["patch", "pin"],
-      "automerge": true
+      "automerge": true,
+      "labels": ["renovate: automerge"]
     }
   ]
 }
