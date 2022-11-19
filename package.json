@@ -9,7 +9,9 @@
     "start": "next start",
     "format": "prettier --write .",
     "check-format": "prettier --check .",
-    "lint": "next lint"
+    "lint": "next lint",
+    "tsc": "tsc",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@code-hike/mdx": "0.7.4",
@@ -23,6 +25,7 @@
     "shiki": "0.11.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.28.0",
     "@tailwindcss/typography": "0.5.8",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
