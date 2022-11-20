@@ -6,7 +6,7 @@
     {
       "matchUpdateTypes": ["patch", "pin"],
       "automerge": true,
-      "labels": ["renovate: automerge"]
+      "addLabels": ["renovate: automerge"]
     }
   ]
 }
