@@ -87,7 +87,7 @@ function MyApp({
       <footer className="max-w-3xl w-full md:w-2/3 mt-auto mx-auto py-4 px-4 md:py-8 md:px-8">
         <div className="flex justify-center gap-2">
           <a href="/rss/feed.json" className="inline-flex">
-            <IconRss />
+            <IconRss aria-label="RSS" />
           </a>
           <a
             href={REPO_URL}
@@ -95,7 +95,7 @@ function MyApp({
             target="_blank"
             rel="noreferrer"
           >
-            <IconBrandGithub />
+            <IconBrandGithub aria-label="Github" />
           </a>
         </div>
       </footer>
