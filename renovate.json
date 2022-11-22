@@ -8,5 +8,6 @@
       "automerge": true,
       "addLabels": ["renovate: automerge"]
     }
-  ]
+  ],
+  "platformAutomerge": true
 }
