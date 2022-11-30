@@ -30,6 +30,6 @@ export const generateRSSFeed = async () => {
     })
   })
 
-  fs.mkdirSync("./public/rss", { recursive: true })
-  fs.writeFileSync("./public/rss/feed.json", feed.json1())
+  fs.mkdirSync("../public/rss", { recursive: true })
+  fs.writeFileSync("../public/rss/feed.json", feed.json1())
 }
