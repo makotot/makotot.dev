@@ -1,4 +1,5 @@
 import fs from "node:fs"
+import path from "node:path"
 import { Feed } from "feed"
 import { getPosts } from "../utils/getPosts"
 import { AUTHOR, EMAIL, SITE_NAME, SITE_URL } from "../config"
@@ -30,6 +31,7 @@ export const generateRSSFeed = async () => {
     })
   })
 
-  fs.mkdirSync("./public/rss", { recursive: true })
-  fs.writeFileSync("./public/rss/feed.json", feed.json1())
+  const dir = path.resolve(__dirname, "../../../public/rss")
+  fs.mkdirSync(dir, { recursive: true })
+  fs.writeFileSync(path.resolve(dir, "feed.json"), feed.json1())
 }
