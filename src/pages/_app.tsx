@@ -1,13 +1,14 @@
 import "../styles/globals.css"
 
 import type { AppProps } from "next/app"
+import Script from "next/script"
 import Head from "next/head"
 import "@code-hike/mdx/dist/index.css"
 import Link from "next/link"
 import { IconBrandGithub, IconCircleDotted, IconRss } from "@tabler/icons"
 import { Router } from "next/router"
 import { useEffect, useState } from "react"
-import { REPO_URL, SITE_NAME } from "../config"
+import { REPO_URL, SITE_NAME, GA_ID } from "../config"
 import { Post } from "../types/Post"
 
 const usePageLoading = () => {
@@ -99,6 +100,24 @@ function MyApp({
           </a>
         </div>
       </footer>
+
+      {/*
+        Global site tag (gtag.js) - Google Analytics
+        Ref: https://nextjs.org/docs/messages/next-script-for-ga#using-gtagjs
+       */}
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', '${GA_ID}');
+        `}
+      </Script>
     </>
   )
 }
