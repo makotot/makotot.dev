@@ -72,7 +72,7 @@ const PostPage = ({
   frontMatter,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <article className="prose md:prose-lg mx-auto">
+    <article className="prose mx-auto md:prose-lg">
       <h1>{frontMatter.title}</h1>
       <div className="text-sm">
         Published <time dateTime={frontMatter.date}>{frontMatter.date}</time>

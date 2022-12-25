@@ -66,14 +66,14 @@ function MyApp({
         <meta name="description" content="" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header className="max-w-3xl w-full md:w-2/3 mx-auto py-4 px-4 md:py-8 md:px-8">
-        <div className="flex gap-2 items-center">
+      <header className="mx-auto w-full max-w-3xl p-4 md:w-2/3 md:p-8">
+        <div className="flex items-center gap-2">
           <Link
             href="/"
-            className="inline-flex justify-center items-center w-8 h-8 border border-solid border-primary text-primary hover:bg-primary hover:text-base-100 hover:border-primary-focus"
+            className="inline-flex h-8 w-8 items-center justify-center border border-solid border-primary text-primary hover:border-primary-focus hover:bg-primary hover:text-base-100"
           >
             {isLoading ? (
-              <span className="animate-spin text-primary hover:bg-primary hover:text-base-100 hover:border-primary-focus">
+              <span className="animate-spin text-primary hover:border-primary-focus hover:bg-primary hover:text-base-100">
                 <IconCircleDotted size={16} />
               </span>
             ) : (
@@ -82,10 +82,10 @@ function MyApp({
           </Link>
         </div>
       </header>
-      <div className="max-w-3xl w-full md:w-2/3 mx-auto py-4 px-4 md:py-8 md:px-8">
+      <div className="mx-auto w-full max-w-3xl p-4 md:w-2/3 md:p-8">
         <Component {...pageProps} />
       </div>
-      <footer className="max-w-3xl w-full md:w-2/3 mt-auto mx-auto py-4 px-4 md:py-8 md:px-8">
+      <footer className="mx-auto mt-auto w-full max-w-3xl p-4 md:w-2/3 md:p-8">
         <div className="flex justify-center gap-2">
           <a href="/rss/feed.json" className="inline-flex">
             <IconRss aria-label="RSS" />
