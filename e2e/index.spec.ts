@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test"
-import { getPosts } from "../utils/getPosts"
+import { getPosts } from "../src/utils/getPosts"
 
 test.describe("/", async () => {
   test("should have a link to home.", async ({ page }) => {
