@@ -11,12 +11,11 @@ tags: ["Data fetching", "React Query"]
 
 ---
 
-React Querygaが内部的にどのように機能しているのか、最近よく聞かれるようになりました。再レンダリングするタイミングををどうやって検知しているのか？ 重複をどうやって排除するのか？ どうやってフレームワークに依存しないようになっているのか？
+React Queryga が内部的にどのように機能しているのか、最近よく聞かれるようになりました。再レンダリングするタイミングををどうやって検知しているのか？ 重複をどうやって排除するのか？ どうやってフレームワークに依存しないようになっているのか？
 
 いずれもとても良い質問です。では、私たちの愛する非同期状態管理ライブラリを細かく確認して、`useQuery`を呼んだら何が起きるのかを調査しましょう。
 
 構造を理解するためには最初から始めなければいけません。
-
 
 ## QueryClient
 
@@ -41,17 +40,15 @@ function App() {
 ```
 
 `QueryClientProvider`は[React Context](https://beta.reactjs.org/reference/react/useContext) を利用してアプリケーション全体に`QueryClient`を配布します。
-クライアント自体は安定した値で、1度だけ作られる（[うっかり幾度も再生成しないよう](https://tkdodo.eu/blog/react-query-fa-qs#2-the-queryclient-is-not-stable)に注意してください）ので、Contextを利用するのに最適なケースです。
-アプリケーションを再レンダリング***せずに***、クライアントに`useQueryClient`を通してアクセスできるようにするだけです。
-
+クライアント自体は安定した値で、1 度だけ作られる（[うっかり幾度も再生成しないよう](https://tkdodo.eu/blog/react-query-fa-qs#2-the-queryclient-is-not-stable)に注意してください）ので、Context を利用するのに最適なケースです。
+アプリケーションを再レンダリング**_せずに_**、クライアントに`useQueryClient`を通してアクセスできるようにするだけです。
 
 ## キャッシュを格納する容器
 
 あまり知られてないことだと思いますが、`QueryClient`自体はあまり多くのことを行いません。`QueryCache`や`MutationCache`のコンテナーであり、`new QueryClient`を生成するとき自動的に生成されます。
 
-また、全てのクエリやミューテーションに設定できるいくつかの初期値を持っていて、キャッシュを操作するための便利なメソッドを提供します。ほとんどのケースにおいては、キャッシュと直接やりとりすることは***ありません***。
+また、全てのクエリやミューテーションに設定できるいくつかの初期値を持っていて、キャッシュを操作するための便利なメソッドを提供します。ほとんどのケースにおいては、キャッシュと直接やりとりすることは**_ありません_**。
 やりとりする場合に`QueryClient`を通してアクセスします。
-
 
 ## QueryCache
 
@@ -61,9 +58,8 @@ function App() {
 
 簡単に言うと、 `QueryCache` は、**queryKeys** をしっかりとシリアライズしたもの（**queryKeyHash** ）によるキーと、 `Query`クラスのインスタンスによる値とのインメモリーのオブジェクトです。
 
-デフォルトの状態のReact Queryがインメモリー***だけ***に保存して、それ以外のどこにも保存しないということを理解するのが、私は重要だと思います。ブラウザのページを再読み込みしたら、キャッシュはなくなります。
-localstorageのような外部ストレージにキャッシュを書き込みたいときは、[persister](https://tanstack.com/query/v4/docs/react/plugins/persistQueryClient)について一読ください。
-
+デフォルトの状態の React Query がインメモリー**_だけ_**に保存して、それ以外のどこにも保存しないということを理解するのが、私は重要だと思います。ブラウザのページを再読み込みしたら、キャッシュはなくなります。
+localstorage のような外部ストレージにキャッシュを書き込みたいときは、[persister](https://tanstack.com/query/v4/docs/react/plugins/persistQueryClient)について一読ください。
 
 ## Query
 
@@ -71,41 +67,37 @@ localstorageのような外部ストレージにキャッシュを書き込み�
 
 キャッシュにはクエリがあり、`Query`にロジックの大部分が集まります。クエリ（自身のデータや、ステータスか直近のフェッチがいつ発生したかのようなメタ情報）に関する全ての情報が含まれているだけでなく、クエリ機能の実行も担っていて、リトライやキャンセル、重複削除のロジックも持っています。
 
-これは、実現不可能な状態に陥らないように、内部的に***ステートマシーン***を持ちます。例えば、すでにフェッチされている中でもクエリ機能を呼ぶ必要があれば、そのフェッチを重複削除できたりします。クエリがキャンセルされたら、以前の状態に戻ります。
+これは、実現不可能な状態に陥らないように、内部的に**_ステートマシーン_**を持ちます。例えば、すでにフェッチされている中でもクエリ機能を呼ぶ必要があれば、そのフェッチを重複削除できたりします。クエリがキャンセルされたら、以前の状態に戻ります。
 
-何よりも重要なこととして、クエリはクエリデータに対して***誰が***興味を持っているかを把握していて、全ての変更に関して`Observers`へ伝えることができます。
-
+何よりも重要なこととして、クエリはクエリデータに対して**_誰が_**興味を持っているかを把握していて、全ての変更に関して`Observers`へ伝えることができます。
 
 ## QueryObserver
 
 ![Observer is created by useQuery and informs the component about updates](/images/content/inside-react-query-translation-ja/queryObserver.png "ObserverはuseQueryによって生成されて、更新をコンポーネントに知らせる")
 
-オブザーバーは、`Query`とコンポーネントとの間の接着剤です。`Observer`は`useQuery`が呼ばれたときに生成され、常に1つのクエリだけを購読します。`useQuery`に`queryKey`を渡さなければならないのは、このためです。 😉
+オブザーバーは、`Query`とコンポーネントとの間の接着剤です。`Observer`は`useQuery`が呼ばれたときに生成され、常に 1 つのクエリだけを購読します。`useQuery`に`queryKey`を渡さなければならないのは、このためです。 😉
 
 `Observer`が行うのはこれだけではありません。最適化の大部分がここで行われます。`Observer`は、コンポーネントが使用している`Query`のプロパティーがどれかを知っているので、無関係の変更を通知する必要がありません。
-例として、`data`フィールドだけを使っているのであれば、バックグラウンドで再度フェッチが行われて`isFetching`に変更があっても、コンポーネントの再レンダリングは不要です。 
+例として、`data`フィールドだけを使っているのであれば、バックグラウンドで再度フェッチが行われて`isFetching`に変更があっても、コンポーネントの再レンダリングは不要です。
 
-さらに`Observer`毎に***selector***オプションを持ち、`data`フィールドのどこに関心があるかを決定できます。 以前、[#2: React Query Data Transformations](https://tkdodo.eu/blog/react-query-data-transformations#3-using-the-select-option)でこの最適化について書きました。
+さらに`Observer`毎に**_selector_**オプションを持ち、`data`フィールドのどこに関心があるかを決定できます。  以前、[#2: React Query Data Transformations](https://tkdodo.eu/blog/react-query-data-transformations#3-using-the-select-option)でこの最適化について書きました。
 `stealTime`の類やインターバルでのフェッチのようなタイマーのほとんどもまたオブザーバー層で発生します。
-
 
 ## 活性なクエリと非活性なクエリ
 
-`Observer`を持たない`Query`は、***非活性な***クエリと呼ばれます。どのコンポーネントからも使われていませんが、キャッシュにはまだあります。React Query DevToolsを見るとき、グレイアウトした非活性のクエリを目にすることがあるでしょう。
+`Observer`を持たない`Query`は、**_非活性な_**クエリと呼ばれます。どのコンポーネントからも使われていませんが、キャッシュにはまだあります。React Query DevTools を見るとき、グレイアウトした非活性のクエリを目にすることがあるでしょう。
 左の数値はクエリをサブスクライブしている`Observer`の数を示します。
 
 ![Devtools where one query has 2 observers and another one has 0](/images/content/inside-react-query-translation-ja/devtools.png "2つのオブザーバーを持つクエリと1つもオブザーバーを持っていないクエリのDevtools")
-
 
 ## 全体像
 
 ![Full overview of the architecture](/images/content/inside-react-query-translation-ja/architecture.png "アーキテクチャの全体像")
 
-まとめると、ほとんどのロジックがフレームワークに依存しないQuery Coreの部分にあります: `QueryClient`、`QueryCache`、`Query`、`QueryObserver`などが全てここにあります。
+まとめると、ほとんどのロジックがフレームワークに依存しない Query Core の部分にあります: `QueryClient`、`QueryCache`、`Query`、`QueryObserver`などが全てここにあります。
 
 そのため、新しいフレームワークに対するアダプターをつくることは非常に簡単です。基本的に必要となるのは、`Observer`を生成して、購読して、`Obsever`から通知があればコンポーネントを再レンダリングする方法です。
-[react](https://github.com/TanStack/query/blob/9d9aea5fb12eb89dec54c619845b3d226b53cf2b/packages/react-query/src/useBaseQuery.ts#L33-L115)や[solid](https://github.com/TanStack/query/blob/9579dd893656d0a4a7ac0207a204d4b3735c329d/packages/solid-query/src/createBaseQuery.ts#L33-L131)の`useQuery`のアダプターは、いずれも100行程度のコードです。
-
+[react](https://github.com/TanStack/query/blob/9d9aea5fb12eb89dec54c619845b3d226b53cf2b/packages/react-query/src/useBaseQuery.ts#L33-L115)や[solid](https://github.com/TanStack/query/blob/9579dd893656d0a4a7ac0207a204d4b3735c329d/packages/solid-query/src/createBaseQuery.ts#L33-L131)の`useQuery`のアダプターは、いずれも 100 行程度のコードです。
 
 ## コンポーネントの視点から
 
@@ -113,14 +105,14 @@ localstorageのような外部ストレージにキャッシュを書き込み�
 
 ![flow from component mounting over fetching data to rendering it](/images/content/inside-react-query-translation-ja/flow.png "コンポーネントのマウントからデータのフェッチ、レンダリングまでの流れ")
 
-- コンポーネントが***マウント***されたら`useQuery`が呼ばれて`Observer`が生成されます。
+- コンポーネントが**_マウント_**されたら`useQuery`が呼ばれて`Observer`が生成されます。
 - `Observer`は`QueryCache`にある`Query`を購読します。
 - サブスクリプションは、（まだ無ければ）`Query`の生成のトリガーとなるか、データが古いと判断されたときにバックグラウンドで再度フェッチするトリガーとなります。
 - フェッチが開始されると`Query`の状態が変わるので、`Observer`はその変化を検知します。
 - `Observer`はいくつかの最適化を行い、新しい状態をレンダリングする更新をコンポーネントに通知します。
 - `Query`の実行が完了したら、`Observer`にそれを知らせます。
 
-これは考えられるさまざまな流れの中の***1つにすぎない***ことに注意してください。理想的な状態は、コンポーネントがマウントされたとき、既にデータがキャッシュにあることです。
+これは考えられるさまざまな流れの中の**_1 つにすぎない_**ことに注意してください。理想的な状態は、コンポーネントがマウントされたとき、既にデータがキャッシュにあることです。
 より詳細には、[#17: Seeding the Query Cache](https://tkdodo.eu/blog/seeding-the-query-cache) を一読ください。
 
-全ての流れに共通するのは、ロジックの大半がReact（もしくはSolidやVueなど）の外で発生して、ステートマシーンからの全ての更新が`Observer`にまで伝わって、`Observer`がコンポーネントにまで伝えるべきかを決定します。
+全ての流れに共通するのは、ロジックの大半が React（もしくは Solid や Vue など）の外で発生して、ステートマシーンからの全ての更新が`Observer`にまで伝わって、`Observer`がコンポーネントにまで伝えるべきかを決定します。
