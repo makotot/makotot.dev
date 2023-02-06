@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@code-hike/mdx": "0.8.0",
-    "@tabler/icons-react": "2.1.2",
+    "@tabler/icons-react": "2.2.0",
     "feed": "4.2.2",
     "gray-matter": "4.0.3",
     "next": "13.1.6",
