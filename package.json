@@ -14,7 +14,7 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
-    "@code-hike/mdx": "0.8.0",
+    "@code-hike/mdx": "0.8.1",
     "@tabler/icons-react": "2.8.0",
     "feed": "4.2.2",
     "gray-matter": "4.0.3",
