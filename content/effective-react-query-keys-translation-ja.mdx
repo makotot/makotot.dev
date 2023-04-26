@@ -1,0 +1,227 @@
+---
+title: 効果的なReact Queryのキー
+draft: false
+date: "2023-04-27"
+tags: ["Data fetching", "React Query"]
+---
+
+これは、[Dominik Dorfmeister 氏](https://tkdodo.eu/)のブログ記事である[Effective React Query Keys](https://tkdodo.eu/blog/effective-react-query-keys)を日本語訳してみたものです。
+
+誤訳などあれば[Issue](https://github.com/makotot/makotot.dev/issues/new)や PR を頂けると幸いです。
+
+---
+
+[クエリのキー](https://react-query.tanstack.com/guides/query-keys)は React Query において非常に重要な核となる概念です。
+これは、クエリーの依存に変化があった時、React Query が内部的にデータを正しくキャッシュしたり、自動的に再取得できるようにするために必要なことです。
+そして、例えば、ミューテーションの後のデータ更新や、何かしらのクエリーをキャッシュ無効化する必要がある時、必要に応じて手動でクエリーのキャッシュとやりとりできるようにします。
+
+より効果的にこのようなことを行う上で私がクエリーのキーをどのように構成しているかをお話しする前に、これら 3 つのポイントが意味することを確認してみましょう。
+
+## データのキャッシュ
+
+内部的には、クエリーのキャッシュは、キーがクエリーキーをシリアライズしたものであり、値がクエリーのデータにメタ情報を加えた、ただの JavaScript のオブジェクトです。
+キーは、[決定論的な方法](https://react-query.tanstack.com/guides/query-keys#query-keys-are-hashed-deterministically)でハッシュ化されるので、オブジェクトを使うこともできます（トップレベルにおいてはキーが文字列か配列でなければいけないですが）。
+
+最も重要な部分は、キーがクエリに対して**_ユニーク_**でなければいけないということです。React Query がキャッシュの中からキーに対するエントリーを見つけたら、それを使います。`useQuery`**_と_**`useInfiniteQuery`とで同じキーを使用できないことにも注意してください。結局のところ、ただ 1 つのクエリー**_キャッシュ_**があり、これら 2 つの間でデータは共有されるのです。無限のクエリーが”通常”のクエリーと根本的に異なる構造を持つため、これは好ましくありません。
+
+```ts dont-mix-keys
+useQuery({ queryKey: ['todos'], queryFn: fetchTodos })
+
+// 🚨 これはうまくいきません
+useInfiniteQuery({ queryKey: ['todos'], queryFn: fetchInfiniteTodos })
+
+// ✅ 代わりに他のものを選びましょう
+useInfiniteQuery({
+  queryKey: ['infiniteTodos'],
+  queryFn: fetchInfiniteTodos,
+})
+```
+
+## 自動的な再取得
+
+> クエリーは宣言的です。
+
+これは強調しきれないほど**_とても_**重要な概念であり、また、”腑に落ちる”までしばらく時間を要するものです。ほとんどの人はクエリーを、特に再取得について、命令的な方法で考えます。
+
+例えばクエリーが 1 つあり、何かデータを取得するとします。ボタンをクリックすると異なるパラメーターでデータを再取得しましょう。そうすると以下のような実装をよく目にします:
+
+```tsx imperative-refetch
+function Component() {
+  const { data, refetch } = useQuery({
+    queryKey: ['todos'],
+    queryFn: fetchTodos,
+  })
+
+  // ❓ どのようにして再取得にパラメーターを渡すのでしょう ❓
+  return <Filters onApply={() => refetch(???)} />
+}
+```
+
+答えはこうです: **やらない。**
+
+`refetch`はこのためのものではありません。**_同じパラメーターで_**再取得するためのものです。
+
+React Query がキーの変化するたび常時自動的に再取得をトリガーするため、データを変更する何か**_状態_**を持つ場合、必要な唯一のことはクエリーキーにそれを含めることです。そのため、絞り込みを適用したい場合、**_クライアントステート_**を変更するだけです:
+
+```tsx query-key-drives-the-query
+function Component() {
+  const [filters, setFilters] = React.useState()
+  const { data } = useQuery({
+    queryKey: ['todos', filters],
+    queryFn: () => fetchTodos(filters),
+  })
+
+  // ✅ ローカルの状態を設定して、クエリーを”駆動”します
+  return <Filters onApply={setFilters} />
+}
+```
+
+`setFilters`によって引き起こされる再レンダリングは、React Query に異なるクエリーキーを渡します。
+
+## 手動でのやりとり
+
+クエリーキャッシュとの手動でのやりとりは、クエリーキーの構造が最も重要なものです。
+[Query Filters](https://react-query.tanstack.com/guides/filters#query-filters)をサポートする[invalidateQueries](https://react-query.tanstack.com/reference/QueryClient#queryclientinvalidatequeries)や[setQueriesData](https://react-query.tanstack.com/reference/QueryClient#queryclientsetqueriesdata)のようなメソッドの多くがクエリーキーにあいまいな一致を許容します。
+
+## 効果的な React Query のキー
+
+これらの点は私の個人的な意見（実のところ、このブログの全てと同様）を反映しているので、クエリーキーを扱う時に絶対守らなければならないこととは考える必要がないことに留意してください。
+この戦略はアプリケーションがより複雑になったとき最も効果的で、またとても良くスケールします。Todo アプリでは絶対に必要ありません 😁。
+
+### コロケーション
+
+[Kent C. Dodds](https://twitter.com/kentcdodds)氏による[Maintainability through colocation](https://kentcdodds.com/blog/colocation)をまだ読んだことがなければ、読んでみてください。私は`/src/utils/queryKeys.ts`に全てのクエリーキーを保持することが状況を良くするとは考えていません。以下のように、私はそれぞれのクエリーのそばにクエリーキーを持って、機能のディレクトリにコロケーションします:
+
+```
+- src
+  - features
+    - Profile
+      - index.tsx
+      - queries.ts
+    - Todos
+      - index.tsx
+      - queries.ts
+```
+
+`queries`ファイルは React Query に関する全てを含むようにします。大抵カスタムフックだけをエクスポートし、クエリー関数とクエリーキーとがローカルに留まるようにします。
+
+### 常に配列のキーを使用する
+
+クエリーキーを文字列にもできますが、一貫性を持たせるため、私は常に配列にすることを好みます。React Query は内部的にいずれにしろ配列に変換します:
+
+```ts always-use-array-keys
+// 🚨 いずれにせよ['todos']に変換されます
+useQuery({ queryKey: 'todos' })
+// ✅
+useQuery({ queryKey: ['todos'] })
+```
+
+**アップデート**: React Query v4 では、全てのキーが配列でなければいけません。
+
+### 構成
+
+クエリーキーは、最も一般的なものから最も具体的なものへと、間を適切な粒度のレベルで、構成します。ここでは、私が絞り込み可能なリスト、並びに詳細の表示が可能な TODO リストをどのように構成するかを示します:
+
+```
+['todos', 'list', { filters: 'all' }]
+['todos', 'list', { filters: 'done' }]
+['todos', 'detail', 1]
+['todos', 'detail', 2]
+```
+
+このような構成により、`['todos']`と紐づく全ての TODO、全てのリストか全ての詳細、正確なキーを知っていれば特定の 1 つをキャッシュ無効化することもできます。必要に応じて全てのリストを対象にできるので、[ミューテーションのレスポンスからの更新](https://react-query.tanstack.com/guides/updates-from-mutation-responses)がより柔軟になります:
+
+```tsx updates-from-mutation-responses
+function useUpdateTitle() {
+  return useMutation({
+    mutationFn: updateTitle,
+    onSuccess: (newTodo) => {
+      // ✅ TODOの詳細を更新
+      queryClient.setQueryData(['todos', 'detail', newTodo.id], newTodo)
+
+      // ✅ このTODOを含む全てのリストを更新
+      queryClient.setQueriesData(['todos', 'list'], (previous) =>
+        previous.map((todo) => (todo.id === newTodo.id ? newtodo : todo))
+      )
+    },
+  })
+}
+```
+
+リストと詳細の構成が大きく異なるのであればうまくいかないかもしれませんが、代わりに、全てのリストをただキャッシュ無効化することももちろん可能です:
+
+```tsx invalidate-all-lists focus=7:8
+function useUpdateTitle() {
+  return useMutation({
+    mutationFn: updateTitle,
+    onSuccess: (newTodo) => {
+      queryClient.setQueryData(['todos', 'detail', newTodo.id], newTodo)
+
+      // ✅ 全てのリストをキャッシュ無効化
+      queryClient.invalidateQueries({ queryKey: ['todos', 'list'] })
+    },
+  })
+}
+```
+
+例えば URL から絞り込みするような、現在どのリストにいるか分かり、それゆえ正確なクエリーキーが構築できる場合、この 2 つのメソッドを組み合わせてリストに対して`setQueryData`を呼び、その他全てをキャッシュ無効化することもできます。
+
+```tsx combine focus=10:19
+function useUpdateTitle() {
+  // URLに保持している現在のフィルターを返すカスタムフックをイメージしてください
+  const { filters } = useFilterParams()
+
+  return useMutation({
+    mutationFn: updateTitle,
+    onSuccess: (newTodo) => {
+      queryClient.setQueryData(['todos', 'detail', newTodo.id], newTodo)
+
+      // ✅ 即座に現在のリストを更新
+      queryClient.setQueryData(['todos', 'list', { filters }], (previous) =>
+        previous.map((todo) => (todo.id === newTodo.id ? newtodo : todo))
+      )
+
+      // 🥳 全てのリストをキャッシュ無効化しつつ、アクティブなものを再取得しない
+      queryClient.invalidateQueries({
+        queryKey: ['todos', 'list'],
+        refetchActive: false,
+      })
+    },
+  })
+}
+```
+
+**アップデート**: v4 で、`refetchActive`は`refetchType`に置き換わっています。上記の例だと何も再取得したくないので、`refetchType: 'none'`となります。
+
+### クエリーキーのファクトリーを使用する
+
+上述の例で、たくさんのクエリーキーを手動で記述していることに気づいたでしょう。これは間違いの元であるだけでなく、例えばもう 1 段階**_他の_**粒度のキーを追加したくなった場合のような、将来の変更を難しくもします。
+
+私が機能ごとのクエリーキーのファクトリーを推奨する理由がここにあります。これは、カスタムフックで利用できる、ただのエントリーとクエリーキーを生み出す関数のオブジェクトです。
+上述の構造の例だと、このようになります:
+
+```ts
+const todoKeys = {
+  all: ['todos'] as const,
+  lists: () => [...todoKeys.all, 'list'] as const,
+  list: (filters: string) => [...todoKeys.lists(), { filters }] as const,
+  details: () => [...todoKeys.all, 'detail'] as const,
+  detail: (id: number) => [...todoKeys.details(), id] as const,
+}
+```
+
+各階層が関連していながらも独立してアクセスできるようになっていて、とても柔軟です:
+
+```tsx examples
+// 🕺 TODOの機能に関連する全てを削除
+queryClient.removeQueries({ queryKey: todoKeys.all })
+
+// 🚀 全てのリストのキャッシュを無効化
+queryClient.invalidateQueries({ queryKey: todoKeys.lists() })
+
+// 🙌 1つのTODOをプリフェッチ
+queryClient.prefetchQueries({
+  queryKey: todoKeys.detail(id),
+  queryFn: () => fetchTodo(id),
+})
+```

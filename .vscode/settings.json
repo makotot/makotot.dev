@@ -20,5 +20,8 @@
   },
   "peacock.color": "#49cb63",
   "editor.formatOnSave": true,
-  "editor.formatOnSaveMode": "modifications"
+  "editor.formatOnSaveMode": "modifications",
+  "files.associations": {
+    "*.mdx": "markdown"
+  }
 }
