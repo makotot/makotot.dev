@@ -4,7 +4,7 @@
   "labels": ["renovate"],
   "packageRules": [
     {
-      "matchUpdateTypes": ["patch", "pin"],
+      "matchUpdateTypes": ["patch", "pin", "minor"],
       "automerge": true,
       "addLabels": ["renovate: automerge"]
     }
