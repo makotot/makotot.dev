@@ -19,7 +19,7 @@ const Home = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <main>
       <h1 className="text-4xl">Posts</h1>
-      <ul className="mt-4">
+      <ul className="mt-4 space-y-1">
         {posts.map((post) => (
           <li key={post.slug}>
             <Link
@@ -28,7 +28,10 @@ const Home = ({ posts }: InferGetStaticPropsType<typeof getStaticProps>) => {
             >
               <span>{post.data.title}</span>
             </Link>
-            <span className="text-sm"> - {post.data.date}</span>
+            <span className="text-sm">
+              {" "}
+              - <time dateTime={post.data.date}>{post.data.date}</time>
+            </span>
           </li>
         ))}
       </ul>
