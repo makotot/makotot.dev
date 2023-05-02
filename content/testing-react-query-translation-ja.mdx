@@ -1,0 +1,245 @@
+---
+title: React Queryのテスト
+draft: false
+date: "2023-05-03"
+tags: ["Data fetching", "React Query", "testing"]
+---
+
+これは、[Dominik Dorfmeister 氏](https://tkdodo.eu/)のブログ記事である[Testing React Query](https://tkdodo.eu/blog/testing-react-query)を日本語訳してみたものです。
+
+誤訳などあれば[Issue](https://github.com/makotot/makotot.dev/issues/new)や PR を頂けると幸いです。
+
+---
+
+テストのトピックに関する質問をよくReact Queryと合わせてもらうので、ここでその中のいくつかに答えましょう。
+私はその理由の1つを、”スマート”なコンポーネント（[コンテナーコンポーネント](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)とも呼ばれます）のテストが簡単ではないからだと考えます。フックの登場により、この分割は概ねほぼ非推奨となりました。今は、ほぼ恣意的な分割とプロップドリルよりも、必要な場所で直接フックを使用することが推奨されるようになりました。
+
+私は、これが全体的にコロケーションやコードの可読性に対するとても良い改善だと考えますが、”ただのprops”以外の依存関係を用いるコンポーネントが増えることになります。
+
+それは`useContext`かもしれません。`useSelector`かもしれません。はたまた`useQuery`かもしれません。
+
+このようなコンポーネントは、異なる状況で呼ばれると異なる結果が返されるので、技術的にはもはやピュアなものではありません。テストする際、適切に動作するよう注意深くこのような周辺環境を設定しておく必要があります。
+
+## ネットワークリクエストのモック
+React Queryが非同期のサーバーステート管理ライブラリなので、コンポーネントはバックエンドへリクエストをするかもしれません。テストする際に、このバックエンドから実際にデータを提供できないし、例えできたとしても、それに依存したテストにしたくはないでしょう。
+
+jestでデータをモックする方法についての記事は大量にあります。APIクライアントがあればそれをモックできます。fetchやaxiosを直接モックもできます。私はただKent C. Dodds氏による記事の[Stop mocking fetch](https://kentcdodds.com/blog/stop-mocking-fetch)に賛同をするだけです。
+
+[@ApiMocking](https://twitter.com/ApiMocking)による[mock service worker](https://mswjs.io/)を利用しましょう。
+
+APIをモックすることで信頼できる唯一の情報源とすることができます。
+
+- テストにおいてNode.jsで動作します
+- RESTもGraphQLもサポートしています
+- [Storybookのアドオン](https://storybook.js.org/addons/msw-storybook-addon)があるので、`useQuery`を使っているコンポーネントをストーリーを書くことができます
+- 開発用にブラウザで動作し、ブラウザの開発者ツールでリクエストを確認できます
+- フィクスチャー同様にCypressで動作します
+
+---
+
+ネットワークレイヤーのケアが済んだので、React Query特有のことに目を向けていきましょう。
+
+## QueryClientProvider
+React Queryを使用するときは常にQueryClientProviderとそれに渡すqueryClient - `QueryCache`を保持する容器 - が必要です。キャッシュはクエリーのデータを順番に保持します。
+
+私はテスト毎に固有のQueryClientProviderを持たせることとテスト毎に`new QueryClient`を生成することを好みます。こうすることでテストはお互い完全に隔離されます。テスト毎にキャッシュをクリアする方法もあるかもしれませんが、私はテスト間で共有する状態を可能な限り小さくしたいと思っています。そうしなければ、並行してテストを実行したら予期しきれないフレーキーな結果が返されるかもしれません。
+
+### カスタムフックの場合
+カスタムフックをテストする場合、[react-hooks-testing-library](https://react-hooks-testing-library.com/)を間違いなく利用するでしょう。これはフックをテストするための最も簡単なものです。このライブラリによって、レンダリング時にテストするコンポーネントを包み込むReactコンポーネントである[ラッパー](https://react-hooks-testing-library.com/reference/api#wrapper)にフックを包むことができます。私は、これがテスト毎に1度実行されるものであるため、QueryClientを生成するのに完璧な場所だと思います。
+
+```tsx wrapper
+const createWrapper = () => {
+  // ✅ テスト毎に新しいQueryClientを生成する
+  const queryClient = new QueryClient()
+  return ({ children }) => (
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  )
+}
+
+test("my first test", async () => {
+  const { result } = renderHook(() => useCustomHook(), {
+    wrapper: createWrapper()
+  })
+})
+```
+
+### コンポーネントの場合
+`useQuery`フックを使うコンポーネントをテストしたい場合においても、そのコンポーネントをQueryClientProviderでラップする必要があります。[react-testing-library](https://testing-library.com/docs/react-testing-library/intro/)の`render`を包む小さなラッパーは良い選択に思えます。React Queryが[自身の内部のテスト](https://github.com/tannerlinsley/react-query/blob/ead2e5dd5237f3d004b66316b5f36af718286d2d/src/react/tests/utils.tsx#L6-L17)をどのように行なっているか見ておきましょう。
+
+## リトライの無効化
+これは、React Queryとテストでのよくある”潜在的問題”の1つです。ライブラリの初期値は指数関数的なバックオフで3回リトライし、即ち、誤ったクエリーをテストしたい時にタイムアウトする可能性があることを意味します。リトライを無効化する最も簡単な方法もまた`QueryClientProvider`を通して行います。上述の例を拡張しましょう。
+
+```tsx no-retries
+const createWrapper = () => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        // ✅ リトライを無効化する
+        retry: false,
+      },
+    },
+  })
+
+  return ({ children }) => (
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  )
+}
+
+test("my first test", async () => {
+  const { result } = renderHook(() => useCustomHook(), {
+    wrapper: createWrapper()
+  })
+}
+```
+これでコンポーネントツリーの全てのクエリーの初期設定を”リトライしない”ようにできます。これは明示的にリトライ指定せず`useQuery`を使用するときに限って機能することを知っておくのが重要です。初期設定がフォールバックとして使われるだけなので、5回リトライさせたいクエリーがあるときはそれが優先されます。
+
+### setQueryDefaults
+この問題に対して私ができる最上の助言は、`useQuery`に直接このようなオプションを指定しないことです。可能な限り初期値を利用や上書きして、特定のクエリーに何か変更を加えたい時に限って[queryClient.setQueryDefaults](https://react-query.tanstack.com/reference/QueryClient#queryclientsetquerydefaults)を使ってください。
+
+なので例えば`useQuery`にリトライを指定する代わりに
+```tsx not-on-useQuery
+const queryClient = new QueryClient()
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Example />
+    </QueryClientProvider>
+  )
+}
+
+function Example() {
+  // 🚨 テストのためにこの設定を上書きすることはできません！
+  const queryInfo = useQuery({
+    queryKey: ['todos'],
+    queryFn: fetchTodos,
+    retry: 5,
+  })
+}
+```
+このように設定します。
+```tsx setQueryDefaults
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 2,
+    },
+  },
+})
+
+// ✅ todosに限り5回リトライするようにします
+queryClient.setQueryDefaults(['todos'], { retry: 5 })
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Example />
+    </QueryClientProvider>
+  )
+}
+```
+これで全てのクエリーが2回リトライするようになり、***todos***だけが5回リトライし、テストにおいて全てのクエリーのリトライを無効化する余地をまだ残しています 🙌。
+
+### ReactQueryConfigProvider
+もちろん、これは既知のクエリーキーに限って機能します。時にはコンポーネントツリーのサブセットに対していくつか設定を加えたいこともあると思います。v2で、React Queryはそのような用途にあった[ReactQueryConfigProvider](https://react-query-v2.tanstack.com/docs/api#reactqueryconfigprovider)を提供していました。v3では以下のような数行のコードで同じことを実現できます。
+
+```tsx ReactQueryConfigProvider
+const ReactQueryConfigProvider = ({ children, defaultOptions }) => {
+  const client = useQueryClient()
+  const [newClient] = React.useState(
+    () =>
+      new QueryClient({
+        queryCache: client.getQueryCache(),
+        muationCache: client.getMutationCache(),
+        defaultOptions,
+      })
+  )
+
+  return (
+    <QueryClientProvider client={newClient}>{children}</QueryClientProvider>
+  )
+}
+```
+
+[codesandboxの例](https://codesandbox.io/s/react-query-config-provider-v3-lt00f)でこれを実際に確認することができます。
+
+## 常にクエリーを待つ
+
+React Queryはそれ自体非同期なので、フックを実行すると即座に結果が得られるわけではありません。大抵読み込み中で確認できるデータがない状態となります。react-hooks-testing-libraryによる[非同期のユーティリティー](https://react-hooks-testing-library.com/reference/api#async-utilities)はこの問題を解決するさまざまな方法を提供しています。最もシンプルな例だと、クエリが成功した状態に遷移するまでただ待つことができます。
+
+```tsx waitFor
+const createWrapper = () => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+  })
+  return ({ children }) => (
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  )
+}
+
+test("my first test", async () => {
+  const { result, waitFor } = renderHook(() => useCustomHook(), {
+    wrapper: createWrapper()
+  })
+
+  // ✅ クエリが成功した状態に遷移するまで待つ
+  await waitFor(() => result.current.isSuccess)
+
+  expect(result.current.data).toBeDefined()
+}
+```
+
+**更新**:  
+[@testing-library/react v13.1.0](https://github.com/testing-library/react-testing-library/releases/tag/v13.1.0)から新しい[renderHook](https://testing-library.com/docs/react-testing-library/api/#renderhook)が利用できるようになりました。それ自体は`waitFor`ユーティリティを返さないので、代わりに[@testing-library/reactからimport](https://testing-library.com/docs/dom-testing-library/api-async/#waitfor)したものを使う必要があります。APIが少し異なり、`boolean`を返すことができず、`Promise`が返されることを期待します。つまりコードを少し修正する必要があります。
+
+```tsx new-render-hook
+import { waitFor, renderHook } from '@testing-library/react'
+
+test("my first test", async () => {
+  const { result } = renderHook(() => useCustomHook(), {
+    wrapper: createWrapper()
+  })
+
+  // ✅ waitForを期待するPromiseを返す
+  await waitFor(() => expect(result.current.isSuccess).toBe(true))
+
+  expect(result.current.data).toBeDefined()
+}
+```
+
+## エラーコンソールを沈黙させる
+初期設定につき、React Queryはコンソールにエラーを出力します。全てのテストが🟢なのにコンソールに🔴が見えことになるので、テストにおいてこの点をとても邪魔なものだと思います。React Queryはそのデフォルトの挙動を[ロガーを設定](https://react-query.tanstack.com/reference/setLogger)することで上書きできるので、私は普段からこのようにしています。
+
+```tsx silence-errors
+import { setLogger } from 'react-query'
+
+setLogger({
+  log: console.log,
+  warn: console.warn,
+  // ✅ コンソールにエラーを出さない
+  error: () => {},
+})
+```
+
+**更新**:  
+v4で`setLogger`は削除されました。その代わり`QueryClient`のpropとしてカスタムのロガーを渡すことができます。
+
+```tsx logger-prop
+const queryClient = new QueryClient({
+  logger: {
+    log: console.log,
+    warn: console.warn,
+    // ✅ コンソールにエラーを出さない
+    error: () => {},
+  }
+})
+```
+また、混乱を避けるため本番環境モードではエラーをログに記録しないようになりました。
+
+
+## まとめ
+私はこれら全てがよくまとまっている即席のリポジトリーをセットアップしました。mock-service-workerやreact-testing-library、そして前述のラッパーを含んでいます。これは4つのテストを含んでいます - カスタムフックとコンポーネントの基本的な失敗と成功のテストです。https://github.com/TkDodo/testing-react-query をご覧になってみてください。
