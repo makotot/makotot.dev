@@ -1,6 +1,6 @@
-import type { GetStaticPropsContext, InferGetStaticPropsType } from "next"
 import path from "path"
 import fs from "fs"
+import type { GetStaticPropsContext, InferGetStaticPropsType } from "next"
 import matter from "gray-matter"
 import { MDXRemote } from "next-mdx-remote"
 import { serialize } from "next-mdx-remote/serialize"
