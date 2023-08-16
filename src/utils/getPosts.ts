@@ -12,7 +12,7 @@ export const getPosts = (): Post[] => {
     .map((file) => {
       const fileContent = fs.readFileSync(
         path.join(process.cwd(), "content", file.name),
-        "utf-8"
+        "utf-8",
       )
       const { data, content } = matter(fileContent)
       const slug = file.name.replace(/.mdx$/, "")
