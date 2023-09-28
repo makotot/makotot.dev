@@ -1,0 +1,122 @@
+---
+title: テストを書きましょう。あまり多くなりすぎないように。主に結合テストで。
+draft: false
+date: "2023-09-28"
+tags: ['testing']
+---
+
+これは、[Kent C. Dodds 氏](https://kentcdodds.com/)のブログ記事である[Write tests. Not too many. Mostly integration.](https://kentcdodds.com/blog/write-tests)を日本語訳してみたものです。
+
+誤訳などあれば[Issue](https://github.com/makotot/makotot.dev/issues/new)や PR を頂けると幸いです。
+
+---
+
+このブログ記事は、こちらでご覧いただける講演を記事にしたものです:
+
+<div className="content-center">
+  <iframe src="https://www.youtube.com/embed/Fha2bVoC8SE?list=PLV5CVI1eNcJgNqzNwcs4UKrlJdhfDjshf" title="Kent C. Dodds – Write tests. Not too many. Mostly integration." frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+</div>
+
+少し前に、[Socket.io](https://socket.io)の作者であり[Zeit.co](https://zeit.co)（最近発表された多くの素晴らしいものを生み出している会社）のファウンダーでもある[Guillermo Rauch氏](https://twitter.com/rauchg)が[深いことをツイートしました](<(https://twitter.com/rauchg/status/807626710350839808)>)。
+
+<div className="content-center">
+  <blockquote className="twitter-tweet"><p lang="en" dir="ltr">Write tests. Not too many. Mostly integration.</p>&mdash; Guillermo Rauch (@rauchg) <a href="https://twitter.com/rauchg/status/807626710350839808?ref_src=twsrc%5Etfw">December 10, 2016</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+</div>
+
+> **_テストを書きましょう。あまり多くなりすぎないように。主に結合テストで。_**
+
+これは短いにも関わらず深いことなので、掘り下げてみましょう。
+
+## テストを書きましょう。
+
+そうです、ほとんどのプロジェクトでは自動化されたテストを書くべきです。時間に価値があるのならとにかくそうするべきです。
+午前2時に電話をもらってバグを修正するよりも、テストによってローカルでバグを発見する方がはるかに良いです。
+**テストを書くことに時間を費やすと時間の節約になっていることに気づくことがよくあります。**
+作るものにかかる実装の時間は長くなるかもしれないし、そうじゃないかもしれないけど、私（や他の人）がそれを維持することに費やす時間はほぼ間違いなく節約できます。
+
+テストを書くときに考えるべきことは、プロジェクトにバグがないか確信を持つことがどれだけできるかどうか、です。
+[TypeScript](https://www.typescriptlang.org)や[ESLint](https://eslint.org)のような静的型付けツールやリントツールは驚くほどの信頼性をもたらすので、
+もしこれらのツールを利用していないのであれば使ってみることを強くお勧めします。
+とはいえ、**強く型付けされた言語であってもテストがあるべきです**。型付けやリントは、ビジネスロジックにバグがないことを保証できません。
+そのため、良いテストスイートによって信頼性を高めることが出来ます。
+
+## あまり多くなりすぎないように。
+
+私は、マネージャーやチームがアプリケーションに対する100%のコードカバレッジを義務としているのを耳にしたことがあります。
+それは本当に良くない考えです。問題は、**カバレッジが70%を優に超える状態になると、テストから得られるものが少なくなる**（数字は私が科学的根拠なく出したものです。。）ことにあります。
+なぜでしょうか？それは、常に100%を目指しているとテストする必要のないものまでテストすることに時間を費やすようになるのです。
+それらは本当にロジックを全く持たないものです（バグがあればESLintやFlowで発見できます）。
+_このようなテストの維持は本当にあなたやあなたのチームの速度を低下させます。_
+
+また、テスト環境で再現困難な1行のコードの確認をするためだけに実装詳細をテストしていることに気づくこともあるでしょう。
+アプリケーションが動いていることに十分な信頼性を得られず、リファクタリング時に速度低下を招くので、実装詳細をテストすることは _本当に_ 避けたいものです。
+**リファクタリング時にテストを修正することは、滅多にするべきではありません。**
+
+私のほとんど全てのオープンソースプロジェクトが100%のコードカバレッジであることに触れておくべきでしょう。私のオープンソースプロジェクトはさまざまな状況で再利用できる小さなライブラリーやツールばかり
+（壊れると利用している多くのプロジェクトで重大な問題を招きます）で、とにかく相対的に100%のコードカバレッジを得やすいものです。
+
+## 主に結合テストで。
+
+テストにはさまざまな種類があります（これについてはFluent Confにおける私の5分の講演をご覧ください：["What we can learn about testing from the wheel"](https://youtu.be/Da9wfQ0frGA?list=PLV5CVI1eNcJgNqzNwcs4UKrlJdhfDjshf)）
+それぞれにトレードオフがあります。自動テストについて話題にするとき最も一般的な3つのテストの形態は、単体、結合、そしてE2Eです。
+
+こちらは、私のフロントエンドマスターズワークショップ["Testing JavaScript Applications"](https://frontendmasters.com/courses/testing-javascript)での[スライド](http://slides.com/kentcdodds/testing-workshop#/4/8)です。
+
+![テストピラミッド](/images/content/write-tests-translation-ja/test-pyramid.png)
+
+このテストピラミッドは、[マーティン・ファウラー氏のブログ](https://martinfowler.com/bliki/TestPyramid.html)と[Googleのテストのブログ](https://testing.googleblog.com/2015/04/just-say-no-to-more-end-to-end-tests.html)から組み合わせたものです。
+
+ここで示しているように、ピラミッドは下から上へ、単体、結合、E2Eの順になっています。
+ピラミッドの上へ向かうほどテストの記述/実行に時間がかかり、実行/維持に（時間とリソースの面で）より高いコストがかかります。
+これによって、単体テストへより多くの時間を割くべきということを示すものです。
+
+ここで示されていないことは、**ピラミッドの上へ向かうほど各テスト形態の信頼指数が高まる**ということです。より多くの利益を得られるのです。
+つまり、E2Eテストは単体テストよりも遅くコストが高いものですが、アプリケーションが意図通りに動作していることに対してより大きな信頼をもたらします。
+
+<div className="content-center">
+  <blockquote className="twitter-tweet"><p lang="en" dir="ltr">The TestPyramid blog post by <a href="https://twitter.com/martinfowler?ref_src=twsrc%5Etfw">@martinfowler</a> (<a href="https://t.co/RCv8abFm37">https://t.co/RCv8abFm37</a>) finishes with this note.<br /><br />Our tools are awesome now and this assumption is less true. This is why I say goodby to the pyramid 🔼 and hello to the trophy 🏆 <a href="https://t.co/EKTK4vqj6n">https://t.co/EKTK4vqj6n</a> <a href="https://t.co/Wa8brUiWfy">pic.twitter.com/Wa8brUiWfy</a></p>&mdash; Kent C. Dodds 🌌 (@kentcdodds) <a href="https://twitter.com/kentcdodds/status/1141365123296051201?ref_src=twsrc%5Etfw">June 19, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+</div>
+
+上記の通り、我々のツールはマーティン・ファウラー氏によるテストピラミッドのコンセプトの想定を超えたものになっています。”テストトロフィー”を作った理由がここにあります 🏆。
+
+<div className="content-center">
+  <blockquote className="twitter-tweet"><p lang="en" dir="ltr">&quot;The Testing Trophy&quot; 🏆<br /><br />A general guide for the **return on investment** 🤑 of the different forms of testing with regards to testing JavaScript applications.<br /><br />- End to end w/ <a href="https://twitter.com/Cypress_io?ref_src=twsrc%5Etfw">@Cypress_io</a> ⚫️<br />- Integration &amp; Unit w/ @fbjest 🃏<br />- Static w/ <a href="https://twitter.com/flowtype?ref_src=twsrc%5Etfw">@flowtype</a> 𝙁 and <a href="https://twitter.com/geteslint?ref_src=twsrc%5Etfw">@geteslint</a> ⬣ <a href="https://t.co/kPBC6yVxSA">pic.twitter.com/kPBC6yVxSA</a></p>&mdash; Kent C. Dodds 🌌 (@kentcdodds) <a href="https://twitter.com/kentcdodds/status/960723172591992832?ref_src=twsrc%5Etfw">February 6, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+</div>
+
+こちらは、結合テストの重要性をユーモラスに説明したものです。
+
+<div className="content-center">
+  <blockquote className="twitter-tweet"><p lang="en" dir="ltr">expect(umbrellaOpens).toBe(true)<br /><br />tests: 1 passed, 1 total<br /><br />**all tests passed** <a href="https://t.co/p6IKO7KDuy">pic.twitter.com/p6IKO7KDuy</a></p>&mdash; Erin 🐠 (@erinfranmc) <a href="https://twitter.com/erinfranmc/status/1148986961207730176?ref_src=twsrc%5Etfw">July 10, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+</div>
+
+コンポーネント`<B />`にprop`e`が渡らずに壊れる場合には、コンポーネント`<A />`が`c`と`d`のpropsを受け取るコンポーネント`<B />`をレンダリングするかどうかは問題ではありません。
+そのため、これらの部品が独立して機能することを検証する単体テストを幾らか持つことは悪いことではないですが、_それらが適切に連携して機能すること**も**検証しないとあまり意味がありません_。
+そして、適切に連携して機能することをテストすることで、わざわざ独立して個別にテストする必要がないと気づくことが多々あるでしょう。
+
+**結合テストは、信頼性とスピード/費用とのトレードオフの間で素晴らしいバランスが保たれます。**
+そのため、_ほとんど_（全てではないけども）の労力をここに費やすことをお勧めします。
+
+<div style={{
+  padding: "0.5rem",
+  border: "1px solid hsl(var(--p)",
+}}>
+これに関して詳しくは[Testing Implementation Details](https://kentcdodds.com/blog/testing-implementation-details)を読んでください。
+テストの形態について詳しくは、[Static vs Unit vs Integration vs E2E Testing for Frontend Apps](https://kentcdodds.com/blog/static-vs-unit-vs-integration-vs-e2e-tests)を読んでください。
+</div>
+
+## より多くの結合テストを書く方法
+
+結合テストと単体テストとの境界線はやや曖昧です。とにかく、より多くの結合テストを書くのにできる最も大きなことは**あまり多くのことをモックするのをやめる**ことだと思います。
+_何かをモックすると、テストしているものとモックされているものの間の結合における全ての信頼を除去していることになります。_
+私は、モックが（[異論もあると思いますが](https://youtu.be/EaxDl5NPuCA)）[時に避けられないもの](https://kentcdodds.com/blog/the-merits-of-mocking)だとも理解しています。
+毎回テストで _実際に_ メールを送信したりクレジットカードで支払ったりはしたくないと思いますが、大抵の場合においてモックを避けることは可能あり、そうすることでより良くなるでしょう。
+
+**Reactを利用しているのであれば、シャローレンダリングもモックに含まれます。** より詳しくは[Why I Never Use Shallow Rendering](https://kentcdodds.com/blog/why-i-never-use-shallow-rendering)を読んでください。
+
+## 結論
+
+ソフトウェアのテストが時間の無駄だと異論を唱える人はいないと思います。
+最大の課題は、[実装詳細をテスト](https://kentcdodds.com/blog/testing-implementation-details)することによる誤った信頼ではなく、
+[何をテストするべきか知り](https://kentcdodds.com/blog/how-to-know-what-to-test)、それをどのようにして[本当の信頼](https://kentcdodds.com/blog/confidently-shipping-code)を得るテストとするかです。
+
+この記事がお役に立てば幸いです。また自信を持ってアプリケーショを届ける目標が達成されることを祈っています！
