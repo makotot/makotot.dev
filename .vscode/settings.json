@@ -23,5 +23,8 @@
   "editor.formatOnSaveMode": "modifications",
   "files.associations": {
     "*.mdx": "markdown"
+  },
+  "editor.quickSuggestions": {
+    "strings": "on"
   }
 }
