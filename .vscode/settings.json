@@ -22,7 +22,8 @@
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "modifications",
   "files.associations": {
-    "*.mdx": "markdown"
+    "*.mdx": "markdown",
+    "*.css": "tailwindcss"
   },
   "editor.quickSuggestions": {
     "strings": "on"
