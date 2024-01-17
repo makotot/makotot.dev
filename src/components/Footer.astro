@@ -1,0 +1,27 @@
+---
+import { Icon } from "astro-icon/components"
+import { REPO_URL, GA_ID } from "../consts"
+---
+
+<footer class="mx-auto mt-auto w-full max-w-3xl p-4 md:w-2/3 md:p-8">
+  <div class="flex justify-center gap-2">
+    <a href="/rss/feed.xml" class="inline-flex">
+      <Icon name="mdi:rss" size={24} aria-label={"RSS"} />
+    </a>
+    <a href={REPO_URL} class="inline-flex" target="_blank" rel="noreferrer">
+      <Icon name="mdi:github" size={24} aria-label={"Github"} />
+    </a>
+  </div>
+</footer>
+
+<script
+  type="text/partytown"
+  src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+<script type="text/partytown">
+  window.dataLayer = window.dataLayer || []
+  function gtag() {
+    dataLayer.push(arguments)
+  }
+  gtag("js", new Date())
+  gtag("config", `${GA_ID}`)
+</script>

@@ -3,13 +3,13 @@ import typography from "@tailwindcss/typography"
 import daisyui from "daisyui"
 
 const config = {
-  content: ["./src/**/*.{js,ts,jsx,tsx}"],
+  content: ["./src/**/*.{astro,,md,mdx,ts,tsx}"],
   theme: {
     extend: {},
   },
   plugins: [typography, daisyui],
   daisyui: {
-    themes: ["forest", "emerald"],
+    themes: ["winter"],
   },
 } satisfies Config
 
