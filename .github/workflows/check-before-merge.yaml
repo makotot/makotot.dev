@@ -16,6 +16,8 @@ jobs:
       - run: pnpm install
       - name: Check format
         run: npm run check-format
+      - name: sync
+        run: pnpm astro sync
       - name: Lint
         run: npm run lint
       - name: Type check
