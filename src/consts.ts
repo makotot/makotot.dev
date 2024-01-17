@@ -1,3 +1,4 @@
+export const SITE_TITLE = "makotot.dev"
 export const SITE_URL = `${process.env.VERCEL_URL}`
 export const SITE_NAME = "makotot.dev"
 export const EMAIL = "makoto.ttn@gmail.com"

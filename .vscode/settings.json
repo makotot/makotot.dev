@@ -1,30 +1,20 @@
 {
-  "workbench.colorCustomizations": {
-    "activityBar.activeBackground": "#71d685",
-    "activityBar.background": "#71d685",
-    "activityBar.foreground": "#15202b",
-    "activityBar.inactiveForeground": "#15202b99",
-    "activityBarBadge.background": "#806bd4",
-    "activityBarBadge.foreground": "#e7e7e7",
-    "commandCenter.border": "#15202b99",
-    "sash.hoverBorder": "#71d685",
-    "statusBar.background": "#49cb63",
-    "statusBar.foreground": "#15202b",
-    "statusBarItem.hoverBackground": "#32af4b",
-    "statusBarItem.remoteBackground": "#49cb63",
-    "statusBarItem.remoteForeground": "#15202b",
-    "titleBar.activeBackground": "#49cb63",
-    "titleBar.activeForeground": "#15202b",
-    "titleBar.inactiveBackground": "#49cb6399",
-    "titleBar.inactiveForeground": "#15202b99"
+  "prettier.documentSelectors": ["**/*.astro"],
+  "[astro]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "peacock.color": "#49cb63",
-  "editor.formatOnSave": true,
-  "editor.formatOnSaveMode": "modifications",
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "astro",
+    "typescript",
+    "typescriptreact"
+  ],
   "files.associations": {
-    "*.mdx": "markdown",
     "*.css": "tailwindcss"
   },
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "modifications",
   "editor.quickSuggestions": {
     "strings": "on"
   }

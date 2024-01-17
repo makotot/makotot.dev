@@ -1,0 +1,33 @@
+---
+import { getCollection } from "astro:content"
+import { SITE_TITLE } from "../consts"
+import Base from "../layouts/Base.astro"
+
+const posts = (await getCollection("posts"))
+  .sort((a, b) => (a.data.date > b.data.date ? -1 : 1))
+  .filter((p) => !p.data.draft)
+---
+
+<Base title={SITE_TITLE}>
+  <section>
+    <h2 class="text-3xl">Posts</h2>
+    <ul class="mt-4 space-y-1">
+      {
+        posts.map((post) => (
+          <li>
+            <a
+              href={`/posts/${post.slug}/`}
+              class="underline hover:text-primary"
+            >
+              {post.data.title}
+            </a>
+            <span class="text-sm">
+              {" "}
+              - <time datetime={post.data.date}>{post.data.date}</time>
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>

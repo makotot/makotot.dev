@@ -1,0 +1,23 @@
+---
+import { ViewTransitions } from "astro:transitions"
+import BaseHead from "../components/BaseHead.astro"
+import Header from "../components/Header.astro"
+import Footer from "../components/Footer.astro"
+
+const { title } = Astro.props
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <BaseHead title={title} />
+    <ViewTransitions />
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <Header />
+    <main class="mx-auto w-full max-w-3xl p-4 md:w-2/3 md:p-8">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

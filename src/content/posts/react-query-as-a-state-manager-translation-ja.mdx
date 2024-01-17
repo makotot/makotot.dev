@@ -25,7 +25,7 @@ React Query は非同期の状態管理ツールです。あらゆる形の非�
 実際のデータを取得する関数に 2 度アクセスする必要がないようにカスタムフックで抽象化するのが最も良いかもしれません。
 
 ```tsx async-state-manager
-export const useTodos = () => useQuery(['todos'], fetchTodos)
+export const useTodos = () => useQuery(["todos"], fetchTodos)
 
 function ComponentOne() {
   const { data } = useTodos()
@@ -149,10 +149,7 @@ function App() {
 ```tsx lazy-second-component
 function ComponentOne() {
   const { data } = useTodos()
-  const [showMore, toggleShowMore] = React.useReducer(
-    (value) => !value,
-    false
-  )
+  const [showMore, toggleShowMore] = React.useReducer((value) => !value, false)
 
   // そうです、”ただの”例なのでエラーハンドリングを省いています
   if (!data) {
@@ -181,11 +178,13 @@ function ComponentOne() {
 
 おそらくどのような方向に話を進めたいのか既にお分かりかもしれません：解決策としては特定のユースケースに適した値を*stealTime*に設定することでしょう：知っておくべきことは：
 
-<div style={{
-  padding: "0.5rem",
-  border: "1px solid hsl(var(--p)",
-}}>
-データが新鮮な限りは、常にキャッシュから取得します。新鮮なデータを何度取ってきてもそのデータのネットワークリクエストが表示されることはありません。
+<div
+  style={{
+    padding: "0.5rem",
+    border: "1px solid hsl(var(--p)",
+  }}
+>
+  データが新鮮な限りは、常にキャッシュから取得します。新鮮なデータを何度取ってきてもそのデータのネットワークリクエストが表示されることはありません。
 </div>
 
 *staleTime*の*正しい*値もまた存在しません。多くの状況においては初期設定でうまく機能します。個人的には、最低 20 秒に設定してその時間枠の重複を削除するのが好みですが、完全にあなた次第です。

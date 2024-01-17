@@ -33,10 +33,10 @@ React Query の利点の 1 つはクエリのステータスへのアクセス�
 const todos = useTodos()
 
 if (todos.isLoading) {
-  return 'Loading...'
+  return "Loading..."
 }
 if (todos.error) {
-  return 'An error has occurred: ' + todos.error.message
+  return "An error has occurred: " + todos.error.message
 }
 
 return <div>{todos.data.map(renderTodo)}</div>
@@ -84,10 +84,10 @@ if (todos.data) {
   return <div>{todos.data.map(renderTodo)}</div>
 }
 if (todos.error) {
-  return 'An error has occurred: ' + todos.error.message
+  return "An error has occurred: " + todos.error.message
 }
 
-return 'Loading...'
+return "Loading..."
 ```
 
 もう 1 度言いますが、何が正しいかという明確な原則はなく、ユースケースに強く依存します。積極的な再取得がもたらす結果を誰もが把握するべきで、単純な todo の例に従うよりも適宜コードを構成する必要があります。

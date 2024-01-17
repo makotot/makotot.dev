@@ -1,5 +1,4 @@
 import { test, expect } from "@playwright/test"
-import { getPosts } from "../src/utils/getPosts"
 
 test.describe("/", async () => {
   test("should have a link to home.", async ({ page }) => {
@@ -8,11 +7,12 @@ test.describe("/", async () => {
     await expect(headerTitleLink).toHaveAttribute("href", "/")
   })
 
-  test("should have a link to a blog post.", async ({ page }) => {
+  test("should have a link to a post.", async ({ page }) => {
     await page.goto("/")
-    const posts = getPosts()
-    await page.click(`text=${posts[0].data.title}`)
-    await expect(page).toHaveURL(`/posts/${posts[0].slug}`)
-    await expect(page.locator("h1")).toContainText(posts[0].data.title)
+    await page.click('text="UIのテストについての神話"')
+    await expect(page).toHaveURL("/posts/ui-testing-myth-translation-ja/")
+
+    const headline = await page.locator("h1").first()
+    await expect(headline).toContainText("UIのテストについての神話")
   })
 })

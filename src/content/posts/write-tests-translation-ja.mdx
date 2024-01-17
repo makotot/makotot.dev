@@ -2,7 +2,7 @@
 title: テストを書きましょう。あまり多くなりすぎないように。主に結合テストで。
 draft: false
 date: "2023-09-28"
-tags: ['testing']
+tags: ["testing"]
 ---
 
 これは、[Kent C. Dodds 氏](https://kentcdodds.com/)のブログ記事である[Write tests. Not too many. Mostly integration.](https://kentcdodds.com/blog/write-tests)を日本語訳してみたものです。
@@ -13,14 +13,26 @@ tags: ['testing']
 
 このブログ記事は、こちらでご覧いただける講演を記事にしたものです:
 
-<div className="content-center">
-  <iframe src="https://www.youtube.com/embed/Fha2bVoC8SE?list=PLV5CVI1eNcJgNqzNwcs4UKrlJdhfDjshf" title="Kent C. Dodds – Write tests. Not too many. Mostly integration." frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+<div className="flex justify-center">
+  <iframe
+    src="https://www.youtube.com/embed/Fha2bVoC8SE?list=PLV5CVI1eNcJgNqzNwcs4UKrlJdhfDjshf"
+    title="Kent C. Dodds – Write tests. Not too many. Mostly integration."
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowFullScreen
+  ></iframe>
 </div>
 
 少し前に、[Socket.io](https://socket.io)の作者であり[Zeit.co](https://zeit.co)（最近発表された多くの素晴らしいものを生み出している会社）のファウンダーでもある[Guillermo Rauch氏](https://twitter.com/rauchg)が[深いことをツイートしました](<(https://twitter.com/rauchg/status/807626710350839808)>)。
 
-<div className="content-center">
-  <blockquote className="twitter-tweet"><p lang="en" dir="ltr">Write tests. Not too many. Mostly integration.</p>&mdash; Guillermo Rauch (@rauchg) <a href="https://twitter.com/rauchg/status/807626710350839808?ref_src=twsrc%5Etfw">December 10, 2016</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+<div className="flex justify-center">
+  <blockquote className="twitter-tweet">
+    <p lang="en" dir="ltr">
+      Write tests. Not too many. Mostly integration.
+    </p>
+    &mdash; Guillermo Rauch (@rauchg) <a href="https://twitter.com/rauchg/status/807626710350839808?ref_src=twsrc%5Etfw">December 10, 2016</a>
+  </blockquote>{" "}
+  <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
 </div>
 
 > **_テストを書きましょう。あまり多くなりすぎないように。主に結合テストで。_**
@@ -73,20 +85,71 @@ _このようなテストの維持は本当にあなたやあなたのチーム�
 ここで示されていないことは、**ピラミッドの上へ向かうほど各テスト形態の信頼指数が高まる**ということです。より多くの利益を得られるのです。
 つまり、E2Eテストは単体テストよりも遅くコストが高いものですが、アプリケーションが意図通りに動作していることに対してより大きな信頼をもたらします。
 
-<div className="content-center">
-  <blockquote className="twitter-tweet"><p lang="en" dir="ltr">The TestPyramid blog post by <a href="https://twitter.com/martinfowler?ref_src=twsrc%5Etfw">@martinfowler</a> (<a href="https://t.co/RCv8abFm37">https://t.co/RCv8abFm37</a>) finishes with this note.<br /><br />Our tools are awesome now and this assumption is less true. This is why I say goodby to the pyramid 🔼 and hello to the trophy 🏆 <a href="https://t.co/EKTK4vqj6n">https://t.co/EKTK4vqj6n</a> <a href="https://t.co/Wa8brUiWfy">pic.twitter.com/Wa8brUiWfy</a></p>&mdash; Kent C. Dodds 🌌 (@kentcdodds) <a href="https://twitter.com/kentcdodds/status/1141365123296051201?ref_src=twsrc%5Etfw">June 19, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+<div className="flex justify-center">
+  <blockquote className="twitter-tweet">
+    <p lang="en" dir="ltr">
+      The TestPyramid blog post by{" "}
+      <a href="https://twitter.com/martinfowler?ref_src=twsrc%5Etfw">
+        @martinfowler
+      </a>{" "}
+      (<a href="https://t.co/RCv8abFm37">https://t.co/RCv8abFm37</a>) finishes
+      with this note.
+      <br />
+      <br />
+      Our tools are awesome now and this assumption is less true. This is why I say
+      goodby to the pyramid 🔼 and hello to the trophy 🏆 <a href="https://t.co/EKTK4vqj6n">
+        https://t.co/EKTK4vqj6n
+      </a> <a href="https://t.co/Wa8brUiWfy">pic.twitter.com/Wa8brUiWfy</a>
+    </p>
+    &mdash; Kent C. Dodds 🌌 (@kentcdodds) <a href="https://twitter.com/kentcdodds/status/1141365123296051201?ref_src=twsrc%5Etfw">June 19, 2019</a>
+  </blockquote>{" "}
+  <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
 </div>
 
 上記の通り、我々のツールはマーティン・ファウラー氏によるテストピラミッドのコンセプトの想定を超えたものになっています。”テストトロフィー”を作った理由がここにあります 🏆。
 
-<div className="content-center">
-  <blockquote className="twitter-tweet"><p lang="en" dir="ltr">&quot;The Testing Trophy&quot; 🏆<br /><br />A general guide for the **return on investment** 🤑 of the different forms of testing with regards to testing JavaScript applications.<br /><br />- End to end w/ <a href="https://twitter.com/Cypress_io?ref_src=twsrc%5Etfw">@Cypress_io</a> ⚫️<br />- Integration &amp; Unit w/ @fbjest 🃏<br />- Static w/ <a href="https://twitter.com/flowtype?ref_src=twsrc%5Etfw">@flowtype</a> 𝙁 and <a href="https://twitter.com/geteslint?ref_src=twsrc%5Etfw">@geteslint</a> ⬣ <a href="https://t.co/kPBC6yVxSA">pic.twitter.com/kPBC6yVxSA</a></p>&mdash; Kent C. Dodds 🌌 (@kentcdodds) <a href="https://twitter.com/kentcdodds/status/960723172591992832?ref_src=twsrc%5Etfw">February 6, 2018</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+<div className="flex justify-center">
+  <blockquote className="twitter-tweet">
+    <p lang="en" dir="ltr">
+      &quot;The Testing Trophy&quot; 🏆
+      <br />
+      <br />A general guide for the **return on investment** 🤑 of the different
+      forms of testing with regards to testing JavaScript applications.
+      <br />
+      <br />- End to end w/{" "}
+      <a href="https://twitter.com/Cypress_io?ref_src=twsrc%5Etfw">
+        @Cypress_io
+      </a>{" "}
+      ⚫️
+      <br />- Integration &amp; Unit w/ @fbjest 🃏
+      <br />- Static w/{" "}
+      <a href="https://twitter.com/flowtype?ref_src=twsrc%5Etfw">@flowtype</a> 𝙁
+      and{" "}
+      <a href="https://twitter.com/geteslint?ref_src=twsrc%5Etfw">@geteslint</a>{" "}
+      ⬣ <a href="https://t.co/kPBC6yVxSA">pic.twitter.com/kPBC6yVxSA</a>
+    </p>
+    &mdash; Kent C. Dodds 🌌 (@kentcdodds) <a href="https://twitter.com/kentcdodds/status/960723172591992832?ref_src=twsrc%5Etfw">February 6, 2018</a>
+  </blockquote>{" "}
+  <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
 </div>
 
 こちらは、結合テストの重要性をユーモラスに説明したものです。
 
-<div className="content-center">
-  <blockquote className="twitter-tweet"><p lang="en" dir="ltr">expect(umbrellaOpens).toBe(true)<br /><br />tests: 1 passed, 1 total<br /><br />**all tests passed** <a href="https://t.co/p6IKO7KDuy">pic.twitter.com/p6IKO7KDuy</a></p>&mdash; Erin 🐠 (@erinfranmc) <a href="https://twitter.com/erinfranmc/status/1148986961207730176?ref_src=twsrc%5Etfw">July 10, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+<div className="flex justify-center">
+  <blockquote className="twitter-tweet">
+    <p lang="en" dir="ltr">
+      expect(umbrellaOpens).toBe(true)
+      <br />
+      <br />
+      tests: 1 passed, 1 total
+      <br />
+      <br />
+      **all tests passed**{" "}
+      <a href="https://t.co/p6IKO7KDuy">pic.twitter.com/p6IKO7KDuy</a>
+    </p>
+    &mdash; Erin 🐠 (@erinfranmc) <a href="https://twitter.com/erinfranmc/status/1148986961207730176?ref_src=twsrc%5Etfw">July 10, 2019</a>
+  </blockquote>{" "}
+  <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
 </div>
 
 コンポーネント`<B />`にprop`e`が渡らずに壊れる場合には、コンポーネント`<A />`が`c`と`d`のpropsを受け取るコンポーネント`<B />`をレンダリングするかどうかは問題ではありません。
@@ -96,12 +159,17 @@ _このようなテストの維持は本当にあなたやあなたのチーム�
 **結合テストは、信頼性とスピード/費用とのトレードオフの間で素晴らしいバランスが保たれます。**
 そのため、_ほとんど_（全てではないけども）の労力をここに費やすことをお勧めします。
 
-<div style={{
-  padding: "0.5rem",
-  border: "1px solid hsl(var(--p)",
-}}>
-これに関して詳しくは[Testing Implementation Details](https://kentcdodds.com/blog/testing-implementation-details)を読んでください。
-テストの形態について詳しくは、[Static vs Unit vs Integration vs E2E Testing for Frontend Apps](https://kentcdodds.com/blog/static-vs-unit-vs-integration-vs-e2e-tests)を読んでください。
+<div
+  style={{
+    padding: "0.5rem",
+    border: "1px solid hsl(var(--p)",
+  }}
+>
+  これに関して詳しくは[Testing Implementation
+  Details](https://kentcdodds.com/blog/testing-implementation-details)を読んでください。
+  テストの形態について詳しくは、[Static vs Unit vs Integration vs E2E Testing
+  for Frontend
+  Apps](https://kentcdodds.com/blog/static-vs-unit-vs-integration-vs-e2e-tests)を読んでください。
 </div>
 
 ## より多くの結合テストを書く方法
