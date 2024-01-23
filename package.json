@@ -20,7 +20,7 @@
     "@astrojs/check": "0.4.1",
     "@astrojs/mdx": "2.0.6",
     "@astrojs/partytown": "^2.0.4",
-    "@astrojs/rss": "4.0.2",
+    "@astrojs/rss": "4.0.3",
     "@astrojs/sitemap": "3.0.5",
     "@code-hike/mdx": "0.9.0",
     "@iconify-json/mdi": "1.1.64",
