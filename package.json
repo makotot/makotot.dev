@@ -44,7 +44,7 @@
     "eslint-plugin-astro": "0.31.3",
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-jsx-a11y": "6.8.0",
-    "eslint-plugin-tailwindcss": "3.14.0",
+    "eslint-plugin-tailwindcss": "3.14.1",
     "husky": "8.0.3",
     "postcss": "8.4.33",
     "prettier-plugin-astro": "0.13.0",
