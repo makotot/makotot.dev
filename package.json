@@ -26,7 +26,7 @@
     "@iconify-json/mdi": "1.1.64",
     "astro": "4.3.5",
     "astro-icon": "1.1.0",
-    "shiki": "1.0.0"
+    "shiki": "1.1.1"
   },
   "devDependencies": {
     "@astrojs/tailwind": "5.1.0",
