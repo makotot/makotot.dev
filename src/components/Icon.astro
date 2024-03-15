@@ -6,12 +6,13 @@ interface Props {
   label?: string
   size: number
 }
-const {name, label, size} = Astro.props;
+const { name, label, size } = Astro.props
 ---
+
 {
-  typeof label === 'string'
-  ? 
+  typeof label === "string" ? (
     <AstroIcon name={name} size={size} aria-label={label} />
-  : 
+  ) : (
     <AstroIcon name={name} size={size} />
+  )
 }

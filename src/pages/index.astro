@@ -20,11 +20,7 @@ const posts = (await getCollection("posts"))
       {
         posts.map((post) => (
           <li>
-            <TextLink
-              href={`/posts/${post.slug}/`}
-            >
-              {post.data.title}
-            </TextLink>
+            <TextLink href={`/posts/${post.slug}/`}>{post.data.title}</TextLink>
             <span class="text-sm">
               {" "}
               - <time datetime={post.data.date}>{post.data.date}</time>

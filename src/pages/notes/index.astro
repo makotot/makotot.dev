@@ -16,18 +16,12 @@ const notes = (await getCollection("notes"))
       <Icon name="mdi:note-text" size={20} />
       <span>Notes</span>
     </h2>
-    {
-      notes.length === 0 && (
-        <p class="mt-4 space-y-1">No notes yet.</p>
-      )
-    }
+    {notes.length === 0 && <p class="mt-4 space-y-1">No notes yet.</p>}
     <ul class="mt-4 space-y-1">
       {
         notes.map((note) => (
           <li>
-            <TextLink
-              href={`/random-notes/${note.slug}/`}
-            >
+            <TextLink href={`/random-notes/${note.slug}/`}>
               {note.data.title}
             </TextLink>
             <span class="text-sm">
