@@ -10,14 +10,14 @@ export async function getStaticPaths() {
     props: note,
   }))
 }
-type Props = CollectionEntry<"Notes">
+type Props = CollectionEntry<"notes">
 
-const Note = Astro.props
-const { Content } = await Note.render()
+const note = Astro.props
+const { Content } = await note.render()
 ---
 
-<Base title={Note.data.title}>
-  <Post {...Note.data}>
+<Base title={note.data.title}>
+  <Post {...note.data}>
     <Content />
   </Post>
 </Base>
