@@ -1,0 +1,36 @@
+---
+import { getCollection } from "astro:content"
+import { SITE_TITLE } from "../../consts"
+import Base from "../../layouts/Base.astro"
+import TextLink from "../../components/TextLink.astro"
+import Icon from "../../components/Icon.astro"
+
+const notes = (await getCollection("notes"))
+  .sort((a, b) => (a.data.date > b.data.date ? -1 : 1))
+  .filter((p) => !p.data.draft)
+---
+
+<Base title={SITE_TITLE}>
+  <section>
+    <h2 class="flex items-center gap-1 text-3xl">
+      <Icon name="mdi:note-text" size={20} />
+      <span>Notes</span>
+    </h2>
+    {notes.length === 0 && <p class="mt-4 space-y-1">No notes yet.</p>}
+    <ul class="mt-4 space-y-1">
+      {
+        notes.map((note) => (
+          <li>
+            <TextLink href={`/random-notes/${note.slug}/`}>
+              {note.data.title}
+            </TextLink>
+            <span class="text-sm">
+              {" "}
+              - <time datetime={note.data.date}>{note.data.date}</time>
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>
