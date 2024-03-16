@@ -21,7 +21,7 @@ const notes = (await getCollection("notes"))
       {
         notes.map((note) => (
           <li>
-            <TextLink href={`/random-notes/${note.slug}/`}>
+            <TextLink href={`/notes/${note.slug}/`}>
               {note.data.title}
             </TextLink>
             <span class="text-sm">

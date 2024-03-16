@@ -10,6 +10,7 @@ const posts = defineCollection({
   }),
 })
 
+// 雑記のコレクション
 const notes = defineCollection({
   type: "content",
   schema: z.object({
