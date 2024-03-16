@@ -21,9 +21,7 @@ const notes = (await getCollection("notes"))
       {
         notes.map((note) => (
           <li>
-            <TextLink href={`/notes/${note.slug}/`}>
-              {note.data.title}
-            </TextLink>
+            <TextLink href={`/notes/${note.slug}/`}>{note.data.title}</TextLink>
             <span class="text-sm">
               {" "}
               - <time datetime={note.data.date}>{note.data.date}</time>
