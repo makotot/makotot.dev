@@ -1,0 +1,61 @@
+---
+title: The CSS Cascade を読んだメモ
+draft: false
+date: "2024-03-23"
+tags: []
+---
+
+[The CSS Cascade](https://2019.wattenberger.com/blog/css-cascade) を読んで、メモ。
+
+- Cascading Style Sheetsの「Cascading」について説明している記事。
+- カスケードは、よく理解していないと非常に苛立つ概念。`!important`と記述して強引に解決したくなる。
+- > The CSS Cascade is the way our browsers resolve competing CSS declarations.
+  - CSSのカスケードとは、ブラウザーが競合するCSS宣言を解決する方法。
+- CSSの宣言があるたびに、その宣言はカスケードの中に入る。
+  - カスケードの下層にあるものは上層のものから上書きされる可能性がある。
+  - カスケードの各層は以下。
+    - 1. 重要度
+    - 2. オリジン
+    - 3. 詳細度
+    - 4. 順序
+- カスケードの各層の詳細は、
+  - 1. 重要度
+    - この層には4種類ある。
+      - 1. transition
+        - `transition`プロパティーがある場合、そのプロパティーは他のプロパティーよりも優先される。`!important`よりも優先される。
+      - 2. !important
+      - 3. animation
+        - `animation`プロパティーは、`!important`より優先されるものではないけど、他の通常のプロパティーより優先される。
+      - 4. 通常のプロパティー
+    - アニメーションを適切に動かすために優先されるものと`!important`のための層。
+    - この層で差異が付かない場合、次の層で解決するかを見ることになる。
+  - 2. オリジン
+    - この層では、どこで宣言されているかによって分類される。
+      - 1. ウェブサイト
+      - 2. ユーザー
+      - 3. ブラウザー
+        - 各ブラウザーが持つデフォルトのスタイルシート。
+          - [Chromiumの場合](https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/core/html/resources/html.css)
+  - 3. 詳細度
+    - この層ではルールの詳細度が見られる。5つに分類される。
+      - 1. `style`属性
+        - HTMLの`style`属性が最も高い詳細度となる。
+      - 2. `@layer`
+        - [@layer - CSS: カスケーディングスタイルシート | MDN](https://developer.mozilla.org/ja/docs/Web/CSS/@layer)
+          - > @layer は CSS のアットルールで、カスケードレイヤーを宣言するために使用し、また複数のカスケードレイヤーがある場合に、優先順位を定義するためにも使用することができます。
+        - モダンブラウザーでは十分にサポートされている。
+          - https://caniuse.com/css-cascade-layers
+      - 3. `id`セレクター
+        - `#id`セレクターが該当する。
+      - 4. `class`セレクター, 擬似クラスセレクター, 属性セレクター
+        - `.class`、`:hover`、`[type="text"]`などが該当する。
+      - 5. 要素セレクター、擬似要素セレクター
+        - `div`、`a`、`::before`などが該当する。
+    - `*`や`>`のようなセレクターは詳細度に影響しない。
+  - 4. 順序
+    - 最後の層では、順番が決め手になる。
+    - 後方にあるものが前方にあるものを上書きする。
+- [The cascade  |  web.dev](https://web.dev/learn/css/the-cascade)
+  - web.devにも詳細な説明がある。
+- CSSのカスケードの仕様を読むのがいい。
+  - https://drafts.csswg.org/css-cascade/
