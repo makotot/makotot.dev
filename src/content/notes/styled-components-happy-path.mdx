@@ -2,7 +2,7 @@
 title: The styled-components Happy Path読んだメモ
 draft: false
 date: "2024-03-28"
-tags: ['css']
+tags: ["css"]
 ---
 
 [The styled-components Happy Path](https://www.joshwcomeau.com/css/styled-components/) を読んで、メモ。
@@ -22,9 +22,9 @@ tags: ['css']
   - [interpolation function](https://styled-components.com/docs/basics#adapting-based-on-props)というのがまず手段としてある。
     - ```tsx
       const Wrapper = styled.div`
-        opacity: ${p => p.opacity};
-        background-color: ${p => p.color};
-      `;
+        opacity: ${(p) => p.opacity};
+        background-color: ${(p) => p.color};
+      `
       ```
     - ただ、propが変更されるたびにクラスを再生成して、`head`へ挿入する必要があって、パフォーマンス上問題になるかもしれない。
   - CSS変数を使うというのが別の手段として考えられる。
@@ -32,12 +32,13 @@ tags: ['css']
       const Wrapper = styled.div`
         opacity: var(--opacity);
         background-color: var(--color);
-      `;
+      `
       ```
     - `var(--color, var(--color-gray-900))`のように、デフォルト値を指定することもできる。
       - [var() - CSS: カスケーディングスタイルシート | MDN](https://developer.mozilla.org/ja/docs/Web/CSS/var)
     - ゲームチェンジングとまでは言えないけども、ちょっとした嬉しさがある。
 - スタイルの唯一の源
+
   - 氏が記事の中で1つだけ選ぶとしたら、このTipsをと推している。
   - 特定のコンポーネントの中だけで、ある別のコンポーネント（`TextLink`という`a`要素のコンポーネントだと仮定）のスタイルを変更したい場合、どうするか。
   - ```tsx
@@ -48,11 +49,13 @@ tags: ['css']
         color: var(--color-text);
         font-weight: var(--font-weight-bold);
       }
-    `;
+    `
     ```
+
     - この例だと、`a`が、`TextLink`コンポーネントにあたり、そのスタイルを`Wrapper`コンポーネント内だけで変えたいときに`a`要素を指定する形で記述している。
     - このような実装は、アプリケーションにおけるスタイルの推論を非常に困難なものとする。
       - `TextLink`コンポーネントがこのようにしてスタイルを書き換えられていることを検知するのは容易ではない。
+
   - ```tsx
     const Wrapper = styled.aside`
       /* Base styles... */
@@ -61,23 +64,25 @@ tags: ['css']
         color: var(--color-text);
         font-weight: var(--font-weight-bold);
       }
-    `;
+    `
     ```
+
     - `a`要素じゃなくて、コンポーネント`TextLink`を埋め込んで指定することもできる。
       - `TextLink`にスタイルを適用するということが明示されるので、`a`よりかは幾分良くなっている。
     - 幾分よくなっているけど、Reactで得られる[カプセル化](https://ja.wikipedia.org/wiki/%E3%82%AB%E3%83%97%E3%82%BB%E3%83%AB%E5%8C%96)について考えてみると、この方法もあまり良いとは言えないかもしれない。
       - Reactコンポーネントは、自身のJSXからなるHTMLを自分自身だけが変更して、外部から変えられることはない、という境界の信頼がある。
         - HTMLがどこか別のところから変更される心配から解放されている。
       - つまり、この方法だと別のコンポーネントから`TextLink`のスタイル書き換えられることになるので、カプセル化できてない。
+
   - ```tsx
-      const TextLink = styled.a`
-        color: var(--color-primary);
-        font-weight: var(--font-weight-medium);
-        ${AsideWrapper} & {
-          color: var(--color-text);
-          font-weight: var(--font-weight-bold);
-        }
-      `;
+    const TextLink = styled.a`
+      color: var(--color-primary);
+      font-weight: var(--font-weight-medium);
+      ${AsideWrapper} & {
+        color: var(--color-text);
+        font-weight: var(--font-weight-bold);
+      }
+    `
     ```
     - `TextLink`コンポーネントの中で`AsideWrapper`コンポーネントを参照して、そこで`TextLink`のスタイルを指定すれば`TextLink`コンポーネントのスタイルは予期しない形で書き換えられることはない。
     - `${AsideWrapper} &`で`TextLink`コンポーネントを子孫セレクターとして指定する形の`AsideWrapper`のセレクターが作れる。
@@ -91,7 +96,7 @@ tags: ['css']
       - ```tsx
         const LandingPageTextLink = styled(TextLink)`
           font-size: 4rem;
-        `;
+        `
         ```
       - 暗黙のうちのスタイルが破壊される危険性が高まるけども、それはトレードオフ。
   - [継承プロパティー](https://developer.mozilla.org/ja/docs/Web/CSS/Inheritance#%E7%B6%99%E6%89%BF%E3%83%97%E3%83%AD%E3%83%91%E3%83%86%E3%82%A3)については、大きな問題とはいえない。
@@ -125,7 +130,7 @@ tags: ['css']
           && {
             color: var(--color-text);
           }
-        `;
+        `
         ```
       - `!important`を使わずに詳細度を上げることができる。ただ、詳細度の戦いをしていることには変わりない。
   - [babelプラグイン](https://github.com/styled-components/babel-plugin-styled-components)
