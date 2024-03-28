@@ -1,0 +1,137 @@
+---
+title: The styled-components Happy Path読んだメモ
+draft: false
+date: "2024-03-28"
+tags: ['css']
+---
+
+[The styled-components Happy Path](https://www.joshwcomeau.com/css/styled-components/) を読んで、メモ。
+
+- Josh W. Comeau氏のブログ記事。
+- > Last Updated: February 21st, 2021
+  - 記事は3年前の2021年2月に最終更新となっている。
+  - 2024年現在、styled-componentsの人気はもう下降していて、これからCSS in JSのライブラリーとして採用しようという人はあまりいないはず。
+    - CSSに関するライブラリーの潮流は、急速に変わっている。
+    - 過去にstyled-componentsを採用したプロジェクトで、今後メンテナンスを続ける上で学びを得るために読むというのは良いかもしれない。
+      - Emotionのような類似のライブラリーにも適用できるはず。
+- “Every style is a component”というのは、最初からすんなりとは受け入れ難い考え方。
+  - Reactとこの点では類似している。
+  - スタイリングに関するメンタルモデルを変えることなく、プロジェクトで使ってしまう。
+- 記事自体は、React経験者向け。入門記事ではない。
+- CSS変数
+  - [interpolation function](https://styled-components.com/docs/basics#adapting-based-on-props)というのがまず手段としてある。
+    - ```tsx
+      const Wrapper = styled.div`
+        opacity: ${p => p.opacity};
+        background-color: ${p => p.color};
+      `;
+      ```
+    - ただ、propが変更されるたびにクラスを再生成して、`head`へ挿入する必要があって、パフォーマンス上問題になるかもしれない。
+  - CSS変数を使うというのが別の手段として考えられる。
+    - ```tsx
+      const Wrapper = styled.div`
+        opacity: var(--opacity);
+        background-color: var(--color);
+      `;
+      ```
+    - `var(--color, var(--color-gray-900))`のように、デフォルト値を指定することもできる。
+      - [var() - CSS: カスケーディングスタイルシート | MDN](https://developer.mozilla.org/ja/docs/Web/CSS/var)
+    - ゲームチェンジングとまでは言えないけども、ちょっとした嬉しさがある。
+- スタイルの唯一の源
+  - 氏が記事の中で1つだけ選ぶとしたら、このTipsをと推している。
+  - 特定のコンポーネントの中だけで、ある別のコンポーネント（`TextLink`という`a`要素のコンポーネントだと仮定）のスタイルを変更したい場合、どうするか。
+  - ```tsx
+    const Wrapper = styled.aside`
+      /* Base styles... */
+
+      a {
+        color: var(--color-text);
+        font-weight: var(--font-weight-bold);
+      }
+    `;
+    ```
+    - この例だと、`a`が、`TextLink`コンポーネントにあたり、そのスタイルを`Wrapper`コンポーネント内だけで変えたいときに`a`要素を指定する形で記述している。
+    - このような実装は、アプリケーションにおけるスタイルの推論を非常に困難なものとする。
+      - `TextLink`コンポーネントがこのようにしてスタイルを書き換えられていることを検知するのは容易ではない。
+  - ```tsx
+    const Wrapper = styled.aside`
+      /* Base styles... */
+
+      ${TextLink} {
+        color: var(--color-text);
+        font-weight: var(--font-weight-bold);
+      }
+    `;
+    ```
+    - `a`要素じゃなくて、コンポーネント`TextLink`を埋め込んで指定することもできる。
+      - `TextLink`にスタイルを適用するということが明示されるので、`a`よりかは幾分良くなっている。
+    - 幾分よくなっているけど、Reactで得られる[カプセル化](https://ja.wikipedia.org/wiki/%E3%82%AB%E3%83%97%E3%82%BB%E3%83%AB%E5%8C%96)について考えてみると、この方法もあまり良いとは言えないかもしれない。
+      - Reactコンポーネントは、自身のJSXからなるHTMLを自分自身だけが変更して、外部から変えられることはない、という境界の信頼がある。
+        - HTMLがどこか別のところから変更される心配から解放されている。
+      - つまり、この方法だと別のコンポーネントから`TextLink`のスタイル書き換えられることになるので、カプセル化できてない。
+  - ```tsx
+      const TextLink = styled.a`
+        color: var(--color-primary);
+        font-weight: var(--font-weight-medium);
+        ${AsideWrapper} & {
+          color: var(--color-text);
+          font-weight: var(--font-weight-bold);
+        }
+      `;
+    ```
+    - `TextLink`コンポーネントの中で`AsideWrapper`コンポーネントを参照して、そこで`TextLink`のスタイルを指定すれば`TextLink`コンポーネントのスタイルは予期しない形で書き換えられることはない。
+    - `${AsideWrapper} &`で`TextLink`コンポーネントを子孫セレクターとして指定する形の`AsideWrapper`のセレクターが作れる。
+      - `.Aside-Wrapper-def789 .TextLink-abc123`のような形。
+    - 制御の反転。
+      - `TextLink`コンポーネントのスタイルは唯一の源である`TextLink`コンポーネント自身1箇所にまとまって書かれる。
+    - 常にこの方法でスタイルを書くべきかというと、そうではない。
+      - マーケティング色の強いLPでのみ使うようなスタイルを書くときには、この方法は適さない。
+        - 単発のスタイルのバリアントで埋め尽くされて、バンドルサイズが肥大化することになる。
+    - 単発のスタイルの場合、コンポジションで対応することが良いかもしれない。
+      - ```tsx
+        const LandingPageTextLink = styled(TextLink)`
+          font-size: 4rem;
+        `;
+        ```
+      - 暗黙のうちのスタイルが破壊される危険性が高まるけども、それはトレードオフ。
+  - [継承プロパティー](https://developer.mozilla.org/ja/docs/Web/CSS/Inheritance#%E7%B6%99%E6%89%BF%E3%83%97%E3%83%AD%E3%83%91%E3%83%86%E3%82%A3)については、大きな問題とはいえない。
+    - コンポーネント側が詳細度で負けることはない。
+    - 継承プロパティーはフォントに関連するものがほとんど。
+  - 隔離されたCSS
+    - margin
+      - Heydon Pickering氏の名言
+        - > Margin is like putting glue on something before you’ve decided what to stick it to, or if it should be stuck to anything.
+          - marginは、何かを貼り付ける前に、何に貼り付けるか、貼り付けるべきかどうかを決める前に、接着剤を塗るようなもの。
+      - marginの相殺を知っている必要がある。
+        - [The Rules of Margin Collapse](https://www.joshwcomeau.com/css/rules-of-margin-collapse/)
+      - `margin`の代わりに使えるものがある。
+        - `gap`
+        - Spacerコンポーネント
+          - [Bringing Spacer GIFs Back, to handle spacing elements in React and CSS](https://www.joshwcomeau.com/react/modern-spacer-gif/)
+        - Stackコンポーネント
+      - トレードオフを理解して必要に応じてmarginを使用することは現実的。
+    - z-index
+      - `z-index`を含んで`styled`しているコンポーネントは、他のコンポーネントとの間で`z-index`の競合が発生する可能性がある。
+      - `isolation`で分離するべき。
+        - [isolation - CSS: カスケーディングスタイルシート | MDN](https://developer.mozilla.org/ja/docs/Web/CSS/isolation)
+  - `as`
+    - `as`プロパティーを使うと、コンポーネントのタグを変更できる。
+    - `styled.div`の形でスタイリングしているものが`as=''h1`で`h1`要素に変更できるとしても、それは予測容易性が低い気が。
+  - 詳細度
+    - 常に理想的なコードベースで仕事ができるわけじゃない。詳細度の戦いに悩まされる時がある。
+    - `&&`を使うと詳細度を上げたスタイルが書ける。
+      - ```tsx
+        const Wrapper = styled.div`
+          && {
+            color: var(--color-text);
+          }
+        `;
+        ```
+      - `!important`を使わずに詳細度を上げることができる。ただ、詳細度の戦いをしていることには変わりない。
+  - [babelプラグイン](https://github.com/styled-components/babel-plugin-styled-components)
+    - 開発時にデバッグ容易になるクラス名を生成することが可能になる。
+  - メンタルモデル
+    - 正しく構築できれば、
+      - CSSを安全に削除可能だと感じられるようになる。
+      - 詳細度を上げるための戦いから解放される。
+    - styled-componentsがコンポーネントであるということをまず理解する必要がある。
