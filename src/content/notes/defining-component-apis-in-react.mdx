@@ -1,0 +1,47 @@
+---
+title: DEFINING COMPONENT APIS IN REACT を読んだメモ
+draft: false
+date: "2024-04-02"
+tags: ["component", "react"]
+---
+
+[Defining Component APIs in React](https://jxnblk.com/blog/defining-component-apis-in-react/) を読んで、メモ。
+
+- Styled Systemなどの開発者である[Brent Jackson氏](https://github.com/jxnblk)による記事。
+  - 2018年に書かれた記事。
+  - 氏が経験から得た、柔軟で理解しやすいコンポーネントAPIの設計についてまとめたもの。
+  - Class Componentが主流の時代に書かれた記事であることは留意しておく必要がある。
+- APIの表面積を最小限にすること
+  - [Minimal API Surface Area](https://2014.jsconf.eu/speakers/sebastian-markbage-minimal-api-surface-area-learning-patterns-instead-of-frameworks.html)
+    - React自身のAPIが基づいている考え方を、そのままコンポーネントの設計にも適用できるということ。
+    - 新しく学ぶ必要のあるAPIが少なければ少ないほど、人々がそのコンポーネントを理解して使っていくことが容易になり、再利用しやすくなる。
+      - 理解が困難であれば、重複した実装が増えるリスクが高まる。
+        - 理解されずに同じ目的や機能を持つコンポーネントが生まれることになるので。
+- 見つけやすくすること
+  - フラットなディレクトリー構成から初めて、時期早々なコードの整理を避けること。
+  - ディレクトリー構造によって隠されたコードを見つける作業が負担を生む可能性を持っている。
+  - 1つの階層に全てがまとまっているとアルファベット順に並べることができ、コンポーネントを見つけるのが容易になる。
+    - この点に関しては、テストファイルなどを考慮すると、ディレクトリーをコンポーネント毎に用意して、そのディレクトリーをフラットにするという形でも良いかもしれない。
+- `renderXXX`というメソッドを避けること
+  - Class Componentの時代に見られるパターンで、そのメソッドをコンポーネント分割するべきということ。
+    - https://twitter.com/chrisbiscardi/status/1004559213320814592
+      - そのメソッド自体に十分コンポーネント分割するだけの複雑性が含まれている。
+- データの境界でコンポーネント分割すること
+  - UIではなく、データに基づいてコンポーネントを分割すること。
+  - 3回以上同じUIの実装があれば、それをUIコンポーネントとして分けるべきかもしれないけど、Bootstrapを使うような感覚でコンポーネント分割するべきじゃない。
+    - [Rule of three (computer programming) - Wikipedia](https://en.wikipedia.org/wiki/Rule_of_three_(computer_programming))
+- [Apropcalypse](https://speakerdeck.com/jenncreighton/the-how-and-why-of-flexible-react-components-289aa486-464a-4dea-b89a-6f92d0af6606?slide=10)を避けること
+  - propを増やすよりもコンポーネントを分けることを優先するべき。
+  - 例えば、`Button`コンポーネントに`icon`propを追加するよりも、`<Button><Icon ... /></Button>`のようなコンポーネント構造にする。
+- コンポジションを使うこと
+  - `children`を再発明しないこと。propsを使って文字列を渡すよりも、`children`でコンポーネントをコンポジションする方が良い。
+  - アプリケーションのデータ構造に基づくコンポーネントも状況によっては適切だけど、再利用性の高いコンポーネントにおいてはコンポジションが有用であることが多い。
+- 列挙型にbooleanのpropを使わないようにすること
+  - https://twitter.com/satya164/status/1015206655997472768
+  - 極端な例かもしれないけど、`<Button primary secondary />`のような指定が可能だと、そのコンポーネントの振る舞いが予想しづらい。
+    - `<Button variant='primary' />`の方が、コンポーネントの振る舞いを予測しやすい。
+- 可能な限り同じAPIを提供すること
+  - ネイティブのHTML要素と同じ命名でAPIを提供したり、他のコンポーネントと同じ命名でAPIを提供することで、振る舞いが予測しやすいコンポーネントを作ることができる。
+  - > Learn Once, Write Anywhere
+- 同僚と話すこと
+  - RFCやPRを利用したり、会話したり、[README駆動開発](https://ponyfoo.com/articles/readme-driven-development)したり、自分たちのニーズに合致するコンポーネントAPIを相互理解することが大切。
