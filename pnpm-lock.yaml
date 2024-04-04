@@ -24,8 +24,8 @@ dependencies:
     specifier: 0.9.0
     version: 0.9.0(react@18.2.0)
   '@iconify-json/mdi':
-    specifier: 1.1.64
-    version: 1.1.64
+    specifier: 1.1.65
+    version: 1.1.65
   astro:
     specifier: 4.5.15
     version: 4.5.15(@types/node@20.12.4)(typescript@5.4.3)
@@ -795,8 +795,8 @@ packages:
     resolution: {integrity: sha512-6EwiSjwWYP7pTckG6I5eyFANjPhmPjUX9JRLUSfNPC7FX7zK9gyZAfUEaECL6ALTpGX5AjnBq3C9XmVWPitNpw==}
     dev: true
 
-  /@iconify-json/mdi@1.1.64:
-    resolution: {integrity: sha512-zGeo5TjhNFAY6FmSDBLAzDO811t77r6v/mDi7CAL9w5eXqKez6bIjk8R9AL/RHIeq44ALP4Ozr4lMqFTkHr7ug==}
+  /@iconify-json/mdi@1.1.65:
+    resolution: {integrity: sha512-P9ovos4pKjqwbcUaF5axnHKc1J4djfwLQ6vheJSzbTuZ7gLyonAI/mDDc+ekC4HFCnrYWPjdpkKT+mIujuqOaA==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: false
