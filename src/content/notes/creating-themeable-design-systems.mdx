@@ -1,0 +1,48 @@
+---
+title: creating themeable design systems を読んだメモ
+draft: false
+date: "2024-04-05"
+tags: ["design system"]
+---
+
+[Creating Themeable Design Systems | Brad Frost](https://bradfrost.com/blog/post/creating-themeable-design-systems/) を読んで、メモ。
+
+- [Brad Frost氏](https://github.com/bradfrost)の2018年のブログ記事。
+- 見た目が全く異なるブランドや体験を1つのデザインシステムによってサポートできるかどうかというと可能。
+  - そのニーズの背景に何があるか。
+    - 異なる客層やコンテキスト
+    - 異なるブランド
+    - 異なるプロダクト
+- [CSS Zen Garden: The Beauty of CSS Design](https://www.csszengarden.com/)
+- > The truth is that a design system is as rigid or as flexible as you make it to be.
+  - デザインシステムの柔軟性は、そのデザインシステム次第で決められる。
+    - デザインシステムが一定の制約をもたらすのは事実だけども、それが表現を制限するものではない。
+- 本題のthemeableなデザインシステムをどう実現するか。
+  - デザイントークン
+  - > each brand defines their own design tokens, which then hook into the design system’s codebase.
+    - 各ブランドで独自のデザイントークンを定義して、デザインシステムのコードベースにフックする。
+    - 氏は、3段階に階層を分けることが多い。
+      - 1. ブランドの核となる定義
+        - `--color-brand-starbucks-green`, `--font-family-primary`
+        - 抽象的な定義で、UIに直接適用するものではない。
+      - 2. 高レベルのアプリケーションの変数定義
+        - `--primary-action-background-color`, `--font-family-heading`
+        - 1層目の値を使ってアプリケーションでどのように利用するかを定義。
+      - 3. コンポーネント固有の変数定義
+        - `--button-background-color`, `--button-font-family`
+        - 2層目の値を使ってコンポーネントでどのように利用するかを定義。
+        - コンポーネントレベルでの定義は1度行うと、あとで変更することはほとんどない。対応するブランド数が多いほど、これによって労力が減らせる。
+      - 影響範囲が階層によって絞られるので、変更したい内容に応じて該当の階層の値を変更すればいい。
+      - このような3層構造にすることは、困難が伴う。システムによっては過剰になるし、開発速度の低下を招く可能性もある。
+        - [Theming With Variables: Globals and Locals | CSS-Tricks - CSS-Tricks](https://css-tricks.com/theming-with-variables-globals-and-locals/)
+          - 2層構造の記事。
+  - [アトミックデザイン](https://atomicdesign.bradfrost.com/)
+    - コンポーネントのレイヤー構成。
+    - atomレイヤーのボタンの例。
+      - https://codepen.io/bradfrost/pen/mpzovG/
+    - moleculeレイヤーのカードの例。
+      - https://codepen.io/bradfrost/pen/ZxxMzr/
+    - organismのカードグリッドの例。
+      - https://codepen.io/bradfrost/pen/YaLqpZ/
+  - 異なるUIを提供するパターンについては[Creating Themeable Design Systems | Brad Frost](https://bradfrost.com/blog/post/pattern-variations/)を参照。
+  - 画一的なUIしか提供できないという思い込みは持つべきじゃない。体系的に設計することで異なるUIを提供できるようになる。
