@@ -1,0 +1,64 @@
+---
+title: Disclosures and accordions (show/hide) — Web Accessibility Guidance project — NZ Government 読んだメモ
+draft: false
+date: "2024-04-09"
+tags: ["a11y", "html", "disclosure", "accordion", "details", "summary"]
+---
+
+[Disclosures and accordions (show/hide) — Web Accessibility Guidance project — NZ Government](https://govtnz.github.io/web-a11y-guidance/wct/disclosures-and-accordions)
+
+- ニュージーランド政府のアクセシビリティーガイダンスのドキュメント。
+- アクセシブルなディスクロージャーとアコーディオンの実装についてのガイダンス。
+- ディスクロージャー
+  - コンテンツの一部を表示/非表示する単一のコンポーネント。
+  - ボタンとそのボタンに隣接するコンテンツの開閉パターンが一般的。
+  - コンテンツが閉じられている状態であれば、支援技術のユーザー含め全てのユーザーがコンテンツへアクセスできない。
+- アコーディオン
+  - 2つ以上のディスクロージャーからなるコンポーネント。
+- アクセシブルなディスクロージャー
+  - 実装手段は2つ。
+    - ARIA属性を用いてJavaScriptによる制御を行う。
+    - HTMLの`<details>`と`<summary>`要素を用いる。
+  - ARIA属性を用いた実装
+    - [Disclosure (Show/Hide) Pattern — ARIA Authoring Practices Guide — W3C.](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/)
+    - [ARIA Disclosure Widget](https://scottaohara.github.io/aria_disclosure_widget/)
+    - ネイティブのHTMLで実現できる実装の場合、ARIA属性を用いた実装は避けるべきというのが注意点としてある。
+  - `<details>`と`<summary>`要素を用いた実装
+    - JavaScriptを用いずにHTMLだけで開閉処理が組み込まれる。
+    - [The details and summary elements, again | scottohara.me](https://www.scottohara.me/blog/2022/09/12/details-summary.html)
+    - 2023年9月時点で、`<details>`と`<summary>`要素はアクセシビリティーサポーティッドが不十分。
+      - [「アクセシビリティ・サポーテッド」という考えかた | Accessible & Usable](https://accessible-usable.net/2010/02/entry_100204.html)
+      - iOSのSafariでVoiceOverを使用した場合、インタラクティブな要素として識別できず、開閉状態の識別もできない。
+        - https://bugs.webkit.org/show_bug.cgi?id=108979
+      - WCAG 2を満たすことができない。
+- アクセシブルなアコーディオン
+  - `details`と`summary`からなるディスクロージャーからアコーディオンを作る場合、[Progressively Enhanced HTML Accordion — Adrian Roselli](https://adrianroselli.com/2023/08/progressively-enhanced-html-accordion.html)が参考になる。
+  - ディスクロージャーをグルーピングするには見出しを持つセクションで囲む。
+    - 簡単な方法としては、
+      - すべてのディスクロージャーを囲む`div`要素に`role="group"`属性を追加する。
+      - アコーディオンの見出しがある場合、見出し要素の`id`をその`div`要素の`aria-labelledby`属性に指定する。これによってグループのアクセシブルな名前として見出しが使用される。
+  - アコーディオンが重要な要素であり、ページのTOCにリストされるようなものである場合、`section`要素の中でディスクロージャーをグルーピングしてアクセシブルな名前をつける。
+- ディスクロージャーの中の見出し
+  - ディスクロージャーの中のコンテンツに見出しがある場合、そのディスクロージャー自体の見出しよりも低いレベルの見出しであるべき。
+  - ディスクロージャーの後にくるコンテンツは、それ自身の見出しを持つべき。そうしないとディスクロージャーの中のコンテンツと区別がつかなくなる。
+- ARIAとJavaScriptで実装している場合
+  - 見出しの要素の中に開閉のトリガー要素を含むこと。`button`要素や`role`属性に`button`を持つ要素の中に見出しを入れることはHTMLとして正しくない。
+- `<details>`と`<summary>`要素を用いた実装の見出し
+  - `summary`要素の中に見出し要素や`button`要素のようなインタラクティブな要素を入れることができる。入れられるけど、入れることが通常ではない。
+    - `summary`の`role`は暗黙的に`button`になる。
+      - [`<summary>`: 概要明示要素 - HTML: ハイパーテキストマークアップ言語 | MDN](https://developer.mozilla.org/ja/docs/Web/HTML/Element/summary#%E6%8A%80%E8%A1%93%E7%9A%84%E6%A6%82%E8%A6%81)
+- ボタンのテキストのすぐ隣に開閉アイコンを配置する
+  - 画面の一部だけを見た時に、ボタンのテキストと開閉アイコンが連続していることで、ユーザーが開閉状態を識別できる。
+  - デザインによってはアイコンとボタンテキストを離れて配置するかもしれないけど、テキストが開閉処理と関連していることを識別しにくくなる。
+- `display:none`で隠されるとユーザーがブラウザーのページ内検索で見つけることができない。
+  - `details`と`summary`要素を用いた実装では、`display:none`を使わずに実装できて、その場合ChromeやEdgeのページ内検索で見つけることができる。
+    - `hidden`属性の`until-found`に関連した振る舞い。
+      - [hidden - HTML: ハイパーテキストマークアップ言語 | MDN](https://developer.mozilla.org/ja/docs/Web/HTML/Global_attributes/hidden#hidden_until_found_%E7%8A%B6%E6%85%8B)
+- テスト
+  - セマンティックなHTMLで組まれていること。
+  - キーボードからアクセシブルであること。
+  - ARIA属性とJavaScriptで実装されいてる場合、
+    - `button`か`role="button"`の要素がボタンに利用されて、`aria-expanded`で開閉状態が示されていること。
+  - ディスクロージャーに見出しが含まれる場合、
+    - ボタン要素が見出し要素の中にあること。
+    - ディスクロージャーの後に来るコンテンツ自身に見出しがあること。
