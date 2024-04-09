@@ -14,16 +14,16 @@ tags: ["textlint"]
   - `Processor`は必須。
   - ```ts
     export default {
-      Processor: require("./YourProcessor")
-    };
+      Processor: require("./YourProcessor"),
+    }
     ```
   - 利用可能なファイルタイプとその前後処理を定義するクラス。
   - デフォルトのプラグインの実装
     - [`@textlint/textlint-plugin-markdown`](https://github.com/textlint/textlint/tree/master/packages/@textlint/textlint-plugin-markdown)
     - [`@textlint/textlint-plugin-text`](https://github.com/textlint/textlint/tree/master/packages/@textlint/textlint-plugin-text)
   - ```js
-    import {parse} from 'text-to-ast'
-    
+    import { parse } from "text-to-ast"
+
     export default class YourProcessor {
       constructor(options = {}) {
         this.options = options
@@ -31,7 +31,7 @@ tags: ["textlint"]
         this.extensions = options.extensions || []
       }
       availableExtensions() {
-        return ['.txt'].concat(this.extensions)
+        return [".txt"].concat(this.extensions)
       }
       // 前後処理を定義（解析および生成）
       processor(ext) {
@@ -45,11 +45,12 @@ tags: ["textlint"]
               messages,
               filePath,
             }
-          }
+          },
         }
       }
     }
     ```
+
     - `Processor`クラスはこれらのメソッド定義が必要。
     - `preProcess`
       - `TxtParentNode`か`{ text: string, ast: TxtParentNode }`のいずれかを返す。非同期なら`Promise<TxtParentNode> | Promise<{ text: string, ast: TxtParentNode }>`で。
@@ -61,9 +62,7 @@ tags: ["textlint"]
 - プラグインをconfigで指定するときは`plugins`に。
   ```json
   {
-    "plugins": [
-      "plugin-name"
-    ]
+    "plugins": ["plugin-name"]
   }
   ```
   - オプションがあるなら
