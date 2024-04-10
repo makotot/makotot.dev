@@ -9,6 +9,7 @@ tags: ["VS Code"]
 
 - Node.jsおよびGitがインストール済みの前提。
 - [yoman](https://yeoman.io/)で[generator-code](https://www.npmjs.com/package/generator-code)使ってプロジェクト作る。
+
   - yomanをローカルにインストールせずとも`npx --package yo --package generator-code -- yo code`で大丈夫。
   - ```sh
     ❯ npx --package yo --package generator-code -- yo code
@@ -46,6 +47,7 @@ tags: ["VS Code"]
     ? Bundle the source code with webpack? Yes
     ? Which package manager to use? pnpm
     ```
+
 - `src/extension.ts`がエントリーポイント。
 - `src/extension.ts`を開いて、`Debug: Start Debugging`をコマンドパレットで実行。
   - コンパイルして、拡張機能の開発ホストウィンドウが起動する。
