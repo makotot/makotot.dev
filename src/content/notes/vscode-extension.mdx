@@ -1,0 +1,56 @@
+---
+title: VS Codeの拡張について公式ドキュメント読んだメモ
+draft: false
+date: "2024-04-11"
+tags: ["VS Code"]
+---
+
+[Your First Extension | Visual Studio Code Extension API](https://code.visualstudio.com/api/get-started/your-first-extension)読んでメモ。
+
+- Node.jsおよびGitがインストール済みの前提。
+- [yoman](https://yeoman.io/)で[generator-code](https://www.npmjs.com/package/generator-code)使ってプロジェクト作る。
+  - yomanをローカルにインストールせずとも`npx --package yo --package generator-code -- yo code`で大丈夫。
+  - ```sh
+    ❯ npx --package yo --package generator-code -- yo code
+    Need to install the following packages:
+    yo@5.0.0
+    generator-code@1.8.5
+    Ok to proceed? (y) y
+
+         _-----_     ╭──────────────────────────╮
+        |       |    │   Welcome to the Visual  │
+        |--(o)--|    │   Studio Code Extension  │
+       `---------´   │        generator!        │
+        ( _´U`_ )    ╰──────────────────────────╯
+        /___A___\   /
+         |  ~  |
+       __'.___.'__
+     ´   `  |° ´ Y `
+
+    ? What type of extension do you want to create?
+    ❯ New Extension (TypeScript)
+      New Extension (JavaScript)
+      New Color Theme
+      New Language Support
+      New Code Snippets
+      New Keymap
+      New Extension Pack
+      New Language Pack (Localization)
+      New Web Extension (TypeScript)
+      New Notebook Renderer (TypeScript)
+    ? What type of extension do you want to create? New Extension (TypeScript)
+    ? What's the name of your extension? vscode-ext-hello
+    ? What's the identifier of your extension? vscode-ext-hello
+    ? What's the description of your extension? hello
+    ? Initialize a git repository? Yes
+    ? Bundle the source code with webpack? Yes
+    ? Which package manager to use? pnpm
+    ```
+- `src/extension.ts`がエントリーポイント。
+- `src/extension.ts`を開いて、`Debug: Start Debugging`をコマンドパレットで実行。
+  - コンパイルして、拡張機能の開発ホストウィンドウが起動する。
+  - 開発ホストウィンドウでコマンドパレットを開いて、`Hello World`を実行すると、`Hello World!`が表示される。
+  - `vscode.window.showInformationMessage`でメッセージを表示できる。
+- APIは[API Reference | Visual Studio Code Extension API](https://code.visualstudio.com/api/references/vscode-api)で確認できる。
+- ブレークポイント貼ってデバッグできる。
+  - [Node.jsのデバッグについての公式ドキュメント](https://code.visualstudio.com/docs/nodejs/nodejs-debugging)
