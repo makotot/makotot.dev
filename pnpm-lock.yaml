@@ -10,7 +10,7 @@ dependencies:
     version: 0.5.10(prettier-plugin-astro@0.13.0)(prettier@3.2.5)(typescript@5.4.4)
   '@astrojs/mdx':
     specifier: 2.2.4
-    version: 2.2.4(astro@4.5.17)
+    version: 2.2.4(astro@4.5.18)
   '@astrojs/partytown':
     specifier: ^2.0.4
     version: 2.0.4
@@ -27,8 +27,8 @@ dependencies:
     specifier: 1.1.66
     version: 1.1.66
   astro:
-    specifier: 4.5.17
-    version: 4.5.17(@types/node@20.12.7)(typescript@5.4.4)
+    specifier: 4.5.18
+    version: 4.5.18(@types/node@20.12.7)(typescript@5.4.4)
   astro-icon:
     specifier: 1.1.0
     version: 1.1.0
@@ -39,7 +39,7 @@ dependencies:
 devDependencies:
   '@astrojs/tailwind':
     specifier: 5.1.0
-    version: 5.1.0(astro@4.5.17)(tailwindcss@3.4.3)
+    version: 5.1.0(astro@4.5.18)(tailwindcss@3.4.3)
   '@playwright/test':
     specifier: 1.43.0
     version: 1.43.0
@@ -221,7 +221,7 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /@astrojs/mdx@2.2.4(astro@4.5.17):
+  /@astrojs/mdx@2.2.4(astro@4.5.18):
     resolution: {integrity: sha512-eXCmftMsWj4vTECrc4vgdaXrA8xIvrmJ9rM37BZNK5anQ2PunUm9N8wbnK2VVTE0CAmW5U8v9y3IGps2RYGUvQ==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
@@ -230,7 +230,7 @@ packages:
       '@astrojs/markdown-remark': 5.0.0
       '@mdx-js/mdx': 3.0.0
       acorn: 8.11.3
-      astro: 4.5.17(@types/node@20.12.7)(typescript@5.4.4)
+      astro: 4.5.18(@types/node@20.12.7)(typescript@5.4.4)
       es-module-lexer: 1.4.1
       estree-util-visit: 2.0.0
       github-slugger: 2.0.0
@@ -274,13 +274,13 @@ packages:
       zod: 3.22.4
     dev: false
 
-  /@astrojs/tailwind@5.1.0(astro@4.5.17)(tailwindcss@3.4.3):
+  /@astrojs/tailwind@5.1.0(astro@4.5.18)(tailwindcss@3.4.3):
     resolution: {integrity: sha512-BJoCDKuWhU9FT2qYg+fr6Nfb3qP4ShtyjXGHKA/4mHN94z7BGcmauQK23iy+YH5qWvTnhqkd6mQPQ1yTZTe9Ig==}
     peerDependencies:
       astro: ^3.0.0 || ^4.0.0
       tailwindcss: ^3.0.24
     dependencies:
-      astro: 4.5.17(@types/node@20.12.7)(typescript@5.4.4)
+      astro: 4.5.18(@types/node@20.12.7)(typescript@5.4.4)
       autoprefixer: 10.4.19(postcss@8.4.38)
       postcss: 8.4.38
       postcss-load-config: 4.0.2(postcss@8.4.38)
@@ -1296,7 +1296,7 @@ packages:
       debug: 4.3.4
       globby: 11.1.0
       is-glob: 4.0.3
-      semver: 7.5.4
+      semver: 7.6.0
       tsutils: 3.21.0(typescript@5.4.4)
       typescript: 5.4.4
     transitivePeerDependencies:
@@ -1632,8 +1632,8 @@ packages:
       - supports-color
     dev: false
 
-  /astro@4.5.17(@types/node@20.12.7)(typescript@5.4.4):
-    resolution: {integrity: sha512-fr5onZt7MOe+6v08Ub1AZL9eUVo4f0y0nvL55AFMpVG2bMM1/omcwAH1uU2mkvwMLLtcd4RDtYz4mtJzd54Nfw==}
+  /astro@4.5.18(@types/node@20.12.7)(typescript@5.4.4):
+    resolution: {integrity: sha512-iytLnUfyUneKMjIQdj79zzniByXtcmGNDobIV/gjGsatC9vAyPqeCT8TbMqfkRBMeYGs+S/wCzSoPqaaMJiQnw==}
     engines: {node: '>=18.14.1', npm: '>=6.14.0'}
     hasBin: true
     dependencies:
@@ -5380,6 +5380,7 @@ packages:
     hasBin: true
     dependencies:
       lru-cache: 6.0.0
+    dev: true
 
   /semver@7.6.0:
     resolution: {integrity: sha512-EnwXhrlwXMk9gKu5/flx5sv/an57AkRplG3hTK68W7FRDN+k+OWBj65M7719OkA82XLBxrcX0KSHj+X5COhOVg==}
@@ -6244,7 +6245,7 @@ packages:
     dependencies:
       '@volar/language-service': 2.1.5
       path-browserify: 1.0.1
-      semver: 7.5.4
+      semver: 7.6.0
       typescript-auto-import-cache: 0.3.2
       vscode-languageserver-textdocument: 1.0.11
       vscode-nls: 5.2.0
