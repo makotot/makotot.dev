@@ -15,34 +15,38 @@ tags: ["css", "react"]
   - 定義した対象の要素の子孫要素全てに適用される。
 - CSSカスタムプロパティーはグローバル変数ではない。
   - ```css
-      p {
-        --primary-color: red;
-      }
-      div {
-        color: var(--primary-color); /* p要素のセレクター内で宣言されている--primary-colorをdiv要素のセレクター内で参照することはできない。 */
-      }
+    p {
+      --primary-color: red;
+    }
+    div {
+      color: var(
+        --primary-color
+      ); /* p要素のセレクター内で宣言されている--primary-colorをdiv要素のセレクター内で参照することはできない。 */
+    }
     ```
   - `:root`や`html`要素に定義することで、グローバル変数のように使われることが多いというだけで、グローバル変数ではない。
 - カスタムプロパティーの値にアクセスするには`var`関数を使う。
   - ```css
-      p {
-        --primary-color: red;
-        color: var(--primary-color);
-      }
+    p {
+      --primary-color: red;
+      color: var(--primary-color);
+    }
     ```
   - 値にはどのような値でも渡せる。
   - カスタムプロパティーの名前を`--`で始める必要がある。
   - デフォルト値は、`var(--primary-color, blue)`のように第2引数に渡すことができる。
 - Reactでstyled-componentsを使っていたりすると、定数で宣言した値を参照する実装が一般的。
+
   - ```ts
     const COLORS = {
-      primary: 'red',
-    };
+      primary: "red",
+    }
 
     const Button = styled.button`
       background-color: ${(props) => props.theme.colors.primary};
-    `;
+    `
     ```
+
   - これをCSSカスタムプロパティーで実装する場合、カスタムプロパティーを宣言してコンポーネントで`var`関数で参照すればいい。
   - ```ts
     const GlobalStyles = createGlobalStyle`
@@ -51,31 +55,35 @@ tags: ["css", "react"]
         --color-background: white;
         --color-primary: rebeccapurple;
       }
-    `;
+    `
 
     const Button = styled.button`
       background-color: var(--primary-color);
-    `;
+    `
     ```
+
   - 型安全性という面では劣る部分があるけど、`var`関数で参照するだけで良いということは非常に便利。
+
 - ブレークポイントによる値の切り替えを1箇所に集約できる。JavaScriptだけだと各コンポーネントに切り替えロジックを書かないといけないが、CSSカスタムプロパティーを使うことで1箇所に集約できる。
+
   - ```ts
     const GlobalStyles = createGlobalStyle`
       html {
         --font-size: 16px;
       }
-
+    
       @media (min-width: 800px) {
         html {
           --font-size: 20px;
         }
       }
-    `;
+    `
 
     const Text = styled.p`
       font-size: var(--font-size);
-    `;
+    `
     ```
+
 - 欠点
   - 静的型付けの恩恵を受けられない。
     - 型付けされた値がどれほど大きな価値を持っているかというと疑問がある。
