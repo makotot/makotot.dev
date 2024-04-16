@@ -1,0 +1,97 @@
+---
+title: CSS Variables for React Devs 読んだメモ
+draft: false
+date: "2024-04-17"
+tags: ["css", "react"]
+---
+
+[How to use CSS variables with React](https://www.joshwcomeau.com/css/css-variables-for-react-devs/)を読んで、メモ。
+
+- CSSのカスタムプロパティーをReactで扱うことについての記事。
+- CSSカスタムプロパティーを必要だと感じるケースとしては、以下の2つのケースがあり得そう。
+  - [人間工学](https://ja.wikipedia.org/wiki/%E4%BA%BA%E9%96%93%E5%B7%A5%E5%AD%A6)的な良さ
+  - JavaScriptでは実現できなことが可能になる
+- CSSカスタムプロパティーは、デフォルトで継承される。`font-size`や`color`のようなプロパティーと同じ。
+  - 定義した対象の要素の子孫要素全てに適用される。
+- CSSカスタムプロパティーはグローバル変数ではない。
+  - ```css
+      p {
+        --primary-color: red;
+      }
+      div {
+        color: var(--primary-color); /* p要素のセレクター内で宣言されている--primary-colorをdiv要素のセレクター内で参照することはできない。 */
+      }
+    ```
+  - `:root`や`html`要素に定義することで、グローバル変数のように使われることが多いというだけで、グローバル変数ではない。
+- カスタムプロパティーの値にアクセスするには`var`関数を使う。
+  - ```css
+      p {
+        --primary-color: red;
+        color: var(--primary-color);
+      }
+    ```
+  - 値にはどのような値でも渡せる。
+  - カスタムプロパティーの名前を`--`で始める必要がある。
+  - デフォルト値は、`var(--primary-color, blue)`のように第2引数に渡すことができる。
+- Reactでstyled-componentsを使っていたりすると、定数で宣言した値を参照する実装が一般的。
+  - ```ts
+    const COLORS = {
+      primary: 'red',
+    };
+
+    const Button = styled.button`
+      background-color: ${(props) => props.theme.colors.primary};
+    `;
+    ```
+  - これをCSSカスタムプロパティーで実装する場合、カスタムプロパティーを宣言してコンポーネントで`var`関数で参照すればいい。
+  - ```ts
+    const GlobalStyles = createGlobalStyle`
+      html {
+        --color-text: black;
+        --color-background: white;
+        --color-primary: rebeccapurple;
+      }
+    `;
+
+    const Button = styled.button`
+      background-color: var(--primary-color);
+    `;
+    ```
+  - 型安全性という面では劣る部分があるけど、`var`関数で参照するだけで良いということは非常に便利。
+- ブレークポイントによる値の切り替えを1箇所に集約できる。JavaScriptだけだと各コンポーネントに切り替えロジックを書かないといけないが、CSSカスタムプロパティーを使うことで1箇所に集約できる。
+  - ```ts
+    const GlobalStyles = createGlobalStyle`
+      html {
+        --font-size: 16px;
+      }
+
+      @media (min-width: 800px) {
+        html {
+          --font-size: 20px;
+        }
+      }
+    `;
+
+    const Text = styled.p`
+      font-size: var(--font-size);
+    `;
+    ```
+- 欠点
+  - 静的型付けの恩恵を受けられない。
+    - 型付けされた値がどれほど大きな価値を持っているかというと疑問がある。
+    - CSSカスタムプロパティーのタイポはすぐに気づけるはず。
+    - 静的型付けよりも、Chromaticのようなビジュアルテストツールによるランタイムにおけるテストの方が重要。
+    - どうしても静的型付けが必要なら[JavaScriptのオブジェクトにマッピングすればいい](https://twitter.com/pveyes/status/1249729653591293952)。
+  - あらゆる場所で利用することはできない。
+    - styled-componentsでJavaScriptの変数を用いると以下のようなことも可能だけど、CSSカスタムプロパティーではできない。
+    - ```ts
+      @media (max-width: ${(p) => p.breakpoints.mobile}) {
+      ```
+    - `env()`関数を使うことで、環境変数を参照することはできるが、`env()`関数はCSSカスタムプロパティーとは異なる。
+      - メディアクエリーに使えるものには見えないけども？
+- ブラウザーサポートは2024年現在特に問題がない。
+  - https://caniuse.com/css-variables
+- 三位一体
+  - ウェブ開発者として、HTML, CSS, JavaScriptの3つの主要技術に精通していることが重要。
+  - CSSは複雑な言語。マスターが容易ではない。
+  - CSSにはエラーメッセージもログもない。
