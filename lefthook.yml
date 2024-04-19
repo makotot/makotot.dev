@@ -7,4 +7,3 @@ pre-commit:
       run: npm run format
     tsc:
       run: npm run tsc
-                
