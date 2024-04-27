@@ -42,9 +42,10 @@ tags: ["rust"]
 - パターンマッチング
   - 複雑なデータ構造を分解する強力なメカニズム。
   - > Rustにおけるマッチは、包括的です: 全てのあらゆる可能性を網羅し尽くさなければ、コードは有効にならないのです。
-    > 
+    >
     > [match制御フロー演算子 - The Rust Programming Language 日本語版](https://doc.rust-jp.rs/book-ja/ch06-02-match.html)
 - クレートとモジュール
+
   - JavaScriptと同様にモジュールを使ってコードを整理できる。
   - `mod`キーワードでモジュールを定義し、`use`キーワードでモジュールをインポートする。
   - ```rs
@@ -62,7 +63,9 @@ tags: ["rust"]
         hello();
     }
     ```
+
 - エラーハンドリング
+
   - Rustでは`Result<T, E>`と`Option<T>`を使ってエラーハンドリングを明示的に行う。
   - [Result - Rust By Example 日本語版](https://doc.rust-jp.rs/rust-by-example-ja/error/result.html)
     - > Resultは、リッチなバージョンのOption型で, 値の不在の可能性の代わりにエラーの可能性を示します。
@@ -84,6 +87,7 @@ tags: ["rust"]
         }
     }
     ```
+
 - 非同期プログラミング
   - ノンブロッキングな実行を可能にするために、JavaScriptでも馴染みのある`async`と`await`キーワードを使って非同期プログラミングができる。
     - 非同期プログラミングをサポートしているけど、[Tokio](https://tokio.rs/)のような非同期ランタイムを必要とする。
