@@ -1,0 +1,89 @@
+---
+title: "Unveiling Rust: A JavaScript Developer’s Guide to Mastering a New Realm を読んだメモ"
+draft: false
+date: "2024-04-28"
+tags: ["rust"]
+---
+
+[Unveiling Rust: A JavaScript Developer’s Guide to Mastering a New Realm | by Igor Komolov | Medium](https://medium.com/@yourfuse/unveiling-rust-a-javascript-developers-guide-to-mastering-a-new-realm-375b4925306c)を読んでメモ。
+
+- JavaScriptの開発者が新たにRustを学ぶ際のガイドとなる記事。
+- パッケージマネージャー
+  - JavaScriptにおけるnpmのような立ち位置に[cargo](https://doc.rust-jp.rs/book-ja/ch01-03-hello-cargo.html)がある。
+    - `cargo new`でプロジェクト作成できて、`cargo run`でビルドできる。
+- 所有権
+  - メモリー管理についてJavaScriptとは異なるアプローチ。
+  - JavaScriptではエンジンによってガベージコレクションで管理されるけど、Rustではメモリー安全性のために所有権モデルを採用している。
+  - Rustでは所有権モデルによって、データ毎に廃棄の責任を持つ所有者が存在する。
+  - ```rs
+    fn main () {
+        let a = String::from("Hello world.");
+        let b = a;
+        println!("{}", a);// 所有権がbに移動したため、aは使用できずにコンパイルエラーになる。
+    }
+    ```
+  - メモリーの2重解放のような問題を防ぐことになる。
+- ゼロコスト抽象化
+  - Rustはゼロコスト抽象化を提供していて、高レベルの抽象化を使ってもパフォーマンスが低下しない実装が可能となる。
+  - `trait`ベースのジェネリクスやイテレーターはゼロコスト抽象化の一例。
+- 並列処理
+  - 所有権によってデータ競合の心配がない。
+  - `Arc`や`Mutex`を用いてスレッド間でデータを共有する。
+    - [状態共有並行性 - The Rust Programming Language 日本語版](https://doc.rust-jp.rs/book-ja/ch16-03-shared-state.html)
+- 強力な型システム
+  - 型推論があるので常に型定義を書く必要はない。
+  - Rustの関数の引数は明示的な型定義が必要。
+- イミュータブル
+  - Rustの変数はデフォルトでイミュータブル。
+  - ```rs
+    let a = 1;
+    a = 2; // コンパイルエラーが発生する。
+    ```
+- パターンマッチング
+  - 複雑なデータ構造を分解する強力なメカニズム。
+  - > Rustにおけるマッチは、包括的です: 全てのあらゆる可能性を網羅し尽くさなければ、コードは有効にならないのです。
+    > 
+    > [match制御フロー演算子 - The Rust Programming Language 日本語版](https://doc.rust-jp.rs/book-ja/ch06-02-match.html)
+- クレートとモジュール
+  - JavaScriptと同様にモジュールを使ってコードを整理できる。
+  - `mod`キーワードでモジュールを定義し、`use`キーワードでモジュールをインポートする。
+  - ```rs
+    // hello.rs
+    pub fn hello() {
+        println!("Hello, world!");
+    }
+    ```
+  - ```rs
+    // main.rs
+    mod hello;
+    use hello::hello;
+
+    fn main () {
+        hello();
+    }
+    ```
+- エラーハンドリング
+  - Rustでは`Result<T, E>`と`Option<T>`を使ってエラーハンドリングを明示的に行う。
+  - [Result - Rust By Example 日本語版](https://doc.rust-jp.rs/rust-by-example-ja/error/result.html)
+    - > Resultは、リッチなバージョンのOption型で, 値の不在の可能性の代わりにエラーの可能性を示します。
+  - ```rs
+    fn error_fn(i:i32) -> Result<f32,String> {
+        if i == 1 {
+            Ok(1)
+        } else {
+            Err(String::from("Error!"))
+        }
+    }
+
+    fn main() {
+        let result = error_fn(2);
+
+        match result {
+            Ok(v) => println!("{}", v),
+            Err(e) => println!("{}", e),
+        }
+    }
+    ```
+- 非同期プログラミング
+  - ノンブロッキングな実行を可能にするために、JavaScriptでも馴染みのある`async`と`await`キーワードを使って非同期プログラミングができる。
+    - 非同期プログラミングをサポートしているけど、[Tokio](https://tokio.rs/)のような非同期ランタイムを必要とする。
