@@ -76,8 +76,8 @@ importers:
         specifier: 9.1.0
         version: 9.1.0(eslint@8.57.0)
       eslint-plugin-astro:
-        specifier: 1.0.3
-        version: 1.0.3(eslint@8.57.0)(typescript@5.4.5)
+        specifier: 1.1.0
+        version: 1.1.0(eslint@8.57.0)(typescript@5.4.5)
       eslint-plugin-import:
         specifier: 2.29.1
         version: 2.29.1(@typescript-eslint/parser@7.7.1(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)
@@ -1481,8 +1481,8 @@ packages:
       eslint-import-resolver-webpack:
         optional: true
 
-  eslint-plugin-astro@1.0.3:
-    resolution: {integrity: sha512-+Nna5I9ypbYftyhmF6I9QbyK3o6m3PGfjgcgRzSF1TbHEXG5VI8z+nzsLywcvyVtGhcwmOpnB71iE7XDKnB94Q==}
+  eslint-plugin-astro@1.1.0:
+    resolution: {integrity: sha512-fvvy7nYRqtr9V7hMgpZ3lKXLhbxZdPzerGhesq6bLBl49lRF944EsJsIRNt5kcvRD0ZJlNL7nXbw09xOWXGTqg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: '>=8.57.0'
@@ -1750,6 +1750,10 @@ packages:
   globals@13.24.0:
     resolution: {integrity: sha512-AhO5QUcj8llrbG09iWhPU2B204J1xnPeL8kQmVorSsy+Sjj1sk8gIyh6cUocGmH4L0UuhAJy+hJMRA4mgA4mFQ==}
     engines: {node: '>=8'}
+
+  globals@15.1.0:
+    resolution: {integrity: sha512-926gJqg+4mkxwYKiFvoomM4J0kWESfk3qfTvRL2/oc/tK/eTDBbrfcKnSa2KtfdxB5onoL7D3A3qIHQFpd4+UA==}
+    engines: {node: '>=18'}
 
   globalthis@1.0.3:
     resolution: {integrity: sha512-sFdI5LyBiNTHjRd7cGPWapiHWMOXKyuBNX/cWJ3NfzrZQVa8GI/8cofCl74AOVqq9W5kNmguTIzJ/1s2gyI9wA==}
@@ -5165,7 +5169,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-astro@1.0.3(eslint@8.57.0)(typescript@5.4.5):
+  eslint-plugin-astro@1.1.0(eslint@8.57.0)(typescript@5.4.5):
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@8.57.0)
       '@jridgewell/sourcemap-codec': 1.4.15
@@ -5173,7 +5177,7 @@ snapshots:
       astro-eslint-parser: 1.0.1(typescript@5.4.5)
       eslint: 8.57.0
       eslint-compat-utils: 0.5.0(eslint@8.57.0)
-      globals: 13.24.0
+      globals: 15.1.0
       postcss: 8.4.38
       postcss-selector-parser: 6.0.15
     transitivePeerDependencies:
@@ -5539,6 +5543,8 @@ snapshots:
   globals@13.24.0:
     dependencies:
       type-fest: 0.20.2
+
+  globals@15.1.0: {}
 
   globalthis@1.0.3:
     dependencies:
