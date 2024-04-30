@@ -1,0 +1,94 @@
+---
+title: Fundamentals for using structs in Rust読んだメモ
+draft: false
+date: "2024-05-01"
+tags: ["rust"]
+---
+
+[Fundamentals for using structs in Rust  - LogRocket Blog](https://blog.logrocket.com/fundamentals-for-using-structs-in-rust/)を読んでメモ。
+
+- 構造体とは何か？
+  - [構造体 - Rust By Example 日本語版](https://doc.rust-jp.rs/rust-by-example-ja/custom_types/structs.html)
+  - オブジェクト指向プログラミングでは、オブジェクトの説明や設計図の役割としてクラスが使われる。
+  - C、Go、Rustなどの言語では、構造体がクラスの代わりに使われる。
+  - 構造体では、メソッド定義できない。RustとGoでは構造体へのアクセスを提供する形でメソッド定義する。
+- `struct`
+  - `#[derive(Debug)]`を使うと、`println!("{:?}", my_struct);`で構造体の中身を表示できる。
+- `trait`
+  - 構造体だけだとプロパティーしか持つことができないけど、他言語におけるクラスのようにメソッド定義はどこに書くのかというと、`trait`。
+  - [トレイト：共通の振る舞いを定義する - The Rust Programming Language 日本語版](https://doc.rust-jp.rs/book-ja/ch10-02-traits.html)
+    - > トレイトは、Rustコンパイラに、特定の型に存在し、他の型と共有できる機能について知らせます。 トレイトを使用すると、共通の振る舞いを抽象的に定義できます。
+  - 他言語のインターフェースに似ている。
+  - GoにおけるコンポジションのプラクティスがRustにおいては`trait`を使うことで実現できる。
+- ```rs
+  #[derive(Debug)]
+  struct Cat {
+      name: String,
+      age: u8,
+  }
+
+  #[derive(Debug)]
+  struct Dog {
+      name: String,
+      age: u8,
+  }
+
+  trait Pet {
+      fn new(name: String) -> Self;
+      fn birthday(&mut self);
+      fn sound(&self);
+  }
+
+  impl Pet for Cat {
+      fn new(name: String) -> Self {
+          Cat { name, age: 0 }
+      }
+
+      fn birthday(&mut self) {// structへの変更可能な参照として`&mut self`を使う
+          self.age += 1;
+          println!("Happy birthday, {} is now {} years old", self.name, self.age);
+      }
+
+      fn sound(&self) {
+          println!("{} goes Meow", self.name);
+      }
+  }
+
+  impl Pet for Dog {
+      fn new(name: String) -> Self {
+          Dog { name, age: 0 }
+      }
+
+      fn birthday(&mut self) {
+          self.age += 1;
+          println!("Happy birthday, {} is now {} years old", self.name, self.age);
+      }
+
+      fn sound(&self) {
+          println!("{} goes Woof", self.name);
+      }
+  }
+
+  fn main() {
+      println!("Hello, world!");
+
+      let mut tama: Cat = Pet::new(String::from("Tama"));
+      let mut hachi: Dog = Pet::new(String::from("Hachi"));
+
+      tama.birthday();
+      hachi.birthday();
+
+      tama.sound();
+      hachi.sound();
+  }
+  ```
+
+  - `trait`を実装する`struct`毎にメソッド定義する必要がある。
+
+- `Box`を使うと動的に`trait`を使うことができるようだけど、書いたら構文エラーになる。
+  - ```
+    the trait `Pet` cannot be made into an object
+    the following types implement the trait, consider defining an enum where each variant holds one of these types, implementing `Pet` for this new enum and using it instead:
+    ```
+  - エラーの意味が分かってない。
+- `struct`でデータ構造を定義し、`trait`で構造体のメソッドを定義、`impl`で`trait`を実装するというのが、Rustの構造体に関する基本的な実装になりそう。
