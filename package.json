@@ -44,7 +44,7 @@
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-jsx-a11y": "6.8.0",
     "eslint-plugin-tailwindcss": "3.17.0",
-    "lefthook": "1.6.13",
+    "lefthook": "1.6.14",
     "postcss": "8.4.38",
     "prettier": "3.2.5",
     "prettier-plugin-astro": "0.14.0",
