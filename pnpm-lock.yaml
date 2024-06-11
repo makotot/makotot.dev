@@ -36,8 +36,8 @@ importers:
         specifier: 1.1.0
         version: 1.1.0
       shiki:
-        specifier: 1.6.3
-        version: 1.6.3
+        specifier: 1.6.4
+        version: 1.6.4
     devDependencies:
       '@astrojs/tailwind':
         specifier: 5.1.0
@@ -901,8 +901,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@shikijs/core@1.6.3':
-    resolution: {integrity: sha512-QnJKHFUW95GnlJLJGP6QLx4M69HM0KlXk+R2Y8lr/x4nAx1Yb/lsuxq4XwybuUjTxbJk+BT0g/kvn0bcsjGGHg==}
+  '@shikijs/core@1.6.4':
+    resolution: {integrity: sha512-WTU9rzZae1p2v6LOxMf6LhtmZOkIHYYW160IuahUyJy7YXPPjyWZLR1ag+SgD22ZMxZtz1gfU6Tccc8t0Il/XA==}
 
   '@tailwindcss/typography@0.5.13':
     resolution: {integrity: sha512-ADGcJ8dX21dVVHIwTRgzrcunY6YY9uSlAHHGVKvkA+vLc5qLwEszvKts40lx7z0qc4clpjclwLeK5rVCV2P/uw==}
@@ -3172,8 +3172,8 @@ packages:
     resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==}
     engines: {node: '>=8'}
 
-  shiki@1.6.3:
-    resolution: {integrity: sha512-lE1/YGlzFY0hQSyEfsZj18xGrTWxyhFQkaiILALqTBZPbJeYFWpbUhlmTGPOupYB/qC+H6sV4UznJzcEh3WMHQ==}
+  shiki@1.6.4:
+    resolution: {integrity: sha512-X88chM7w8jnadoZtjPTi5ahCJx9pc9f8GfEkZAEYUTlcUZIEw2D/RY86HI/LkkE7Nj8TQWkiBfaFTJ3VJT6ESg==}
 
   side-channel@1.0.4:
     resolution: {integrity: sha512-q5XPytqFEIKHkGdiMIrY10mvLRvnQh42/+GoBlFW3b2LXLE2xxJpZFdm94we0BaoV3RwJyGqg5wS7epxTv0Zvw==}
@@ -3793,7 +3793,7 @@ snapshots:
       remark-parse: 11.0.0
       remark-rehype: 11.0.0
       remark-smartypants: 2.1.0
-      shiki: 1.6.3
+      shiki: 1.6.4
       unified: 11.0.4
       unist-util-remove-position: 5.0.0
       unist-util-visit: 5.0.0
@@ -4474,7 +4474,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.16.4':
     optional: true
 
-  '@shikijs/core@1.6.3': {}
+  '@shikijs/core@1.6.4': {}
 
   '@tailwindcss/typography@0.5.13(tailwindcss@3.4.4)':
     dependencies:
@@ -4910,7 +4910,7 @@ snapshots:
       rehype: 13.0.1
       resolve: 1.22.8
       semver: 7.6.2
-      shiki: 1.6.3
+      shiki: 1.6.4
       string-width: 7.1.0
       strip-ansi: 7.1.0
       tsconfck: 3.1.0(typescript@5.4.5)
@@ -7451,9 +7451,9 @@ snapshots:
 
   shebang-regex@3.0.0: {}
 
-  shiki@1.6.3:
+  shiki@1.6.4:
     dependencies:
-      '@shikijs/core': 1.6.3
+      '@shikijs/core': 1.6.4
 
   side-channel@1.0.4:
     dependencies:
