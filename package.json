@@ -23,7 +23,7 @@
     "@astrojs/sitemap": "3.1.6",
     "@code-hike/mdx": "0.9.0",
     "@iconify-json/mdi": "1.1.68",
-    "astro": "4.14.4",
+    "astro": "4.14.5",
     "astro-icon": "1.1.1",
     "shiki": "1.14.1"
   },
