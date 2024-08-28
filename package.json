@@ -17,13 +17,13 @@
   },
   "dependencies": {
     "@astrojs/check": "0.9.3",
-    "@astrojs/mdx": "3.1.4",
+    "@astrojs/mdx": "3.1.5",
     "@astrojs/partytown": "^2.0.4",
     "@astrojs/rss": "4.0.7",
     "@astrojs/sitemap": "3.1.6",
     "@code-hike/mdx": "0.9.0",
     "@iconify-json/mdi": "1.1.68",
-    "astro": "4.14.5",
+    "astro": "4.14.6",
     "astro-icon": "1.1.1",
     "shiki": "1.14.1"
   },
