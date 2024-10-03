@@ -20,10 +20,10 @@
     "@astrojs/mdx": "3.1.7",
     "@astrojs/partytown": "^2.0.4",
     "@astrojs/rss": "4.0.7",
-    "@astrojs/sitemap": "3.1.6",
+    "@astrojs/sitemap": "3.2.0",
     "@code-hike/mdx": "0.9.0",
     "@iconify-json/mdi": "1.2.0",
-    "astro": "4.15.10",
+    "astro": "4.15.11",
     "astro-icon": "1.1.1",
     "shiki": "1.21.0"
   },
