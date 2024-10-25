@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@astrojs/tailwind": "5.1.2",
-    "@playwright/test": "1.48.1",
+    "@playwright/test": "1.48.2",
     "@tailwindcss/typography": "0.5.15",
     "@types/node": "20.17.1",
     "@types/react": "18.3.12",
