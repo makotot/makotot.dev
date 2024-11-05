@@ -24,7 +24,7 @@
     "@code-hike/mdx": "0.9.0",
     "@iconify-json/mdi": "1.2.1",
     "astro": "4.16.9",
-    "astro-icon": "1.1.1",
+    "astro-icon": "1.1.2",
     "shiki": "1.22.2"
   },
   "devDependencies": {
