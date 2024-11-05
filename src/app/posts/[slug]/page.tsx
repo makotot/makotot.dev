@@ -9,13 +9,13 @@ function getPostBySlug(slug: string) {
   })
 }
 
-type Props ={
-  params: {
+type PageProps ={
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
-export async function generateMetadata(  { params }: Props): Promise<Metadata> {
+export async function generateMetadata(  { params }: PageProps): Promise<Metadata> {
   const { slug } = await params
   const post = getPostBySlug(slug)
   
@@ -30,7 +30,7 @@ export async function generateMetadata(  { params }: Props): Promise<Metadata> {
   }
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page({ params }: PageProps) {
   const { slug } = await params
   const post = getPostBySlug(slug)
   if (!post) {

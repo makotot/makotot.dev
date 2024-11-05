@@ -22,12 +22,10 @@
     "paths": {
       "@/*": ["./src/*"],
       "#site/content": ["./.velite"]
-      // "contentlayer/generated": ["./.contentlayer/generated"]
     }
   },
   "include": [
     "next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "next.config.mjs", ".velite"
-    // ".contentlayer/generated"
   ],
   "exclude": ["node_modules"]
 }
