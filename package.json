@@ -20,7 +20,6 @@
     "next": "15.0.2",
     "react": "19.0.0-rc-02c0e824-20241028",
     "react-dom": "19.0.0-rc-02c0e824-20241028",
-    "rehype-pretty-code": "^0.14.0",
     "shiki": "^1.22.2"
   },
   "devDependencies": {
