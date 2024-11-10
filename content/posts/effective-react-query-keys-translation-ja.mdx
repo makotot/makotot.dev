@@ -1,8 +1,8 @@
 ---
 title: 効果的なReact Queryのキー
 draft: false
-date: "2023-04-27"
-tags: ["Data fetching", "React Query"]
+date: '2023-04-27'
+tags: ['Data fetching', 'React Query']
 ---
 
 これは、[Dominik Dorfmeister 氏](https://tkdodo.eu/)のブログ記事である[Effective React Query Keys](https://tkdodo.eu/blog/effective-react-query-keys)を日本語訳してみたものです。
@@ -25,16 +25,16 @@ tags: ["Data fetching", "React Query"]
 最も重要な部分は、キーがクエリに対して**_ユニーク_**でなければいけないということです。React Query がキャッシュの中からキーに対するエントリーを見つけたら、それを使います。`useQuery`**_と_**`useInfiniteQuery`とで同じキーを使用できないことにも注意してください。結局のところ、ただ 1 つのクエリー**_キャッシュ_**があり、これら 2 つの間でデータは共有されるのです。無限のクエリーが”通常”のクエリーと根本的に異なる構造を持つため、これは好ましくありません。
 
 ```ts dont-mix-keys
-useQuery({ queryKey: ["todos"], queryFn: fetchTodos })
+useQuery({ queryKey: ['todos'], queryFn: fetchTodos });
 
 // 🚨 これはうまくいきません
-useInfiniteQuery({ queryKey: ["todos"], queryFn: fetchInfiniteTodos })
+useInfiniteQuery({ queryKey: ['todos'], queryFn: fetchInfiniteTodos });
 
 // ✅ 代わりに他のものを選びましょう
 useInfiniteQuery({
-  queryKey: ["infiniteTodos"],
+  queryKey: ['infiniteTodos'],
   queryFn: fetchInfiniteTodos,
-})
+});
 ```
 
 ## 自動的な再取得
@@ -65,14 +65,14 @@ React Query がキーの変化するたび常時自動的に再取得をトリ�
 
 ```tsx query-key-drives-the-query
 function Component() {
-  const [filters, setFilters] = React.useState()
+  const [filters, setFilters] = React.useState();
   const { data } = useQuery({
-    queryKey: ["todos", filters],
+    queryKey: ['todos', filters],
     queryFn: () => fetchTodos(filters),
-  })
+  });
 
   // ✅ ローカルの状態を設定して、クエリーを”駆動”します
-  return <Filters onApply={setFilters} />
+  return <Filters onApply={setFilters} />;
 }
 ```
 
@@ -111,9 +111,9 @@ function Component() {
 
 ```ts always-use-array-keys
 // 🚨 いずれにせよ['todos']に変換されます
-useQuery({ queryKey: "todos" })
+useQuery({ queryKey: 'todos' });
 // ✅
-useQuery({ queryKey: ["todos"] })
+useQuery({ queryKey: ['todos'] });
 ```
 
 **アップデート**: React Query v4 では、全てのキーが配列でなければいけません。
@@ -137,14 +137,14 @@ function useUpdateTitle() {
     mutationFn: updateTitle,
     onSuccess: (newTodo) => {
       // ✅ TODOの詳細を更新
-      queryClient.setQueryData(["todos", "detail", newTodo.id], newTodo)
+      queryClient.setQueryData(['todos', 'detail', newTodo.id], newTodo);
 
       // ✅ このTODOを含む全てのリストを更新
-      queryClient.setQueriesData(["todos", "list"], (previous) =>
+      queryClient.setQueriesData(['todos', 'list'], (previous) =>
         previous.map((todo) => (todo.id === newTodo.id ? newtodo : todo)),
-      )
+      );
     },
-  })
+  });
 }
 ```
 
@@ -155,12 +155,12 @@ function useUpdateTitle() {
   return useMutation({
     mutationFn: updateTitle,
     onSuccess: (newTodo) => {
-      queryClient.setQueryData(["todos", "detail", newTodo.id], newTodo)
+      queryClient.setQueryData(['todos', 'detail', newTodo.id], newTodo);
 
       // ✅ 全てのリストをキャッシュ無効化
-      queryClient.invalidateQueries({ queryKey: ["todos", "list"] })
+      queryClient.invalidateQueries({ queryKey: ['todos', 'list'] });
     },
-  })
+  });
 }
 ```
 
@@ -169,25 +169,25 @@ function useUpdateTitle() {
 ```tsx combine focus=10:19
 function useUpdateTitle() {
   // URLに保持している現在のフィルターを返すカスタムフックをイメージしてください
-  const { filters } = useFilterParams()
+  const { filters } = useFilterParams();
 
   return useMutation({
     mutationFn: updateTitle,
     onSuccess: (newTodo) => {
-      queryClient.setQueryData(["todos", "detail", newTodo.id], newTodo)
+      queryClient.setQueryData(['todos', 'detail', newTodo.id], newTodo);
 
       // ✅ 即座に現在のリストを更新
-      queryClient.setQueryData(["todos", "list", { filters }], (previous) =>
+      queryClient.setQueryData(['todos', 'list', { filters }], (previous) =>
         previous.map((todo) => (todo.id === newTodo.id ? newtodo : todo)),
-      )
+      );
 
       // 🥳 全てのリストをキャッシュ無効化しつつ、アクティブなものを再取得しない
       queryClient.invalidateQueries({
-        queryKey: ["todos", "list"],
+        queryKey: ['todos', 'list'],
         refetchActive: false,
-      })
+      });
     },
-  })
+  });
 }
 ```
 
@@ -202,26 +202,26 @@ function useUpdateTitle() {
 
 ```ts
 const todoKeys = {
-  all: ["todos"] as const,
-  lists: () => [...todoKeys.all, "list"] as const,
+  all: ['todos'] as const,
+  lists: () => [...todoKeys.all, 'list'] as const,
   list: (filters: string) => [...todoKeys.lists(), { filters }] as const,
-  details: () => [...todoKeys.all, "detail"] as const,
+  details: () => [...todoKeys.all, 'detail'] as const,
   detail: (id: number) => [...todoKeys.details(), id] as const,
-}
+};
 ```
 
 各階層が関連していながらも独立してアクセスできるようになっていて、とても柔軟です:
 
 ```tsx examples
 // 🕺 TODOの機能に関連する全てを削除
-queryClient.removeQueries({ queryKey: todoKeys.all })
+queryClient.removeQueries({ queryKey: todoKeys.all });
 
 // 🚀 全てのリストのキャッシュを無効化
-queryClient.invalidateQueries({ queryKey: todoKeys.lists() })
+queryClient.invalidateQueries({ queryKey: todoKeys.lists() });
 
 // 🙌 1つのTODOをプリフェッチ
 queryClient.prefetchQueries({
   queryKey: todoKeys.detail(id),
   queryFn: () => fetchTodo(id),
-})
+});
 ```

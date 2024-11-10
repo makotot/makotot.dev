@@ -1,8 +1,8 @@
 ---
 title: textlint plugin メモ
 draft: false
-date: "2024-04-10"
-tags: ["textlint"]
+date: '2024-04-10'
+tags: ['textlint']
 ---
 
 [Plugin · textlint](https://textlint.github.io/docs/plugin.html)を読んでメモ。
@@ -15,39 +15,39 @@ tags: ["textlint"]
   - `Processor`は必須。
   - ```ts
     export default {
-      Processor: require("./YourProcessor"),
-    }
+      Processor: require('./YourProcessor'),
+    };
     ```
   - 利用可能なファイルタイプとその前後処理を定義するクラス。
   - デフォルトのプラグインの実装
     - [`@textlint/textlint-plugin-markdown`](https://github.com/textlint/textlint/tree/master/packages/@textlint/textlint-plugin-markdown)
     - [`@textlint/textlint-plugin-text`](https://github.com/textlint/textlint/tree/master/packages/@textlint/textlint-plugin-text)
   - ```js
-    import { parse } from "text-to-ast"
+    import { parse } from 'text-to-ast';
 
     export default class YourProcessor {
       constructor(options = {}) {
-        this.options = options
+        this.options = options;
         // サポートする拡張子をオプションから指定
-        this.extensions = options.extensions || []
+        this.extensions = options.extensions || [];
       }
       availableExtensions() {
-        return [".txt"].concat(this.extensions)
+        return ['.txt'].concat(this.extensions);
       }
       // 前後処理を定義（解析および生成）
       processor(ext) {
         return {
           preProcess(text, filePath) {
             // 解析結果はASTオブジェクト。
-            return parse(text)
+            return parse(text);
           },
           postProcess(messages, filePath) {
             return {
               messages,
               filePath,
-            }
+            };
           },
-        }
+        };
       }
     }
     ```

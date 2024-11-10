@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import Link from "next/link";
+import type { Metadata } from 'next';
+import './globals.css';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: "makotot.dev",
-  description: "",
+  title: 'makotot.dev',
+  description: '',
 };
 
 export default function RootLayout({

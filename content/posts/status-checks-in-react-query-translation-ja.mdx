@@ -1,8 +1,8 @@
 ---
 title: React Queryにおけるステータスチェック
 draft: false
-date: "2023-06-13"
-tags: ["Data fetching", "React Query"]
+date: '2023-06-13'
+tags: ['Data fetching', 'React Query']
 ---
 
 これは、[Dominik Dorfmeister 氏](https://tkdodo.eu/)のブログ記事である[Status Checks in React Query](https://tkdodo.eu/blog/status-checks-in-react-query)を日本語訳してみたものです。
@@ -30,16 +30,16 @@ React Query の利点の 1 つはクエリのステータスへのアクセス�
 無効なクエリーのためのエッジケースなので`idle`状態は大抵省かれます。そのためほとんどの例はこのようになります。
 
 ```jsx standard-example
-const todos = useTodos()
+const todos = useTodos();
 
 if (todos.isLoading) {
-  return "Loading..."
+  return 'Loading...';
 }
 if (todos.error) {
-  return "An error has occurred: " + todos.error.message
+  return 'An error has occurred: ' + todos.error.message;
 }
 
-return <div>{todos.data.map(renderTodo)}</div>
+return <div>{todos.data.map(renderTodo)}</div>;
 ```
 
 ここでは、まず最初にエラーと読み込み中のチェックを行います。これはおそらく、適切なユースケースと不適切なユースケースがそれぞれあります、。データ取得の解決策の多く、特に手製のものは、再取得のメカニズムを持たないか、明示的なユーザ操作に限っての再取得になります。
@@ -78,16 +78,16 @@ return <div>{todos.data.map(renderTodo)}</div>
 私が大抵データの存在を最初にチェックするのはこのためです。
 
 ```jsx data-first
-const todos = useTodos()
+const todos = useTodos();
 
 if (todos.data) {
-  return <div>{todos.data.map(renderTodo)}</div>
+  return <div>{todos.data.map(renderTodo)}</div>;
 }
 if (todos.error) {
-  return "An error has occurred: " + todos.error.message
+  return 'An error has occurred: ' + todos.error.message;
 }
 
-return "Loading..."
+return 'Loading...';
 ```
 
 もう 1 度言いますが、何が正しいかという明確な原則はなく、ユースケースに強く依存します。積極的な再取得がもたらす結果を誰もが把握するべきで、単純な todo の例に従うよりも適宜コードを構成する必要があります。

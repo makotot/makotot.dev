@@ -1,8 +1,8 @@
 ---
 title: 状態管理ツールとしてのReact Query
 draft: false
-date: "2022-10-15"
-tags: ["Data fetching", "State management", "React Query"]
+date: '2022-10-15'
+tags: ['Data fetching', 'State management', 'React Query']
 ---
 
 これは、[Dominik Dorfmeister 氏](https://tkdodo.eu/)のブログ記事である[React Query as a State Manager](https://tkdodo.eu/blog/react-query-as-a-state-manager)を日本語訳してみたものです。
@@ -25,18 +25,18 @@ React Query は非同期の状態管理ツールです。あらゆる形の非�
 実際のデータを取得する関数に 2 度アクセスする必要がないようにカスタムフックで抽象化するのが最も良いかもしれません。
 
 ```tsx async-state-manager
-export const useTodos = () => useQuery(["todos"], fetchTodos)
+export const useTodos = () => useQuery(['todos'], fetchTodos);
 
 function ComponentOne() {
-  const { data } = useTodos()
+  const { data } = useTodos();
 }
 
 function ComponentTwo() {
   // ✅ ComponentOneと全く同じデータを取得する
-  const { data } = useTodos()
+  const { data } = useTodos();
 }
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 function App() {
   return (
@@ -44,7 +44,7 @@ function App() {
       <ComponentOne />
       <ComponentTwo />
     </QueryClientProvider>
-  )
+  );
 }
 ```
 
@@ -113,28 +113,28 @@ React Query のようなライブラリが手助けとなる前、データ取�
 
 ```tsx mounts-in-short-succession
 function ComponentOne() {
-  const { data } = useTodos()
+  const { data } = useTodos();
 
   if (data) {
     // ⚠️ データを既に持った後に限った条件付きでマウントします
-    return <ComponentTwo />
+    return <ComponentTwo />;
   }
-  return <Loading />
+  return <Loading />;
 }
 
 function ComponentTwo() {
   // ⚠️ 従って2回目のネットワークリクエストを引き起こします
-  const { data } = useTodos()
+  const { data } = useTodos();
 }
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ComponentOne />
     </QueryClientProvider>
-  )
+  );
 }
 ```
 
@@ -148,12 +148,12 @@ function App() {
 
 ```tsx lazy-second-component
 function ComponentOne() {
-  const { data } = useTodos()
-  const [showMore, toggleShowMore] = React.useReducer((value) => !value, false)
+  const { data } = useTodos();
+  const [showMore, toggleShowMore] = React.useReducer((value) => !value, false);
 
   // そうです、”ただの”例なのでエラーハンドリングを省いています
   if (!data) {
-    return <Loading />
+    return <Loading />;
   }
 
   return (
@@ -163,7 +163,7 @@ function ComponentOne() {
       // ✅ ボタンがクリックされたらComponentTwoを表示します
       {showMore ? <ComponentTwo /> : null}
     </div>
-  )
+  );
 }
 ```
 
@@ -199,10 +199,10 @@ const queryClient = new QueryClient({
       staleTime: 1000 * 20,
     },
   },
-})
+});
 
 // 🚀 todoに関連する全てが1分のstaleTimeとなります
-queryClient.setQueryDefaults(todoKeys.all, { staleTime: 1000 * 60 })
+queryClient.setQueryDefaults(todoKeys.all, { staleTime: 1000 * 60 });
 ```
 
 ## 関心の分離についての注意

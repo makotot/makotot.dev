@@ -16,6 +16,8 @@ jobs:
       - run: pnpm install
       - name: Build
         run: npm run build
+      - name: format
+        run: npm run format:check
       - name: Lint
         run: npm run lint
       - name: Type check
