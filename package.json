@@ -11,7 +11,9 @@
     "build": "run-s build:*",
     "start": "next start",
     "lint": "next lint",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "format:check": "prettier --check .",
+    "format:write": "prettier --write ."
   },
   "dependencies": {
     "@shikijs/rehype": "^1.22.2",
@@ -29,8 +31,10 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "15.0.3",
+    "eslint-config-prettier": "^9.1.0",
     "npm-run-all2": "^7.0.1",
     "postcss": "^8",
+    "prettier": "3.3.3",
     "tailwindcss": "^3.4.1",
     "typescript": "^5",
     "velite": "^0.2.1"

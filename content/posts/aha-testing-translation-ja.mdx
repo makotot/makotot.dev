@@ -1,8 +1,8 @@
 ---
 title: AHAテスト 💡
 draft: false
-date: "2022-10-23"
-tags: ["testing"]
+date: '2022-10-23'
+tags: ['testing']
 ---
 
 これは、[Kent C. Dodds 氏](https://kentcdodds.com/)のブログ記事である[AHA Testing 💡](https://kentcdodds.com/blog/aha-testing)を日本語訳してみたものです。
@@ -15,57 +15,57 @@ tags: ["testing"]
 私が実際に見てきたテストのほとんどが抽象の分布の片方に偏ったものでした：ANA（”Absolutely No Abstraction” - 全く抽象化しない）か完全に DRY（Don't Repeat Yourself - 繰り返しを避ける）か。（ANA はたった今作りました。）
 
 <div
-  style={{ width: "100%", marginTop: 10, marginBottom: 40, overflow: "auto" }}
+  style={{ width: '100%', marginTop: 10, marginBottom: 40, overflow: 'auto' }}
 >
   <div
     style={{
-      width: "100%",
-      display: "flex",
-      justifyContent: "space-between",
-      fontSize: "1.5em",
-      textAlign: "center",
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'space-between',
+      fontSize: '1.5em',
+      textAlign: 'center',
       lineHeight: 1.2,
-      marginBottom: "4px",
+      marginBottom: '4px',
     }}
   >
-    <div style={{ color: "rgb(94, 49, 220)" }}>
-      <strong style={{ display: "block" }}>ANA</strong>
+    <div style={{ color: 'rgb(94, 49, 220)' }}>
+      <strong style={{ display: 'block' }}>ANA</strong>
       <small
-        style={{ display: "block", fontSize: "0.5em" }}
+        style={{ display: 'block', fontSize: '0.5em' }}
       >{`(Absolutely No Abstraction)`}</small>
     </div>
-    <div style={{ color: "rgb(71,67,220)" }}>
-      <strong style={{ display: "block" }}>AHA</strong>
+    <div style={{ color: 'rgb(71,67,220)' }}>
+      <strong style={{ display: 'block' }}>AHA</strong>
       <small
-        style={{ display: "block", fontSize: "0.5em" }}
+        style={{ display: 'block', fontSize: '0.5em' }}
       >{`(Avoid Hasty Abstraction)`}</small>
     </div>
-    <div style={{ color: "rgb(49, 85, 220)" }}>
-      <strong style={{ display: "block" }}>DRY</strong>
+    <div style={{ color: 'rgb(49, 85, 220)' }}>
+      <strong style={{ display: 'block' }}>DRY</strong>
       <small
-        style={{ display: "block", fontSize: "0.5em" }}
+        style={{ display: 'block', fontSize: '0.5em' }}
       >{`(Don't Repeat Yourself)`}</small>
     </div>
   </div>
   <div
     style={{
-      width: "100%",
-      height: "20px",
+      width: '100%',
+      height: '20px',
       backgroundImage:
-        "linear-gradient(-213deg, rgb(94, 49, 220) 0%, rgb(49, 85, 220) 100%)",
+        'linear-gradient(-213deg, rgb(94, 49, 220) 0%, rgb(49, 85, 220) 100%)',
     }}
   />
   <div
     style={{
-      marginTop: "10px",
-      color: "rgb(71,67,220)",
+      marginTop: '10px',
+      color: 'rgb(71,67,220)',
       background:
-        "linear-gradient(-213deg, rgb(94, 49, 220) 0%, rgb(49, 85, 220) 100%)",
-      WebkitBackgroundClip: "text",
-      WebkitTextFillColor: "transparent",
-      display: "flex",
-      justifyContent: "space-between",
-      fontSize: "1.8em",
+        'linear-gradient(-213deg, rgb(94, 49, 220) 0%, rgb(49, 85, 220) 100%)',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      display: 'flex',
+      justifyContent: 'space-between',
+      fontSize: '1.8em',
     }}
   >
     <strong>T</strong>
@@ -111,48 +111,48 @@ tags: ["testing"]
 > 時間をかけ過ぎないように。。。
 
 ```js
-import * as blogPostController from "../blog-post"
+import * as blogPostController from '../blog-post';
 
 // データベース用のアプリケーション全体でのモックを読み込みます。
 // これはANNA（Almost Absolutely No Abstraction - ほぼ全く抽象化しない）を
 // 意味するかもしれませんが、データベースのモックの全てをこのブログ記事に
 // 書きたくありません 😅
-jest.mock("../../lib/db")
+jest.mock('../../lib/db');
 
-test("lists blog posts for the logged in user", async () => {
+test('lists blog posts for the logged in user', async () => {
   const req = {
     locale: {
-      source: "default",
-      language: "en",
-      region: "GB",
+      source: 'default',
+      language: 'en',
+      region: 'GB',
     },
     user: {
-      guid: "0336397b-e29d-4b63-b94d-7e68a6fa3747",
+      guid: '0336397b-e29d-4b63-b94d-7e68a6fa3747',
       isActive: false,
-      picture: "http://placehold.it/32x32",
+      picture: 'http://placehold.it/32x32',
       age: 30,
       name: {
-        first: "Francine",
-        last: "Oconnor",
+        first: 'Francine',
+        last: 'Oconnor',
       },
-      company: "ACME",
-      email: "francine.oconnor@ac.me",
+      company: 'ACME',
+      email: 'francine.oconnor@ac.me',
       latitude: 51.507351,
       longitude: -0.127758,
-      favoriteFruit: "banana",
+      favoriteFruit: 'banana',
     },
     body: {},
     cookies: {},
     query: {},
     params: {
-      bucket: "photography",
+      bucket: 'photography',
     },
     header(name) {
       return {
-        Authorization: "Bearer TEST_TOKEN",
-      }[name]
+        Authorization: 'Bearer TEST_TOKEN',
+      }[name];
     },
-  }
+  };
   const res = {
     clearCookie: jest.fn(),
     cookie: jest.fn(),
@@ -164,57 +164,57 @@ test("lists blog posts for the logged in user", async () => {
     send: jest.fn(),
     sendStatus: jest.fn(),
     set: jest.fn(),
-  }
-  const next = jest.fn()
+  };
+  const next = jest.fn();
 
-  await blogPostController.loadBlogPosts(req, res, next)
+  await blogPostController.loadBlogPosts(req, res, next);
 
-  expect(res.json).toHaveBeenCalledTimes(1)
+  expect(res.json).toHaveBeenCalledTimes(1);
   expect(res.json).toHaveBeenCalledWith({
     posts: expect.arrayContaining([
       expect.objectContaining({
-        title: "Test Post 1",
-        subtitle: "This is the subtitle of Test Post 1",
-        body: "The is the body of Test Post 1",
+        title: 'Test Post 1',
+        subtitle: 'This is the subtitle of Test Post 1',
+        body: 'The is the body of Test Post 1',
       }),
     ]),
-  })
-})
+  });
+});
 
-test("returns an empty list when there are no blog posts", async () => {
+test('returns an empty list when there are no blog posts', async () => {
   const req = {
     locale: {
-      source: "default",
-      language: "en",
-      region: "GB",
+      source: 'default',
+      language: 'en',
+      region: 'GB',
     },
     user: {
-      guid: "0336397b-e29d-4b63-b94d-7e68a6fa3747",
+      guid: '0336397b-e29d-4b63-b94d-7e68a6fa3747',
       isActive: false,
-      picture: "http://placehold.it/32x32",
+      picture: 'http://placehold.it/32x32',
       age: 30,
       name: {
-        first: "Francine",
-        last: "Oconnor",
+        first: 'Francine',
+        last: 'Oconnor',
       },
-      company: "ACME",
-      email: "francine.oconnor@ac.me",
+      company: 'ACME',
+      email: 'francine.oconnor@ac.me',
       latitude: 31.230416,
       longitude: 121.473701,
-      favoriteFruit: "banana",
+      favoriteFruit: 'banana',
     },
     body: {},
     cookies: {},
     query: {},
     params: {
-      bucket: "photography",
+      bucket: 'photography',
     },
     header(name) {
       return {
-        Authorization: "Bearer TEST_TOKEN",
-      }[name]
+        Authorization: 'Bearer TEST_TOKEN',
+      }[name];
     },
-  }
+  };
   const res = {
     clearCookie: jest.fn(),
     cookie: jest.fn(),
@@ -226,16 +226,16 @@ test("returns an empty list when there are no blog posts", async () => {
     send: jest.fn(),
     sendStatus: jest.fn(),
     set: jest.fn(),
-  }
-  const next = jest.fn()
+  };
+  const next = jest.fn();
 
-  await blogPostController.loadBlogPosts(req, res, next)
+  await blogPostController.loadBlogPosts(req, res, next);
 
-  expect(res.json).toHaveBeenCalledTimes(1)
+  expect(res.json).toHaveBeenCalledTimes(1);
   expect(res.json).toHaveBeenCalledWith({
     posts: [],
-  })
-})
+  });
+});
 ```
 
 違いを見つけられましたか？そう！最初の方では記事を見つけることを想定して、2 つ目の方ではそうではないことを想定しています。いいですね！よくできました。でも、、、何が原因でしょうか？
@@ -277,46 +277,46 @@ test("returns an empty list when there are no blog posts", async () => {
 最初のテストは確実に抽象化のための悲鳴を上げています（これは AHA プログラミングの指針となるものです）。そこで、思慮深く抽象化したものを書いてみましょう。これらのテストで何が違いを生んでいるかを考えてください：
 
 ```js
-import * as blogPostController from "../blog-post"
+import * as blogPostController from '../blog-post';
 
 // データベース用のアプリケーション全体でのモックを読み込みます。
-jest.mock("../../lib/db")
+jest.mock('../../lib/db');
 
 function setup(overrides = {}) {
   const req = {
     locale: {
-      source: "default",
-      language: "en",
-      region: "GB",
+      source: 'default',
+      language: 'en',
+      region: 'GB',
     },
     user: {
-      guid: "0336397b-e29d-4b63-b94d-7e68a6fa3747",
+      guid: '0336397b-e29d-4b63-b94d-7e68a6fa3747',
       isActive: false,
-      picture: "http://placehold.it/32x32",
+      picture: 'http://placehold.it/32x32',
       age: 30,
       name: {
-        first: "Francine",
-        last: "Oconnor",
+        first: 'Francine',
+        last: 'Oconnor',
       },
-      company: "ACME",
-      email: "francine.oconnor@ac.me",
+      company: 'ACME',
+      email: 'francine.oconnor@ac.me',
       latitude: 51.507351,
       longitude: -0.127758,
-      favoriteFruit: "banana",
+      favoriteFruit: 'banana',
     },
     body: {},
     cookies: {},
     query: {},
     params: {
-      bucket: "photography",
+      bucket: 'photography',
     },
     header(name) {
       return {
-        Authorization: "Bearer TEST_TOKEN",
-      }[name]
+        Authorization: 'Bearer TEST_TOKEN',
+      }[name];
     },
     ...overrides,
-  }
+  };
 
   const res = {
     clearCookie: jest.fn(),
@@ -329,41 +329,41 @@ function setup(overrides = {}) {
     send: jest.fn(),
     sendStatus: jest.fn(),
     set: jest.fn(),
-  }
-  const next = jest.fn()
+  };
+  const next = jest.fn();
 
-  return { req, res, next }
+  return { req, res, next };
 }
 
-test("lists blog posts for the logged in user", async () => {
-  const { req, res, next } = setup()
+test('lists blog posts for the logged in user', async () => {
+  const { req, res, next } = setup();
 
-  await blogPostController.loadBlogPosts(req, res, next)
+  await blogPostController.loadBlogPosts(req, res, next);
 
-  expect(res.json).toHaveBeenCalledTimes(1)
+  expect(res.json).toHaveBeenCalledTimes(1);
   expect(res.json).toHaveBeenCalledWith({
     posts: expect.arrayContaining([
       expect.objectContaining({
-        title: "Test Post 1",
-        subtitle: "This is the subtitle of Test Post 1",
-        body: "The is the body of Test Post 1",
+        title: 'Test Post 1',
+        subtitle: 'This is the subtitle of Test Post 1',
+        body: 'The is the body of Test Post 1',
       }),
     ]),
-  })
-})
+  });
+});
 
-test("returns an empty list when there are no blog posts", async () => {
-  const { req, res, next } = setup()
-  req.user.latitude = 31.230416
-  req.user.longitude = 121.473701
+test('returns an empty list when there are no blog posts', async () => {
+  const { req, res, next } = setup();
+  req.user.latitude = 31.230416;
+  req.user.longitude = 121.473701;
 
-  await blogPostController.loadBlogPosts(req, res, next)
+  await blogPostController.loadBlogPosts(req, res, next);
 
-  expect(res.json).toHaveBeenCalledTimes(1)
+  expect(res.json).toHaveBeenCalledTimes(1);
   expect(res.json).toHaveBeenCalledWith({
     posts: [],
-  })
-})
+  });
+});
 ```
 
 お分かり頂けたでしょうか？最初のテストと 2 つ目のテストとの違いは何でしょうか？最初のテストではユーザーがロンドンにいて、2 つ目のテストではユーザーが上海にいます！
@@ -376,16 +376,16 @@ test("returns an empty list when there are no blog posts", async () => {
 React では、私はここでの`setup`関数のように振る舞う`renderFoo`関数を用意することが時々あります。以下が簡単な例です：
 
 ```tsx
-import * as React from "react"
-import { render, screen } from "@testing-library/react"
-import userEvent from "@testing-library/user-event"
-import LoginForm from "../login-form"
+import * as React from 'react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import LoginForm from '../login-form';
 
 function renderLoginForm(props) {
-  render(<LoginForm {...props} />)
-  const usernameInput = screen.getByLabelText(/username/i)
-  const passwordInput = screen.getByLabelText(/password/i)
-  const submitButton = screen.getByText(/submit/i)
+  render(<LoginForm {...props} />);
+  const usernameInput = screen.getByLabelText(/username/i);
+  const passwordInput = screen.getByLabelText(/password/i);
+  const submitButton = screen.getByText(/submit/i);
   return {
     usernameInput,
     passwordInput,
@@ -393,22 +393,22 @@ function renderLoginForm(props) {
     changeUsername: (value) => userEvent.type(usernameInput, value),
     changePassword: (value) => userEvent.type(passwordInput, value),
     submitForm: () => userEvent.click(submitButton),
-  }
+  };
 }
 
-test("submit calls the submit handler", () => {
-  const handleSubmit = jest.fn()
+test('submit calls the submit handler', () => {
+  const handleSubmit = jest.fn();
   const { changeUsername, changePassword, submitForm } = renderLoginForm({
     onSubmit: handleSubmit,
-  })
-  const username = "chucknorris"
-  const password = "ineednopassword"
-  changeUsername(username)
-  changePassword(password)
-  submitForm()
-  expect(handleSubmit).toHaveBeenCalledTimes(1)
-  expect(handleSubmit).toHaveBeenCalledWith({ username, password })
-})
+  });
+  const username = 'chucknorris';
+  const password = 'ineednopassword';
+  changeUsername(username);
+  changePassword(password);
+  submitForm();
+  expect(handleSubmit).toHaveBeenCalledTimes(1);
+  expect(handleSubmit).toHaveBeenCalledWith({ username, password });
+});
 ```
 
 > 注意：これを使用するテストが 1 つのファイルにおいて 2 つか 3 つしかなく短いものである場合、私はこれを時期早々の抽象化だと考えるでしょう。ただし、テストしているのがいくつかの微妙な差異を持つ場合（例えばエラーの状態のようなもの）、
@@ -425,38 +425,38 @@ test("submit calls the submit handler", () => {
 （作為的な）例：
 
 ```js
-import add from "../add"
+import add from '../add';
 
-test("adds one and two to equal three", () => {
-  expect(add(1, 2)).toBe(3)
-})
+test('adds one and two to equal three', () => {
+  expect(add(1, 2)).toBe(3);
+});
 
-test("adds three and four to equal seven", () => {
-  expect(add(3, 4)).toBe(7)
-})
+test('adds three and four to equal seven', () => {
+  expect(add(3, 4)).toBe(7);
+});
 
-test("adds one hundred and two to equal one hundred two", () => {
-  expect(add(100, 2)).toBe(102)
-})
+test('adds one hundred and two to equal one hundred two', () => {
+  expect(add(100, 2)).toBe(102);
+});
 ```
 
 非常にシンプルですが`jest-in-case`で改善できます。
 
 ```js
-import cases from "jest-in-case"
-import add from "../add"
+import cases from 'jest-in-case';
+import add from '../add';
 
 cases(
-  "add",
+  'add',
   ({ first, second, result }) => {
-    expect(add(first, second)).toBe(result)
+    expect(add(first, second)).toBe(result);
   },
   [
     { first: 1, second: 2, result: 3 },
     { first: 3, second: 4, result: 7 },
     { first: 100, second: 2, result: 102 },
   ],
-)
+);
 ```
 
 このような簡単な例でわざわざこのようなことをしないかもしれませんが、配列にただ要素を追加するだけでとても簡単にテストケースを追加できることが魅力です。

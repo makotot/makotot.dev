@@ -1,10 +1,12 @@
 {
   "files.associations": {
-  "*.css": "tailwindcss"
+    "*.css": "tailwindcss"
   },
   "editor.quickSuggestions": {
-  "strings": "on"
+    "strings": "on"
   },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#e1e6f3",
     "activityBar.background": "#e1e6f3",

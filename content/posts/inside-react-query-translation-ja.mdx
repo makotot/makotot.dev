@@ -1,8 +1,8 @@
 ---
 title: React Queryの内部
 draft: false
-date: "2023-01-27"
-tags: ["Data fetching", "React Query"]
+date: '2023-01-27'
+tags: ['Data fetching', 'React Query']
 ---
 
 これは、[Dominik Dorfmeister 氏](https://tkdodo.eu/)のブログ記事である[Inside React Query](https://tkdodo.eu/blog/inside-react-query)を日本語訳してみたものです。
@@ -19,15 +19,15 @@ React Query が内部的にどのように機能しているのか、最近よ�
 
 ## QueryClient
 
-![QueryClient with defaultOptions holds the QueryCache](/images/content/inside-react-query-translation-ja/queryclient.png "defaultOptionsによるQueryClientがQueryCacheを保持")
+![QueryClient with defaultOptions holds the QueryCache](/images/content/inside-react-query-translation-ja/queryclient.png 'defaultOptionsによるQueryClientがQueryCacheを保持')
 
 全ての始まりは`QueryClient`です。これは、恐らくアプリケーション起動時に、インスタンスを生成するクラスで、`QueryClientProvider`を通してどこでも利用可能になるものです。
 
 ```js query-client-provider
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 // ⬇️ クライアントを生成
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 function App() {
   return (
@@ -35,7 +35,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <RestOfYourApp />
     </QueryClientProvider>
-  )
+  );
 }
 ```
 
@@ -54,7 +54,7 @@ function App() {
 
 さて、クライアントでキャッシュを扱えるようになりました。キャッシュとは何でしょうか？
 
-![QueryCache consists of Queries and syncs with Persisters](/images/content/inside-react-query-translation-ja/querycache.png "QueryCacheはQueryで構成されて、Persisterと同期する")
+![QueryCache consists of Queries and syncs with Persisters](/images/content/inside-react-query-translation-ja/querycache.png 'QueryCacheはQueryで構成されて、Persisterと同期する')
 
 簡単に言うと、 `QueryCache` は、**queryKeys** をしっかりとシリアライズしたもの（**queryKeyHash** ）によるキーと、 `Query`クラスのインスタンスによる値とのインメモリーのオブジェクトです。
 
@@ -63,7 +63,7 @@ localstorage のような外部ストレージにキャッシュを書き込み�
 
 ## Query
 
-![Query informs Observers](/images/content/inside-react-query-translation-ja/query.png "QueryはObserverに通知する")
+![Query informs Observers](/images/content/inside-react-query-translation-ja/query.png 'QueryはObserverに通知する')
 
 キャッシュにはクエリがあり、`Query`にロジックの大部分が集まります。クエリ（自身のデータや、ステータスか直近のフェッチがいつ発生したかのようなメタ情報）に関する全ての情報が含まれているだけでなく、クエリ機能の実行も担っていて、リトライやキャンセル、重複削除のロジックも持っています。
 
@@ -73,7 +73,7 @@ localstorage のような外部ストレージにキャッシュを書き込み�
 
 ## QueryObserver
 
-![Observer is created by useQuery and informs the component about updates](/images/content/inside-react-query-translation-ja/queryobserver.png "ObserverはuseQueryによって生成されて、更新をコンポーネントに知らせる")
+![Observer is created by useQuery and informs the component about updates](/images/content/inside-react-query-translation-ja/queryobserver.png 'ObserverはuseQueryによって生成されて、更新をコンポーネントに知らせる')
 
 オブザーバーは、`Query`とコンポーネントとの間の接着剤です。`Observer`は`useQuery`が呼ばれたときに生成され、常に 1 つのクエリだけを購読します。`useQuery`に`queryKey`を渡さなければならないのは、このためです。 😉
 
@@ -88,11 +88,11 @@ localstorage のような外部ストレージにキャッシュを書き込み�
 `Observer`を持たない`Query`は、**_非活性な_**クエリと呼ばれます。どのコンポーネントからも使われていませんが、キャッシュにはまだあります。React Query DevTools を見るとき、グレイアウトした非活性のクエリを目にすることがあるでしょう。
 左の数値はクエリをサブスクライブしている`Observer`の数を示します。
 
-![Devtools where one query has 2 observers and another one has 0](/images/content/inside-react-query-translation-ja/devtools.png "2つのオブザーバーを持つクエリと1つもオブザーバーを持っていないクエリのDevtools")
+![Devtools where one query has 2 observers and another one has 0](/images/content/inside-react-query-translation-ja/devtools.png '2つのオブザーバーを持つクエリと1つもオブザーバーを持っていないクエリのDevtools')
 
 ## 全体像
 
-![Full overview of the architecture](/images/content/inside-react-query-translation-ja/architecture.png "アーキテクチャの全体像")
+![Full overview of the architecture](/images/content/inside-react-query-translation-ja/architecture.png 'アーキテクチャの全体像')
 
 まとめると、ほとんどのロジックがフレームワークに依存しない Query Core の部分にあります: `QueryClient`、`QueryCache`、`Query`、`QueryObserver`などが全てここにあります。
 
@@ -103,7 +103,7 @@ localstorage のような外部ストレージにキャッシュを書き込み�
 
 最後に、異なる視点から流れを見ましょう。コンポーネントから始まる流れです。
 
-![flow from component mounting over fetching data to rendering it](/images/content/inside-react-query-translation-ja/flow.png "コンポーネントのマウントからデータのフェッチ、レンダリングまでの流れ")
+![flow from component mounting over fetching data to rendering it](/images/content/inside-react-query-translation-ja/flow.png 'コンポーネントのマウントからデータのフェッチ、レンダリングまでの流れ')
 
 - コンポーネントが**_マウント_**されたら`useQuery`が呼ばれて`Observer`が生成されます。
 - `Observer`は`QueryCache`にある`Query`を購読します。

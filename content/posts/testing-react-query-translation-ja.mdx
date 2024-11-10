@@ -1,8 +1,8 @@
 ---
 title: React Queryのテスト
 draft: false
-date: "2023-05-03"
-tags: ["Data fetching", "React Query", "testing"]
+date: '2023-05-03'
+tags: ['Data fetching', 'React Query', 'testing']
 ---
 
 これは、[Dominik Dorfmeister 氏](https://tkdodo.eu/)のブログ記事である[Testing React Query](https://tkdodo.eu/blog/testing-react-query)を日本語訳してみたものです。
@@ -53,17 +53,17 @@ React Query を使用するときは常に QueryClientProvider とそれに渡�
 ```tsx wrapper
 const createWrapper = () => {
   // ✅ テスト毎に新しいQueryClientを生成する
-  const queryClient = new QueryClient()
+  const queryClient = new QueryClient();
   return ({ children }) => (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  )
-}
+  );
+};
 
-test("my first test", async () => {
+test('my first test', async () => {
   const { result } = renderHook(() => useCustomHook(), {
     wrapper: createWrapper(),
-  })
-})
+  });
+});
 ```
 
 ### コンポーネントの場合
@@ -106,23 +106,23 @@ test("my first test", async () => {
 なので例えば`useQuery`にリトライを指定する代わりに
 
 ```tsx not-on-useQuery
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Example />
     </QueryClientProvider>
-  )
+  );
 }
 
 function Example() {
   // 🚨 テストのためにこの設定を上書きすることはできません！
   const queryInfo = useQuery({
-    queryKey: ["todos"],
+    queryKey: ['todos'],
     queryFn: fetchTodos,
     retry: 5,
-  })
+  });
 }
 ```
 
@@ -135,17 +135,17 @@ const queryClient = new QueryClient({
       retry: 2,
     },
   },
-})
+});
 
 // ✅ todosに限り5回リトライするようにします
-queryClient.setQueryDefaults(["todos"], { retry: 5 })
+queryClient.setQueryDefaults(['todos'], { retry: 5 });
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Example />
     </QueryClientProvider>
-  )
+  );
 }
 ```
 
@@ -157,7 +157,7 @@ function App() {
 
 ```tsx ReactQueryConfigProvider
 const ReactQueryConfigProvider = ({ children, defaultOptions }) => {
-  const client = useQueryClient()
+  const client = useQueryClient();
   const [newClient] = React.useState(
     () =>
       new QueryClient({
@@ -165,12 +165,12 @@ const ReactQueryConfigProvider = ({ children, defaultOptions }) => {
         muationCache: client.getMutationCache(),
         defaultOptions,
       }),
-  )
+  );
 
   return (
     <QueryClientProvider client={newClient}>{children}</QueryClientProvider>
-  )
-}
+  );
+};
 ```
 
 [codesandbox の例](https://codesandbox.io/s/react-query-config-provider-v3-lt00f)でこれを実際に確認することができます。
@@ -228,14 +228,14 @@ test("my first test", async () => {
 初期設定につき、React Query はコンソールにエラーを出力します。全てのテストが 🟢 なのにコンソールに 🔴 が見えことになるので、テストにおいてこの点をとても邪魔なものだと思います。React Query はそのデフォルトの挙動を[ロガーを設定](https://react-query.tanstack.com/reference/setLogger)することで上書きできるので、私は普段からこのようにしています。
 
 ```tsx silence-errors
-import { setLogger } from "react-query"
+import { setLogger } from 'react-query';
 
 setLogger({
   log: console.log,
   warn: console.warn,
   // ✅ コンソールにエラーを出さない
   error: () => {},
-})
+});
 ```
 
 **更新**:  
@@ -249,7 +249,7 @@ const queryClient = new QueryClient({
     // ✅ コンソールにエラーを出さない
     error: () => {},
   },
-})
+});
 ```
 
 また、混乱を避けるため本番環境モードではエラーをログに記録しないようになりました。
