@@ -9,5 +9,6 @@
       "addLabels": ["renovate: automerge"]
     }
   ],
+  "rangeStrategy": "pin",
   "platformAutomerge": true
 }
