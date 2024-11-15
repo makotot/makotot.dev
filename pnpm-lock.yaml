@@ -9,16 +9,16 @@ importers:
   .:
     dependencies:
       '@shikijs/rehype':
-        specifier: ^1.22.2
+        specifier: 1.23.0
         version: 1.23.0
       '@shikijs/transformers':
-        specifier: ^1.22.2
+        specifier: 1.23.0
         version: 1.23.0
       '@tailwindcss/typography':
-        specifier: ^0.5.15
+        specifier: 0.5.15
         version: 0.5.15(tailwindcss@3.4.15)
       daisyui:
-        specifier: ^4.12.14
+        specifier: 4.12.14
         version: 4.12.14(postcss@8.4.49)
       next:
         specifier: 15.0.3
@@ -33,44 +33,44 @@ importers:
         specifier: 5.3.0
         version: 5.3.0(react@19.0.0-rc-fb9a90fa48-20240614)
       shiki:
-        specifier: ^1.22.2
+        specifier: 1.23.0
         version: 1.23.0
     devDependencies:
       '@types/node':
-        specifier: ^22.0.0
+        specifier: 22.9.0
         version: 22.9.0
       '@types/react':
-        specifier: ^18
+        specifier: 18.3.12
         version: 18.3.12
       '@types/react-dom':
-        specifier: ^18
+        specifier: 18.3.1
         version: 18.3.1
       eslint:
-        specifier: ^8
+        specifier: 8.57.1
         version: 8.57.1
       eslint-config-next:
         specifier: 15.0.3
         version: 15.0.3(eslint@8.57.1)(typescript@5.6.3)
       eslint-config-prettier:
-        specifier: ^9.1.0
+        specifier: 9.1.0
         version: 9.1.0(eslint@8.57.1)
       npm-run-all2:
-        specifier: ^7.0.1
+        specifier: 7.0.1
         version: 7.0.1
       postcss:
-        specifier: ^8
+        specifier: 8.4.49
         version: 8.4.49
       prettier:
         specifier: 3.3.3
         version: 3.3.3
       tailwindcss:
-        specifier: ^3.4.1
+        specifier: 3.4.15
         version: 3.4.15
       typescript:
-        specifier: ^5
+        specifier: 5.6.3
         version: 5.6.3
       velite:
-        specifier: ^0.2.1
+        specifier: 0.2.1
         version: 0.2.1(acorn@8.14.0)
 
 packages:
@@ -805,10 +805,6 @@ packages:
 
   concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
-
-  cross-spawn@7.0.3:
-    resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
-    engines: {node: '>= 8'}
 
   cross-spawn@7.0.5:
     resolution: {integrity: sha512-ZVJrKKYunU38/76t0RMOulHOnUcbU9GbpWKAOZ0mhjr7CX6FVrH+4FrAapSOekrgFQ3f/8gwMEuIft0aKq6Hug==}
@@ -1591,9 +1587,6 @@ packages:
   micromark-factory-whitespace@2.0.0:
     resolution: {integrity: sha512-28kbwaBjc5yAI1XadbdPYHX/eDnqaUFVikLwrO7FDnKG7lpgxnvk/XGRhX/PN0mOZ+dBSZ+LgunHS+6tYQAzhA==}
 
-  micromark-util-character@2.1.0:
-    resolution: {integrity: sha512-KvOVV+X1yLBfs9dCBSopq/+G1PcgT3lAK07mC4BzXi5E7ahzMAF8oIupDDJ6mievI6F+lAATkbQQlQixJfT3aQ==}
-
   micromark-util-character@2.1.1:
     resolution: {integrity: sha512-wv8tdUTJ3thSFFFJKtpYKOYiGP2+v96Hvk4Tu8KpCAsTMs6yi+nVmGh1syvSCsaxz45J6Jbw+9DD6g97+NV67Q==}
 
@@ -1633,14 +1626,8 @@ packages:
   micromark-util-subtokenize@2.0.1:
     resolution: {integrity: sha512-jZNtiFl/1aY73yS3UGQkutD0UbhTt68qnRpw2Pifmz5wV9h8gOVsN70v+Lq/f1rKaU/W8pxRe8y8Q9FX1AOe1Q==}
 
-  micromark-util-symbol@2.0.0:
-    resolution: {integrity: sha512-8JZt9ElZ5kyTnO94muPxIGS8oyElRJaiJO8EzV6ZSyGQ1Is8xwl4Q45qU5UOg+bGH4AikWziz0iN4sFLWs8PGw==}
-
   micromark-util-symbol@2.0.1:
     resolution: {integrity: sha512-vs5t8Apaud9N28kgCrRUdEed4UJ+wWNvicHLPxCa9ENlYuAY31M0ETy5y1vA33YoNPDFTghEbnh6efaE8h4x0Q==}
-
-  micromark-util-types@2.0.0:
-    resolution: {integrity: sha512-oNh6S2WMHWRZrmutsRmDDfkzKtxF+bc2VxLC9dvtrDIRFln627VsFP6fLMgTryGDljgLPjkrzQSDcPrjPyDJ5w==}
 
   micromark-util-types@2.0.1:
     resolution: {integrity: sha512-534m2WhVTddrcKVepwmVEVnUAmtrx9bfIjNoQHRqfnvdaHQiFytEhJoTgpWJvDEXCO5gLTQh3wYC1PgOJA4NSQ==}
@@ -3019,12 +3006,6 @@ snapshots:
 
   concat-map@0.0.1: {}
 
-  cross-spawn@7.0.3:
-    dependencies:
-      path-key: 3.1.1
-      shebang-command: 2.0.0
-      which: 2.0.2
-
   cross-spawn@7.0.5:
     dependencies:
       path-key: 3.1.1
@@ -3420,7 +3401,7 @@ snapshots:
       '@ungap/structured-clone': 1.2.0
       ajv: 6.12.6
       chalk: 4.1.2
-      cross-spawn: 7.0.3
+      cross-spawn: 7.0.5
       debug: 4.3.7
       doctrine: 3.0.0
       escape-string-regexp: 4.0.0
@@ -3966,8 +3947,8 @@ snapshots:
       micromark-util-decode-numeric-character-reference: 2.0.1
       micromark-util-decode-string: 2.0.0
       micromark-util-normalize-identifier: 2.0.0
-      micromark-util-symbol: 2.0.0
-      micromark-util-types: 2.0.0
+      micromark-util-symbol: 2.0.1
+      micromark-util-types: 2.0.1
       unist-util-stringify-position: 4.0.0
     transitivePeerDependencies:
       - supports-color
@@ -4067,15 +4048,15 @@ snapshots:
       micromark-factory-space: 2.0.0
       micromark-factory-title: 2.0.0
       micromark-factory-whitespace: 2.0.0
-      micromark-util-character: 2.1.0
+      micromark-util-character: 2.1.1
       micromark-util-chunked: 2.0.0
       micromark-util-classify-character: 2.0.0
       micromark-util-html-tag-name: 2.0.0
       micromark-util-normalize-identifier: 2.0.0
       micromark-util-resolve-all: 2.0.0
       micromark-util-subtokenize: 2.0.1
-      micromark-util-symbol: 2.0.0
-      micromark-util-types: 2.0.0
+      micromark-util-symbol: 2.0.1
+      micromark-util-types: 2.0.1
 
   micromark-extension-mdx-expression@3.0.0:
     dependencies:
@@ -4083,10 +4064,10 @@ snapshots:
       devlop: 1.1.0
       micromark-factory-mdx-expression: 2.0.2
       micromark-factory-space: 2.0.0
-      micromark-util-character: 2.1.0
+      micromark-util-character: 2.1.1
       micromark-util-events-to-acorn: 2.0.2
-      micromark-util-symbol: 2.0.0
-      micromark-util-types: 2.0.0
+      micromark-util-symbol: 2.0.1
+      micromark-util-types: 2.0.1
 
   micromark-extension-mdx-jsx@3.0.1:
     dependencies:
@@ -4096,25 +4077,25 @@ snapshots:
       estree-util-is-identifier-name: 3.0.0
       micromark-factory-mdx-expression: 2.0.2
       micromark-factory-space: 2.0.0
-      micromark-util-character: 2.1.0
+      micromark-util-character: 2.1.1
       micromark-util-events-to-acorn: 2.0.2
-      micromark-util-symbol: 2.0.0
-      micromark-util-types: 2.0.0
+      micromark-util-symbol: 2.0.1
+      micromark-util-types: 2.0.1
       vfile-message: 4.0.2
 
   micromark-extension-mdx-md@2.0.0:
     dependencies:
-      micromark-util-types: 2.0.0
+      micromark-util-types: 2.0.1
 
   micromark-extension-mdxjs-esm@3.0.0:
     dependencies:
       '@types/estree': 1.0.6
       devlop: 1.1.0
       micromark-core-commonmark: 2.0.1
-      micromark-util-character: 2.1.0
+      micromark-util-character: 2.1.1
       micromark-util-events-to-acorn: 2.0.2
-      micromark-util-symbol: 2.0.0
-      micromark-util-types: 2.0.0
+      micromark-util-symbol: 2.0.1
+      micromark-util-types: 2.0.1
       unist-util-position-from-estree: 2.0.0
       vfile-message: 4.0.2
 
@@ -4127,56 +4108,51 @@ snapshots:
       micromark-extension-mdx-md: 2.0.0
       micromark-extension-mdxjs-esm: 3.0.0
       micromark-util-combine-extensions: 2.0.0
-      micromark-util-types: 2.0.0
+      micromark-util-types: 2.0.1
 
   micromark-factory-destination@2.0.0:
     dependencies:
-      micromark-util-character: 2.1.0
-      micromark-util-symbol: 2.0.0
-      micromark-util-types: 2.0.0
+      micromark-util-character: 2.1.1
+      micromark-util-symbol: 2.0.1
+      micromark-util-types: 2.0.1
 
   micromark-factory-label@2.0.0:
     dependencies:
       devlop: 1.1.0
-      micromark-util-character: 2.1.0
-      micromark-util-symbol: 2.0.0
-      micromark-util-types: 2.0.0
+      micromark-util-character: 2.1.1
+      micromark-util-symbol: 2.0.1
+      micromark-util-types: 2.0.1
 
   micromark-factory-mdx-expression@2.0.2:
     dependencies:
       '@types/estree': 1.0.6
       devlop: 1.1.0
       micromark-factory-space: 2.0.0
-      micromark-util-character: 2.1.0
+      micromark-util-character: 2.1.1
       micromark-util-events-to-acorn: 2.0.2
-      micromark-util-symbol: 2.0.0
-      micromark-util-types: 2.0.0
+      micromark-util-symbol: 2.0.1
+      micromark-util-types: 2.0.1
       unist-util-position-from-estree: 2.0.0
       vfile-message: 4.0.2
 
   micromark-factory-space@2.0.0:
     dependencies:
-      micromark-util-character: 2.1.0
-      micromark-util-types: 2.0.0
+      micromark-util-character: 2.1.1
+      micromark-util-types: 2.0.1
 
   micromark-factory-title@2.0.0:
     dependencies:
       micromark-factory-space: 2.0.0
-      micromark-util-character: 2.1.0
-      micromark-util-symbol: 2.0.0
-      micromark-util-types: 2.0.0
+      micromark-util-character: 2.1.1
+      micromark-util-symbol: 2.0.1
+      micromark-util-types: 2.0.1
 
   micromark-factory-whitespace@2.0.0:
     dependencies:
       micromark-factory-space: 2.0.0
-      micromark-util-character: 2.1.0
-      micromark-util-symbol: 2.0.0
-      micromark-util-types: 2.0.0
-
-  micromark-util-character@2.1.0:
-    dependencies:
-      micromark-util-symbol: 2.0.0
-      micromark-util-types: 2.0.0
+      micromark-util-character: 2.1.1
+      micromark-util-symbol: 2.0.1
+      micromark-util-types: 2.0.1
 
   micromark-util-character@2.1.1:
     dependencies:
@@ -4191,23 +4167,23 @@ snapshots:
     dependencies:
       micromark-util-character: 2.1.1
       micromark-util-symbol: 2.0.1
-      micromark-util-types: 2.0.0
+      micromark-util-types: 2.0.1
 
   micromark-util-combine-extensions@2.0.0:
     dependencies:
       micromark-util-chunked: 2.0.0
-      micromark-util-types: 2.0.0
+      micromark-util-types: 2.0.1
 
   micromark-util-decode-numeric-character-reference@2.0.1:
     dependencies:
-      micromark-util-symbol: 2.0.0
+      micromark-util-symbol: 2.0.1
 
   micromark-util-decode-string@2.0.0:
     dependencies:
       decode-named-character-reference: 1.0.2
       micromark-util-character: 2.1.1
       micromark-util-decode-numeric-character-reference: 2.0.1
-      micromark-util-symbol: 2.0.0
+      micromark-util-symbol: 2.0.1
 
   micromark-util-encode@2.0.1: {}
 
@@ -4218,19 +4194,19 @@ snapshots:
       '@types/unist': 3.0.3
       devlop: 1.1.0
       estree-util-visit: 2.0.0
-      micromark-util-symbol: 2.0.0
-      micromark-util-types: 2.0.0
+      micromark-util-symbol: 2.0.1
+      micromark-util-types: 2.0.1
       vfile-message: 4.0.2
 
   micromark-util-html-tag-name@2.0.0: {}
 
   micromark-util-normalize-identifier@2.0.0:
     dependencies:
-      micromark-util-symbol: 2.0.0
+      micromark-util-symbol: 2.0.1
 
   micromark-util-resolve-all@2.0.0:
     dependencies:
-      micromark-util-types: 2.0.0
+      micromark-util-types: 2.0.1
 
   micromark-util-sanitize-uri@2.0.1:
     dependencies:
@@ -4242,14 +4218,10 @@ snapshots:
     dependencies:
       devlop: 1.1.0
       micromark-util-chunked: 2.0.0
-      micromark-util-symbol: 2.0.0
-      micromark-util-types: 2.0.0
-
-  micromark-util-symbol@2.0.0: {}
+      micromark-util-symbol: 2.0.1
+      micromark-util-types: 2.0.1
 
   micromark-util-symbol@2.0.1: {}
-
-  micromark-util-types@2.0.0: {}
 
   micromark-util-types@2.0.1: {}
 
@@ -4270,8 +4242,8 @@ snapshots:
       micromark-util-resolve-all: 2.0.0
       micromark-util-sanitize-uri: 2.0.1
       micromark-util-subtokenize: 2.0.1
-      micromark-util-symbol: 2.0.0
-      micromark-util-types: 2.0.0
+      micromark-util-symbol: 2.0.1
+      micromark-util-types: 2.0.1
     transitivePeerDependencies:
       - supports-color
 
@@ -4337,7 +4309,7 @@ snapshots:
   npm-run-all2@7.0.1:
     dependencies:
       ansi-styles: 6.2.1
-      cross-spawn: 7.0.3
+      cross-spawn: 7.0.5
       memorystream: 0.3.1
       minimatch: 9.0.5
       pidtree: 0.6.0
@@ -4618,7 +4590,7 @@ snapshots:
     dependencies:
       '@types/mdast': 4.0.4
       mdast-util-from-markdown: 2.0.2
-      micromark-util-types: 2.0.0
+      micromark-util-types: 2.0.1
       unified: 11.0.5
     transitivePeerDependencies:
       - supports-color
