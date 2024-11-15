@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Link from 'next/link';
+import { SiGithub } from 'react-icons/si';
 
 export const metadata: Metadata = {
   title: 'makotot.dev',
@@ -34,6 +35,16 @@ export default function RootLayout({
         <main className="mx-auto w-full max-w-3xl p-4 md:w-2/3 md:p-8">
           {children}
         </main>
+
+        <footer>
+          <div className="mx-auto w-full max-w-3xl p-4 md:w-2/3 md:p-8">
+            <div className="flex items-center justify-center gap-2">
+              <Link href="https://github.com/makotot/makotot.dev">
+                <SiGithub size={20} aria-label="GitHub" />
+              </Link>
+            </div>
+          </div>
+        </footer>
       </body>
     </html>
   );
