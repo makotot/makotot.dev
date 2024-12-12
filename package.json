@@ -19,7 +19,7 @@
     "@shikijs/rehype": "1.24.2",
     "@shikijs/transformers": "1.24.2",
     "@tailwindcss/typography": "0.5.15",
-    "daisyui": "4.12.20",
+    "daisyui": "4.12.21",
     "next": "15.1.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
