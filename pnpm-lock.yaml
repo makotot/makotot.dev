@@ -70,8 +70,8 @@ importers:
         specifier: 5.7.2
         version: 5.7.2
       velite:
-        specifier: 0.2.1
-        version: 0.2.1(acorn@8.14.0)
+        specifier: 0.2.2
+        version: 0.2.2(acorn@8.14.0)
 
 packages:
 
@@ -2143,8 +2143,8 @@ packages:
     resolution: {integrity: sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==}
     engines: {node: '>=6'}
 
-  terser@5.36.0:
-    resolution: {integrity: sha512-IYV9eNMuFAV4THUspIRXkLakHnV6XO7FEdtKjf/mDyrnqUg9LnlOn6/RwRvM9SZjR4GUq8Nk8zj67FzVARr74w==}
+  terser@5.37.0:
+    resolution: {integrity: sha512-B8wRRkmre4ERucLM/uXx4MOV5cbnOlVAqUst+1+iLKPI0dOgFO28f84ptoQt9HEI537PMzfYa/d+GEPKTRXmYA==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -2245,8 +2245,8 @@ packages:
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
-  velite@0.2.1:
-    resolution: {integrity: sha512-yhugij87X4v63c7Y4pODvDLrLc0HFU7v8BfNzPeqEnJRKxGbV6+EESNcOQehHt91crGfJVepfCvoH52Si2+zTQ==}
+  velite@0.2.2:
+    resolution: {integrity: sha512-VuaowCAIrlarURqVvTeTc1pMCLXUjjrw6FqwpxFahPht9AsWWZ1i8P/DY411n82s5ZwLqC3f8K4ZqzAnAGvJMA==}
     engines: {node: ^18.17.0 || >=20.3.0}
     hasBin: true
 
@@ -4869,7 +4869,7 @@ snapshots:
 
   tapable@2.2.1: {}
 
-  terser@5.36.0:
+  terser@5.37.0:
     dependencies:
       '@jridgewell/source-map': 0.3.6
       acorn: 8.14.0
@@ -5001,12 +5001,12 @@ snapshots:
 
   util-deprecate@1.0.2: {}
 
-  velite@0.2.1(acorn@8.14.0):
+  velite@0.2.2(acorn@8.14.0):
     dependencies:
       '@mdx-js/mdx': 3.1.0(acorn@8.14.0)
       esbuild: 0.24.0
       sharp: 0.33.5
-      terser: 5.36.0
+      terser: 5.37.0
     transitivePeerDependencies:
       - acorn
       - supports-color
