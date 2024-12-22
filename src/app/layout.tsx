@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Link from 'next/link';
-import { SiGithub } from 'react-icons/si';
+import { SiGithub, SiBluesky } from 'react-icons/si';
 
 export const metadata: Metadata = {
   title: 'makotot.dev',
@@ -38,9 +38,12 @@ export default function RootLayout({
 
         <footer>
           <div className="mx-auto w-full max-w-3xl p-4 md:w-2/3 md:p-8">
-            <div className="flex items-center justify-center gap-2">
+            <div className="flex items-center justify-center gap-4">
               <Link href="https://github.com/makotot/makotot.dev">
                 <SiGithub size={20} aria-label="GitHub" />
+              </Link>
+              <Link href="https://bsky.app/profile/makotottn.bsky.social">
+                <SiBluesky size={20} aria-label="BlueSky" />
               </Link>
             </div>
           </div>
