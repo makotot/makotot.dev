@@ -27,7 +27,7 @@
     "shiki": "1.25.1"
   },
   "devDependencies": {
-    "@types/node": "22.10.3",
+    "@types/node": "22.10.4",
     "@types/react": "19.0.2",
     "@types/react-dom": "19.0.2",
     "eslint": "8.57.1",
