@@ -40,7 +40,7 @@ export default async function Page({ params }: PageProps) {
   }
 
   return (
-    <div className="prose">
+    <div className="prose lg:prose-lg">
       <article>
         <h1>{post.title}</h1>
         <p>{post.date}</p>

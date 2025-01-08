@@ -1,0 +1,274 @@
+---
+title: ミューテーション後のクエリー無効化の自動化
+draft: false
+date: '2025-01-08'
+tags: ['react-query']
+---
+
+これは、[Dominik Dorfmeister 氏](https://tkdodo.eu/)のブログ記事である[Automatic Query Invalidation after Mutations](https://tkdodo.eu/blog/automatic-query-invalidation-after-mutations)を日本語訳してみたものです。
+
+誤訳などあれば[Issue](https://github.com/makotot/makotot.dev/issues/new)や PR を頂けると幸いです。
+
+---
+
+クエリーとミューテーションは同じコインの裏表のようなものです。**クエリー**は読み取る非同期リソースを定義して、大抵はデータフェッチで得られます。一方**ミューテーション**はそのようなリソースを更新するアクションです。
+
+ミューテーションが完了すると、クエリーへ影響する可能性が高いです。例えば、`issue`を更新すると恐らく`issues`のリストへ影響します。そのため、React Queryがミューテーションをクエリーと全くリンクさせてないのは多少驚きがあるかもしれません。
+
+その理由はしごく単純です。React Queryがリソースの管理方法へ意見を主張しないためであり、ミューテーション後に再度取得したくない開発者もいるからです。
+ミューテーションが更新後のデータを返して、さらなるネットワークラウンドトリップを避けるため、それを手動でキャッシュへ入れたい場合もあります。
+
+また、無効化をどのように行いたいかもさまざまです。
+
+- `onSuccess`か`onSettled`で無効化しますか？
+  前者はミューテーションが成功した場合に限り無効化しますが、後者はエラーの場合にも無効化します。
+- 無効化を`await`したいですか？
+  [無効化を待つ](https://tkdodo.eu/blog/mastering-mutations-in-react-query#awaited-promises)と、再取得が完了するまでミューテーションが保留状態になります。
+  例えば再取得完了までフォームを無効化したい場合には良いかもしれませんが、詳細画面から概要画面へできるだけ早く遷移したい場合には望まないことかもしれません。
+
+全てに対応する解決策があるわけじゃないので、React Queryはデフォルトで何かを提供することはありません。しかし、[グローバルキャッシュコールバック](https://tanstack.com/query/v5/docs/reference/MutationCache#global-callbacks)によってReact Queryで自動的に無効化する実装を行うことは難しくありません。
+
+## グローバルキャッシュコールバック
+
+ミューテーションにはコールバックがあります。`onSuccess`、`onError`、`onSettled`をそれぞれの`useMutation`に対して定義する必要があります。同様に、`MutationCache`にも同じコールバックが存在します。`MutationCache`はアプリケーションでただ1つしかないので、そのコールバックは”グローバル”となります。*すべて*のミューテーションで呼ばれるということです。
+
+コールバックを持つ`MutationCache`を作るのは、あまり明らかなことではないでしょう。ほとんどの例では`QueryClient`を作成するとき暗黙的に`MutationCache`が作られるからです。しかし、キャッシュを手動で作ってコールバックを渡すことも可能です。
+
+```ts create-MutationCache
+import { QueryClient, MutationCache } from '@tanstack/react-query';
+
+const queryClient = new QueryClient({
+  mutationCache: new MutationCache({
+    onSuccess,
+    onError,
+    onSettled,
+  }),
+});
+```
+
+コールバックは`useMutation`のそれと同じ引数をとりますが、ミューテーションインスタンスを最後の引数として受け取らない点で異なり、通常のコールバックと同じように返されたPromiseが待機されます。
+
+では、グローバルコールバックの自動的な無効化がどのように助けとなるでしょう？グローバルコールバックで`queryClient.invalidateQueries`を呼び出すだけです。
+
+```ts automatic-invalidation
+const queryClient = new QueryClient({
+  mutationCache: new MutationCache({
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+    },
+  }),
+});
+```
+
+たった5行のコードでRemix（ごめんなさい、React-Routerですね）のようなフレームワークと似た振る舞いを実現できます。送信時に常にすべてを無効化するというものです。この方法を示してくれたAlexへ感謝します。
+
+<blockquote class="twitter-tweet">
+  <p lang="en" dir="ltr">
+    I just invalidate everything on every mutation
+    <a href="https://t.co/0TALY8NdrV">https://t.co/0TALY8NdrV</a>
+  </p>
+  &mdash; Alex / KATT 🐱 (@alexdotjs){' '}
+  <a href="https://twitter.com/alexdotjs/status/1744467890277921095?ref_src=twsrc%5Etfw">
+    January 8, 2024
+  </a>
+</blockquote>
+<script
+  async
+  src="https://platform.twitter.com/widgets.js"
+  charset="utf-8"
+></script>
+
+### しかし、それはやり過ぎではないでしょうか？
+
+そうかもしれないし、そうじゃないかもしれないです。状況によります。繰り返しますが、多くの異なる方法があるのでビルトインではないのです。1つ明確にしておかなければならないことは、無効化は **refetch** と常に同じではないということです。
+
+無効化は単に一致するすべての**アクティブ**なクエリーを再取得し、他のものをすべて`stale`としてマークします。次に使用されるときに再取得されるようにするためです。
+
+これは大抵よいトレードオフになります。フィルター機能を持つイシューリストを考えてみましょう。各フィルターがQueryKeyの1部であるべきなので、キャッシュに複数のクエリーが入るでしょう。しかし、同時に表示されるのは1つのクエリーに限ります。それらすべてを再取得すると多くの不要なリクエストが発生する可能性があり、そのフィルターのリストが再び表示されることさえないかもしれません。
+
+無効化は画面上に表示されているもの（アクティブなクエリー）だけ再取得し、ビューを最新の状態に保ちます。そしてそれ以外全て再度必要になったときに再取得されます。
+
+## 特定のクエリーへ無効化を紐づける
+
+オーケー、ちょっと待ちましょう。きめ細かい再検証はどうでしょうか？`issues`リストにイシューを追加するとき、`profile`データを無効にする理由があるでしょうか？ほとんど意味がありません...
+
+これもまたトレードオフです。コードは可能な限りシンプルとなり、私は厳密に必要な再取得を忘れるくらいなら頻繁なデータ取得を好みます。きめ細かい再検証は、再取得が必要なものを正確に把握してる場合には良いですが、その一致について拡張しないことがわかっている場合に限ります。
+
+過去には、よくきめ細かい再検証を行ってきましたが、後になって無効化のパターンに合わない他のリソース追加を必要とすることが分かるだけでした。その時点で、すべてのミューテーションのコールバックを見直してそのリソースも再取得が必要かを確認しなければならなかったのです。これは面倒なことであり、エラーが起きやすいです。
+
+その上、私たちはほとんどのクエリーに対して2分程度の中規模の`staleTime`を用います。そのため、無関係のユーザー操作後の無効化による影響は無視できるほど小さいものです。
+
+もちろん、よりスマートな再検証を行うためにロジックをより複雑なものにもできるでしょう。過去に私が使ったテクニックは以下のようなものです。
+
+### mutationKeyに紐づける
+
+MutationKeyとQueryKeyには共通するものがなく、Mutationのそれは任意です。MutationKeyを使ってどのクエリーを無効化するか指定したい場合には、これらを紐づけることができます。
+
+```ts mutationKey
+const queryClient = new QueryClient({
+  mutationCache: new MutationCache({
+    onSuccess: (_data, _variables, _context, mutation) => {
+      queryClient.invalidateQueries({
+        queryKey: mutation.options.mutationKey,
+      });
+    },
+  }),
+});
+```
+
+これでMutationに`mutationKey: ['issues']`を指定することでイシューにだけ関連する全てを無効化できます。そして、キーのないMutationがあれば、まだ全てが無効化されます。素晴らしいですね。
+
+### staleTimeに基づいてクエリーを除外する
+
+私は度々`staleTime:Infinity`としてクエリーを”静的”なものにします。このようなクエリーを無効化したくなければ、`predicate`フィルターを利用して除外できます。
+
+```ts nonStaticQueries
+const queryClient = new QueryClient({
+  mutationCache: new MutationCache({
+    onSuccess: (_data, _variables, _context, mutation) => {
+      const nonStaticQueries = (query: Query) => {
+        const defaultStaleTime =
+          queryClient.getQueryDefaults(query.queryKey).staleTime ?? 0;
+        const staleTimes = query.observers
+          .map((observer) => observer.options.staleTime)
+          .filter((staleTime) => staleTime !== undefined);
+
+        const staleTime =
+          query.getObserversCount() > 0
+            ? Math.min(...staleTimes)
+            : defaultStaleTime;
+
+        return staleTime !== Number.POSITIVE_INFINITY;
+      };
+
+      queryClient.invalidateQueries({
+        queryKey: mutation.options.mutationKey,
+        predicate: nonStaticQueries,
+      });
+    },
+  }),
+});
+```
+
+`staleTime`はオブザーバーレベルのプロパティーなので、クエリーの実際の`staleTime`を見つけるのはそう簡単ではないです。しかし、不可能ではなく、`predicate`フィルターと他のフィルターを`queryKey`のように組み合わせることもできます。素晴らしいですね。
+
+### metaオプションを利用する
+
+`meta`をミューテーションに関する任意の静的な情報を保持するために使用することができます。例えば、ミューテーションに"タグ"として`invalidates`フィールドを追加できます。このようなタグは無効化したいクエリーを曖昧に一致させることができます。
+
+```ts the-meta-option
+import { matchQuery } from '@tanstack/react-query';
+
+const queryClient = new QueryClient({
+  mutationCache: new MutationCache({
+    onSuccess: (_data, _variables, _context, mutation) => {
+      queryClient.invalidateQueries({
+        predicate: (query) =>
+          // 一致するすべてのタグを1度に無効化
+          // もしくは、metaがない場合にはすべてを無効化
+          mutation.meta?.invalidates?.some((queryKey) =>
+            matchQuery({ queryKey }, query),
+          ) ?? true,
+      });
+    },
+  }),
+});
+
+// 使い方:
+useMutation({
+  mutationFn: updateLabel,
+  meta: {
+    invalidates: [['issues'], ['labels']],
+  },
+});
+```
+
+ここでは、`predicate`関数を使って`queryClient.invalidateQueries`を1度だけ呼びます。しかし、その中で`matchQuery`を使って曖昧な一致を行います。`matchQuery`関数はReact Queryからimportできます。これは単一の`queryKey`をフィルターとして渡すときに内部的に使われる関数ですが、今回は複数のキーを使います。
+
+このパターンは、`useMutation`自体に`onSuccess`コールバックを持たせるよりもほんの少しだけ良いかもしれませんが、少なくとも毎回`useQueryClient`を使ってQueryClientを持ち込む必要がありません。また、デフォルトですべてを無効化することと組み合わせれば、その振る舞いをオプトアプトするよい方法となり得ます。
+
+<aside className="border border-solid border-white p-4">
+__TypeScriptにおけるmetaオプション__
+
+通常、`mata`は`Record<string, unknown>`として型付けされますが、モジュール拡張でこれを調整することができます。
+
+```ts
+declare module '@tanstack/react-query' {
+  interface Register {
+    mutationMeta: {
+      invalidates?: Array<QueryKey>;
+    };
+  }
+}
+```
+
+[このドキュメント](https://tanstack.com/query/v5/docs/framework/react/typescript#typing-meta)でより詳しい情報を得ることができます。
+
+</aside>
+
+## 待つべきか待たないべきか
+
+ここまですべての例で無効化を`awaiting`するようなことをしていませんが、可能な限り早くミューテーションを終了させたい場合には問題ありません。
+特に私がよく遭遇する状況としては、すべてを無効化したいけども、ある重要なデータの再取得が完了するまでミューテーションを保留にしたいというものです。
+例えば、あるラベルの更新を待ってからラベル固有のクエリーを再取得したいが、すべてのデータの再取得までは待ちたくないという場合です。
+
+`meta`オプションを使って、その構造を定義することで解決策を用意することができます。例えば
+
+```ts meta-awaits
+useMutation({
+  mutationFn: updateLabel,
+  meta: {
+    invalidates: 'all',
+    awaits: ['labels'],
+  },
+});
+```
+
+もしくは、`useMutation`のコールバックの**前**にMutationCacheのコールバックが実行される事実を利用することもできます。
+グローバルコールバックですべてを無効化する設定にしている場合においても、`await`するようにローカルコールバックを追加することができます。
+
+```ts local-onSuccess
+const queryClient = new QueryClient({
+  mutationCache: new MutationCache({
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+    },
+  }),
+});
+
+useMutation({
+  mutationFn: updateLabel,
+  onSuccess: () => {
+    // 待つようにPromiseを返す
+    return queryClient.invalidateQueries(
+      { queryKey: ['labels'] },
+      { cancelRefetch: false },
+    );
+  },
+});
+```
+
+何が行われているかというと、
+
+- 最初に、グローバルコールバックが実行されてすべてのクエリーが無効化されますが、`await`も何か`return`もしてないので、"ファイアー・アンド・フォーゲット"の無効化となります。
+- その後すぐローカルコールバックが実行されて、`['labels']`だけを無効化するPromiseを作ります。このPromiseを返すことで、`['labels']`が再取得されるまでミューテーションが保留状態になります。
+
+<aside className="border border-solid border-white p-4">
+__cancelRefetch__
+
+`invalidateQueries`を実行するのに`cancelRefetch: false`を渡しています。
+このフラグのデフォルトは`true`です。その理由は、命令的なデータ再取得が常に優先され、実行中のものをキャンセルして、最新の更新されたデータを保証するためです。
+
+ただしここでは、逆のことを行いたいです。グローバルコールバックが既に`await`したいクエリーも含めてすべてを無効化しているので、実行中のPromiseを"ピックアップ"して返すだけの`invalidateQueries`を使います。
+
+そうしなければ`['labels']`のクエリーに対してもう一度リクエストが行われるでしょう。
+
+</aside>
+
+---
+
+これは、自動的な無効化のため納得いく抽象化を追加することに必要なコードが多くないことを示していると思います。
+すべての抽象化にはコストがかかることを覚えておいてください。それは新しいAPIであり、学び、理解し、適切に適用する必要があるのです。
+
+すべての可能性を示すことで、React Queryに何もビルトインされてない理由が少しでも明示できいたらと思います。
+膨れ上がることなくすべてのケースを網羅する柔軟なAPIを見出すことは簡単なことではありません。そのため、ユーザー側でそれを作れるようにするツールを提供することが好ましいと考えています。
