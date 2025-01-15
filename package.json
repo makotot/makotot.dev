@@ -16,15 +16,15 @@
     "format:write": "prettier --write ."
   },
   "dependencies": {
-    "@shikijs/rehype": "1.26.2",
-    "@shikijs/transformers": "1.26.2",
+    "@shikijs/rehype": "1.27.2",
+    "@shikijs/transformers": "1.27.2",
     "@tailwindcss/typography": "0.5.16",
     "daisyui": "4.12.23",
     "next": "15.1.4",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-icons": "5.4.0",
-    "shiki": "1.27.0"
+    "shiki": "1.27.2"
   },
   "devDependencies": {
     "@types/node": "22.10.6",
