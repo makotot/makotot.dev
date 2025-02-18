@@ -1,7 +1,9 @@
 import { posts } from '#site/content';
 import { MDXContent } from '@/components/MDXContent';
+import { Prose } from '@/components/Prose';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { PropsWithChildren } from 'react';
 
 function getPostBySlug(slug: string) {
   return posts.find((post) => {
@@ -40,12 +42,44 @@ export default async function Page({ params }: PageProps) {
   }
 
   return (
-    <div className="prose lg:prose-lg">
-      <article>
-        <h1>{post.title}</h1>
-        <p>{post.date}</p>
-        <MDXContent code={post.code} />
-      </article>
+    <Prose>
+      <h1>{post.title}</h1>
+      <p>{post.date}</p>
+      <MDXContent
+        code={post.code}
+        components={{
+          Callout,
+          Tweet,
+        }}
+      />
+    </Prose>
+  );
+}
+
+function Callout({ children }: PropsWithChildren) {
+  return (
+    <div
+      style={{
+        padding: '1rem',
+        backgroundColor: 'gray.100',
+        borderLeft: '4px solid',
+        borderColor: 'gray.500',
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+function Tweet({ children }: PropsWithChildren) {
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+      }}
+    >
+      {children}
     </div>
   );
 }

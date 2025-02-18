@@ -187,7 +187,7 @@ useMutation({
 
 このパターンは、`useMutation`自体に`onSuccess`コールバックを持たせるよりもほんの少しだけ良いかもしれませんが、少なくとも毎回`useQueryClient`を使ってQueryClientを持ち込む必要がありません。また、デフォルトですべてを無効化することと組み合わせれば、その振る舞いをオプトアプトするよい方法となり得ます。
 
-<aside className="border border-solid border-white p-4">
+<Callout>
 __TypeScriptにおけるmetaオプション__
 
 通常、`mata`は`Record<string, unknown>`として型付けされますが、モジュール拡張でこれを調整することができます。
@@ -204,7 +204,7 @@ declare module '@tanstack/react-query' {
 
 [このドキュメント](https://tanstack.com/query/v5/docs/framework/react/typescript#typing-meta)でより詳しい情報を得ることができます。
 
-</aside>
+</Callout>
 
 ## 待つべきか待たないべきか
 
@@ -253,7 +253,7 @@ useMutation({
 - 最初に、グローバルコールバックが実行されてすべてのクエリーが無効化されますが、`await`も何か`return`もしてないので、"ファイアー・アンド・フォーゲット"の無効化となります。
 - その後すぐローカルコールバックが実行されて、`['labels']`だけを無効化するPromiseを作ります。このPromiseを返すことで、`['labels']`が再取得されるまでミューテーションが保留状態になります。
 
-<aside className="border border-solid border-white p-4">
+<Callout>
 __cancelRefetch__
 
 `invalidateQueries`を実行するのに`cancelRefetch: false`を渡しています。
@@ -263,7 +263,7 @@ __cancelRefetch__
 
 そうしなければ`['labels']`のクエリーに対してもう一度リクエストが行われるでしょう。
 
-</aside>
+</Callout>
 
 ---
 

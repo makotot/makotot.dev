@@ -30,7 +30,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "next.config.mjs",
-    ".velite"
+    ".velite",
+    "styled-system"
   ],
   "exclude": ["node_modules"]
 }
