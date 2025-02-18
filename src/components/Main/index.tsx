@@ -9,9 +9,9 @@ const style = css({
   marginInline: 'auto',
   width: 'full',
   maxWidth: '3xl',
-  padding: 4,
+  padding: '4',
   md: {
     width: '2/3',
-    padding: 8,
+    padding: '8',
   },
 });

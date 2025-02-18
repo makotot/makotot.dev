@@ -11,8 +11,8 @@ export function Logo() {
 
 const style = css({
   display: 'inline-flex',
-  width: '2rem',
-  height: '2rem',
+  width: '8',
+  height: '8',
   alignItems: 'center',
   justifyContent: 'center',
   borderWidth: '1px',

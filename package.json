@@ -29,6 +29,7 @@
     "@eslint/eslintrc": "3.2.0",
     "@eslint/js": "9.20.0",
     "@pandacss/dev": "^0.53.0",
+    "@pandacss/eslint-plugin": "0.2.6",
     "@types/node": "22.13.4",
     "@types/react": "19.0.10",
     "@types/react-dom": "19.0.4",
