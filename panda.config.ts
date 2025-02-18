@@ -4,6 +4,9 @@ import typographyPreset from 'pandacss-preset-typography';
 export default defineConfig({
   presets: [typographyPreset(), '@pandacss/dev/presets'],
 
+  strictPropertyValues: true,
+  strictTokens: true,
+
   // Whether to use css reset
   preflight: true,
 

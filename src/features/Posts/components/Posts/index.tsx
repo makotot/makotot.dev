@@ -30,16 +30,16 @@ const style = sva({
   slots: ['root', 'item', 'time', 'link'],
   base: {
     root: {
-      spaceY: 5,
+      spaceY: '5',
     },
     item: {
       display: 'grid',
       gridTemplateColumns: 'auto 1fr',
-      gap: 6,
+      gap: '6',
     },
     time: {
       fontSize: 'sm',
-      color: 'gray-400',
+      color: 'gray.400',
       whiteSpace: 'nowrap',
     },
     link: {

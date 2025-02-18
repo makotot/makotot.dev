@@ -9,7 +9,13 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.config({
-    extends: ['next/core-web-vitals', 'next/typescript', 'prettier'],
+    ignorePatterns: ['node_modules', '.next', 'styled-system'],
+    extends: [
+      'plugin:@pandacss/recommended',
+      'next/core-web-vitals',
+      'next/typescript',
+      'prettier',
+    ],
   }),
 ];
 

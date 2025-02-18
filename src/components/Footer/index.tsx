@@ -26,17 +26,17 @@ const style = sva({
       marginInline: 'auto',
       width: 'full',
       maxWidth: '3xl',
-      padding: 4,
+      padding: '4',
       md: {
         width: '2/3',
-        padding: 8,
+        padding: '8',
       },
     },
     list: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      gap: 4,
+      gap: '4',
     },
   },
 });
