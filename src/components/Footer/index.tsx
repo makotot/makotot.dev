@@ -23,6 +23,7 @@ const style = sva({
   slots: ['root', 'list'],
   base: {
     root: {
+      marginTop: 'auto',
       marginInline: 'auto',
       width: 'full',
       maxWidth: '3xl',
