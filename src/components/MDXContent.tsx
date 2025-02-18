@@ -12,6 +12,7 @@ interface MDXProps {
   components?: Record<string, React.ComponentType>;
 }
 
+// https://velite.js.org/guide/using-mdx
 export const MDXContent = ({ code, components }: MDXProps) => {
   const Component = useMDXComponent(code);
   return <Component components={{ ...sharedComponents, ...components }} />;

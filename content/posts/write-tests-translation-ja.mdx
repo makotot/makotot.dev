@@ -13,19 +13,19 @@ tags: ['testing']
 
 このブログ記事は、こちらでご覧いただける講演を記事にしたものです:
 
-<div className="flex justify-center">
+<Tweet>
   <iframe
     src="https://www.youtube.com/embed/Fha2bVoC8SE?list=PLV5CVI1eNcJgNqzNwcs4UKrlJdhfDjshf"
     title="Kent C. Dodds – Write tests. Not too many. Mostly integration."
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
     allowFullScreen
   ></iframe>
-</div>
+</Tweet>
 
 少し前に、[Socket.io](https://socket.io)の作者であり[Zeit.co](https://zeit.co)（最近発表された多くの素晴らしいものを生み出している会社）のファウンダーでもある[Guillermo Rauch氏](https://twitter.com/rauchg)が[深いことをツイートしました](https://twitter.com/rauchg/status/807626710350839808)。
 
-<div className="flex justify-center">
-  <blockquote className="twitter-tweet">
+<Tweet>
+  <blockquote>
     <p lang="en" dir="ltr">
       Write tests. Not too many. Mostly integration.
     </p>
@@ -35,7 +35,7 @@ tags: ['testing']
     </a>
   </blockquote>{' '}
   <script async src="https://platform.twitter.com/widgets.js"></script>
-</div>
+</Tweet>
 
 > **_テストを書きましょう。あまり多くなりすぎないように。主に結合テストで。_**
 
@@ -87,8 +87,8 @@ _このようなテストの維持は本当にあなたやあなたのチーム�
 ここで示されていないことは、**ピラミッドの上へ向かうほど各テスト形態の信頼指数が高まる**ということです。より多くの利益を得られるのです。
 つまり、E2Eテストは単体テストよりも遅くコストが高いものですが、アプリケーションが意図通りに動作していることに対してより大きな信頼をもたらします。
 
-<div className="flex justify-center">
-  <blockquote className="twitter-tweet">
+<Tweet>
+  <blockquote>
     <p lang="en" dir="ltr">
       The TestPyramid blog post by{' '}
       <a href="https://twitter.com/martinfowler?ref_src=twsrc%5Etfw">
@@ -109,12 +109,12 @@ _このようなテストの維持は本当にあなたやあなたのチーム�
     </a>
   </blockquote>{' '}
   <script async src="https://platform.twitter.com/widgets.js"></script>
-</div>
+</Tweet>
 
 上記の通り、我々のツールはマーティン・ファウラー氏によるテストピラミッドのコンセプトの想定を超えたものになっています。”テストトロフィー”を作った理由がここにあります 🏆。
 
-<div className="flex justify-center">
-  <blockquote className="twitter-tweet">
+<Tweet>
+  <blockquote>
     <p lang="en" dir="ltr">
       &quot;The Testing Trophy&quot; 🏆
       <br />
@@ -139,12 +139,12 @@ _このようなテストの維持は本当にあなたやあなたのチーム�
     </a>
   </blockquote>{' '}
   <script async src="https://platform.twitter.com/widgets.js"></script>
-</div>
+</Tweet>
 
 こちらは、結合テストの重要性をユーモラスに説明したものです。
 
-<div className="flex justify-center">
-  <blockquote className="twitter-tweet">
+<Tweet>
+  <blockquote>
     <p lang="en" dir="ltr">
       expect(umbrellaOpens).toBe(true)
       <br />
@@ -161,7 +161,7 @@ _このようなテストの維持は本当にあなたやあなたのチーム�
     </a>
   </blockquote>{' '}
   <script async src="https://platform.twitter.com/widgets.js"></script>
-</div>
+</Tweet>
 
 コンポーネント`<B />`にprop`e`が渡らずに壊れる場合には、コンポーネント`<A />`が`c`と`d`のpropsを受け取るコンポーネント`<B />`をレンダリングするかどうかは問題ではありません。
 そのため、これらの部品が独立して機能することを検証する単体テストを幾らか持つことは悪いことではないですが、_それらが適切に連携して機能すること**も**検証しないとあまり意味がありません_。
@@ -170,13 +170,13 @@ _このようなテストの維持は本当にあなたやあなたのチーム�
 **結合テストは、信頼性とスピード/費用とのトレードオフの間で素晴らしいバランスが保たれます。**
 そのため、_ほとんど_（全てではないけども）の労力をここに費やすことをお勧めします。
 
-<div className="border border-solid border-white p-2">
+<Callout>
   これに関して詳しくは[Testing Implementation
   Details](https://kentcdodds.com/blog/testing-implementation-details)を読んでください。
   テストの形態について詳しくは、[Static vs Unit vs Integration vs E2E Testing
   for Frontend
   Apps](https://kentcdodds.com/blog/static-vs-unit-vs-integration-vs-e2e-tests)を読んでください。
-</div>
+</Callout>
 
 ## より多くの結合テストを書く方法
 
