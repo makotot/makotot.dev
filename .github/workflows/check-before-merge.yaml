@@ -22,3 +22,5 @@ jobs:
         run: npm run lint
       - name: Type check
         run: npm run tsc
+      - name: Test
+        run: npm run test
