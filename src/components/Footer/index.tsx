@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { SiBluesky, SiGithub } from 'react-icons/si';
+import { SiBluesky, SiGithub, SiZenn } from 'react-icons/si';
 import { sva } from 'styled-system/css';
 
 export function Footer() {
@@ -8,11 +8,17 @@ export function Footer() {
   return (
     <footer className={styles.root}>
       <div className={styles.list}>
-        <Link href="https://github.com/makotot/makotot.dev">
-          <SiGithub size={20} aria-label="GitHub" />
+        <Link href="https://github.com/makotot/makotot.dev" aria-label="GitHub">
+          <SiGithub size={20} aria-hidden />
         </Link>
-        <Link href="https://bsky.app/profile/makotottn.bsky.social">
-          <SiBluesky size={20} aria-label="BlueSky" />
+        <Link
+          href="https://bsky.app/profile/makotottn.bsky.social"
+          aria-label="BlueSky"
+        >
+          <SiBluesky size={20} aria-hidden />
+        </Link>
+        <Link href="https://zenn.dev/makotot" aria-label="Zenn">
+          <SiZenn size={20} aria-hidden />
         </Link>
       </div>
     </footer>
