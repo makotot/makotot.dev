@@ -5,12 +5,7 @@ import {
   transformerNotationFocus,
   transformerNotationHighlight,
 } from '@shikijs/transformers';
-
-const dateFormat = new Intl.DateTimeFormat('en', {
-  year: 'numeric',
-  month: 'short',
-  day: '2-digit',
-});
+import { dateShort } from '@/features/Posts/formatter/dateShort';
 
 export default defineConfig({
   collections: {
@@ -28,7 +23,7 @@ export default defineConfig({
         })
         .transform((post) => ({
           ...post,
-          date: dateFormat.format(new Date(post.date)),
+          date: dateShort(post.date),
         })),
     },
   },
