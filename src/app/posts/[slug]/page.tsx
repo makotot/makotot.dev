@@ -1,6 +1,7 @@
 import { posts } from '#site/content';
 import { MDXContent } from '@/components/MDXContent';
 import { Prose } from '@/components/Prose';
+import { Heading } from '@/features/Posts/components/Post/Heading';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { PropsWithChildren } from 'react';
@@ -43,7 +44,7 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <Prose>
-      <h1>{post.title}</h1>
+      <Heading>{post.title}</Heading>
       <p>{post.date}</p>
       <MDXContent
         code={post.code}

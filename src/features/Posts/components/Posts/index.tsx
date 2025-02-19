@@ -43,6 +43,7 @@ const style = sva({
       whiteSpace: 'nowrap',
     },
     link: {
+      textWrapStyle: 'pretty',
       _hover: {
         textDecoration: 'underline',
       },
