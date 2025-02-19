@@ -14,7 +14,8 @@
     "lint": "next lint",
     "tsc": "tsc",
     "format:check": "prettier --check .",
-    "format:write": "prettier --write ."
+    "format:write": "prettier --write .",
+    "test": "vitest run"
   },
   "dependencies": {
     "@shikijs/rehype": "3.0.0",
@@ -41,7 +42,8 @@
     "postcss": "8.5.2",
     "prettier": "3.5.1",
     "typescript": "5.7.3",
-    "velite": "0.2.2"
+    "velite": "0.2.2",
+    "vitest": "3.0.6"
   },
   "volta": {
     "node": "22.14.0"
