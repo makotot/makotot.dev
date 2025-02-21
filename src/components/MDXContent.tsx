@@ -2,10 +2,10 @@ import * as runtime from 'react/jsx-runtime';
 
 const sharedComponents = {};
 
-const useMDXComponent = (code: string) => {
+function useMDXComponent(code: string) {
   const fn = new Function(code);
   return fn({ ...runtime }).default;
-};
+}
 
 interface MDXProps {
   code: string;
@@ -13,7 +13,7 @@ interface MDXProps {
 }
 
 // https://velite.js.org/guide/using-mdx
-export const MDXContent = ({ code, components }: MDXProps) => {
+export function MDXContent({ code, components }: MDXProps) {
   const Component = useMDXComponent(code);
   return <Component components={{ ...sharedComponents, ...components }} />;
-};
+}

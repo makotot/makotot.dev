@@ -16,6 +16,9 @@ const eslintConfig = [
       'next/typescript',
       'prettier',
     ],
+    rules: {
+      'func-style': ['error', 'declaration'],
+    },
   }),
 ];
 
