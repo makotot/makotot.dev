@@ -41,7 +41,7 @@
     "npm-run-all2": "7.0.2",
     "pandacss-preset-typography": "0.1.6",
     "postcss": "8.5.3",
-    "prettier": "3.5.1",
+    "prettier": "3.5.2",
     "typescript": "5.7.3",
     "velite": "0.2.2",
     "vitest": "3.0.6"
