@@ -1,8 +1,8 @@
 import { type Post } from '#site/content';
-import { MDXContent } from '@/components/MDXContent';
-import { Prose } from '@/components/Prose';
-import { Heading } from '@/features/Posts/components/Post/Heading';
-import { dateISO8601 } from '@/features/Posts/formatter/dateISO8601';
+import { MDXContent } from '@/src/components/MDXContent';
+import { Prose } from '@/src/components/Prose';
+import { Heading } from '@/src/features/Posts/components/Post/Heading';
+import { dateISO8601 } from '@/src/features/Posts/formatter/dateISO8601';
 import { PropsWithChildren } from 'react';
 
 type Props = {

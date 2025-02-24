@@ -5,7 +5,7 @@ import {
   transformerNotationFocus,
   transformerNotationHighlight,
 } from '@shikijs/transformers';
-import { dateShort } from '@/features/Posts/formatter/dateShort';
+import { dateShort } from '@/src/features/Posts/formatter/dateShort';
 
 export default defineConfig({
   collections: {

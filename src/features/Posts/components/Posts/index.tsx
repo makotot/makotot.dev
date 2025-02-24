@@ -1,6 +1,6 @@
 import { posts } from '#site/content';
 import Link from 'next/link';
-import { sva } from 'styled-system/css';
+import { sva } from '@/styled-system/css';
 import { dateISO8601 } from '../../formatter/dateISO8601';
 import { ExternalPost } from '../../types';
 
