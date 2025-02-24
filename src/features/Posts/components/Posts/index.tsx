@@ -59,7 +59,7 @@ const style = sva({
     },
     time: {
       fontSize: 'sm',
-      color: 'gray.400',
+      color: 'gray.500',
       whiteSpace: 'nowrap',
     },
     link: {
