@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import { css } from 'styled-system/css';
+import { css } from '@/styled-system/css';
 
 export function Main(props: PropsWithChildren) {
   return <main className={style}>{props.children}</main>;

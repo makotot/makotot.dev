@@ -8,5 +8,14 @@ const config: StorybookConfig = {
     options: {},
   },
   staticDirs: ['../public'],
+  webpackFinal: async (config) => {
+    if (config.resolve) {
+      config.resolve.alias = {
+        ...config.resolve?.alias,
+        '@': require('path').resolve(__dirname, '../'),
+      };
+    }
+    return config;
+  },
 };
 export default config;

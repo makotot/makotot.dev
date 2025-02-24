@@ -1,6 +1,6 @@
-import { Posts } from '@/features/Posts/components/Posts';
-import { dateShort } from '@/features/Posts/formatter/dateShort';
-import { ExternalPost } from '@/features/Posts/types';
+import { Posts } from '@/src/features/Posts/components/Posts';
+import { dateShort } from '@/src/features/Posts/formatter/dateShort';
+import { ExternalPost } from '@/src/features/Posts/types';
 import RssParser from 'rss-parser';
 
 export default async function Page() {

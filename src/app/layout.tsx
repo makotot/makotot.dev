@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { Header } from '@/components/Header';
-import { Footer } from '@/components/Footer';
-import { Main } from '@/components/Main';
+import { Header } from '@/src/components/Header';
+import { Footer } from '@/src/components/Footer';
+import { Main } from '@/src/components/Main';
 
 export const metadata: Metadata = {
   title: 'makotot.dev',

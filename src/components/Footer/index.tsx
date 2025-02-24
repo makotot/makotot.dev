@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { SiBluesky, SiGithub, SiZenn } from 'react-icons/si';
-import { sva } from 'styled-system/css';
+import { sva } from '@/styled-system/css';
 
 export function Footer() {
   const styles = style();

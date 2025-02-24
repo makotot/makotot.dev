@@ -1,5 +1,5 @@
 import { posts } from '#site/content';
-import { Post } from '@/features/Posts/components/Post';
+import { Post } from '@/src/features/Posts/components/Post';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
