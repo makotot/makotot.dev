@@ -12,6 +12,7 @@ const eslintConfig = [
     ignorePatterns: ['node_modules', '.next', 'styled-system'],
     extends: [
       'plugin:@pandacss/recommended',
+      'plugin:storybook/recommended',
       'next/core-web-vitals',
       'next/typescript',
       'prettier',
