@@ -13,6 +13,7 @@ const eslintConfig = [
     extends: [
       'plugin:@pandacss/recommended',
       'plugin:storybook/recommended',
+      'plugin:@vitest/legacy-recommended',
       'next/core-web-vitals',
       'next/typescript',
       'prettier',
