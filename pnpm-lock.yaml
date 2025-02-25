@@ -81,6 +81,9 @@ importers:
       '@types/react-dom':
         specifier: 19.0.4
         version: 19.0.4(@types/react@19.0.10)
+      '@vitest/eslint-plugin':
+        specifier: 1.1.32
+        version: 1.1.32(eslint@9.21.0(jiti@1.21.7))(typescript@5.7.3)(vitest@3.0.7(@types/debug@4.1.12)(@types/node@22.13.5)(jiti@1.21.7)(lightningcss@1.25.1)(terser@5.37.0)(yaml@2.7.0))
       concurrently:
         specifier: 9.1.2
         version: 9.1.2
@@ -2176,6 +2179,18 @@ packages:
 
   '@ungap/structured-clone@1.3.0':
     resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
+
+  '@vitest/eslint-plugin@1.1.32':
+    resolution: {integrity: sha512-peq6IcFL4RdTrDRom9lm1Y29xnQEqYj0OXZLmnOqk8j0XHSGv8/0EsFf4kq+//I//mzkDM4qTw+iShIzXUw/zw==}
+    peerDependencies:
+      eslint: '>= 8.57.0'
+      typescript: '>= 5.0.0'
+      vitest: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+      vitest:
+        optional: true
 
   '@vitest/expect@2.0.5':
     resolution: {integrity: sha512-yHZtwuP7JZivj65Gxoi8upUN2OzHTi3zVfjwdpu2WrvCZPLwsJ2Ey5ILIPccoW23dd/zQBlJ4/dhi7DWNyXCpA==}
@@ -9185,6 +9200,13 @@ snapshots:
       eslint-visitor-keys: 4.2.0
 
   '@ungap/structured-clone@1.3.0': {}
+
+  '@vitest/eslint-plugin@1.1.32(eslint@9.21.0(jiti@1.21.7))(typescript@5.7.3)(vitest@3.0.7(@types/debug@4.1.12)(@types/node@22.13.5)(jiti@1.21.7)(lightningcss@1.25.1)(terser@5.37.0)(yaml@2.7.0))':
+    dependencies:
+      eslint: 9.21.0(jiti@1.21.7)
+    optionalDependencies:
+      typescript: 5.7.3
+      vitest: 3.0.7(@types/debug@4.1.12)(@types/node@22.13.5)(jiti@1.21.7)(lightningcss@1.25.1)(terser@5.37.0)(yaml@2.7.0)
 
   '@vitest/expect@2.0.5':
     dependencies:
