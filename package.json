@@ -59,7 +59,7 @@
     "postcss": "8.5.3",
     "prettier": "3.5.2",
     "storybook": "8.6.2",
-    "typescript": "5.7.3",
+    "typescript": "5.8.2",
     "velite": "0.2.2",
     "vitest": "3.0.7",
     "wait-on": "8.0.2"
