@@ -6,7 +6,7 @@
     "style:generate": "panda codegen",
     "dev:content": "velite --watch",
     "build:content": "velite --clean",
-    "dev:next": "next dev",
+    "dev:next": "next dev --turbopack",
     "build:next": "next build",
     "dev": "pnpm run style:generate && run-p dev:*",
     "build": "pnpm run style:generate && run-s build:*",
