@@ -44,7 +44,7 @@
     "@storybook/react": "8.6.4",
     "@storybook/test": "8.6.4",
     "@storybook/test-runner": "0.22.0",
-    "@types/node": "22.13.9",
+    "@types/node": "22.13.10",
     "@types/react": "19.0.10",
     "@types/react-dom": "19.0.4",
     "@vitest/eslint-plugin": "1.1.36",
