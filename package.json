@@ -62,7 +62,7 @@
     "typescript": "5.8.2",
     "velite": "0.2.2",
     "vitest": "3.0.8",
-    "wait-on": "8.0.2"
+    "wait-on": "8.0.3"
   },
   "volta": {
     "node": "22.14.0"
