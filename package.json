@@ -35,7 +35,7 @@
     "@eslint/js": "9.22.0",
     "@pandacss/dev": "0.53.1",
     "@pandacss/eslint-plugin": "0.2.6",
-    "@playwright/test": "1.51.0",
+    "@playwright/test": "1.51.1",
     "@storybook/addon-essentials": "8.6.6",
     "@storybook/addon-interactions": "8.6.6",
     "@storybook/addon-onboarding": "8.6.6",
