@@ -31,7 +31,7 @@
     "shiki": "3.2.1"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "3.3.0",
+    "@eslint/eslintrc": "3.3.1",
     "@eslint/js": "9.22.0",
     "@pandacss/dev": "0.53.2",
     "@pandacss/eslint-plugin": "0.2.7",
