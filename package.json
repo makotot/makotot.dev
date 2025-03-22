@@ -34,7 +34,7 @@
     "@eslint/eslintrc": "3.3.1",
     "@eslint/js": "9.23.0",
     "@pandacss/dev": "0.53.2",
-    "@pandacss/eslint-plugin": "0.2.7",
+    "@pandacss/eslint-plugin": "0.2.8",
     "@playwright/test": "1.51.1",
     "@storybook/addon-essentials": "8.6.8",
     "@storybook/addon-interactions": "8.6.8",
