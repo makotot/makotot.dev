@@ -23,7 +23,7 @@
   "dependencies": {
     "@shikijs/rehype": "3.2.1",
     "@shikijs/transformers": "3.2.1",
-    "next": "15.2.3",
+    "next": "15.2.4",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-icons": "5.5.0",
@@ -50,7 +50,7 @@
     "@vitest/eslint-plugin": "1.1.38",
     "concurrently": "9.1.2",
     "eslint": "9.23.0",
-    "eslint-config-next": "15.2.3",
+    "eslint-config-next": "15.2.4",
     "eslint-config-prettier": "10.1.1",
     "eslint-plugin-storybook": "0.11.6",
     "http-server": "14.1.1",
