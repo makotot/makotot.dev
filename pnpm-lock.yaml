@@ -49,7 +49,7 @@ importers:
         specifier: 1.51.1
         version: 1.51.1
       '@storybook/addon-a11y':
-        specifier: ^8.6.9
+        specifier: 8.6.9
         version: 8.6.9(storybook@8.6.9(prettier@3.5.3))
       '@storybook/addon-essentials':
         specifier: 8.6.9
