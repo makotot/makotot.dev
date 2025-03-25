@@ -2,11 +2,12 @@ import { Posts } from '@/src/features/Posts/components/Posts';
 import { dateShort } from '@/src/features/Posts/formatter/dateShort';
 import { ExternalPost } from '@/src/features/Posts/types';
 import RssParser from 'rss-parser';
+import { posts } from '#site/content';
 
 export default async function Page() {
   const externalPosts = await getZennPosts();
 
-  return <Posts externalPosts={externalPosts} />;
+  return <Posts posts={getPublishedPosts({ externalPosts })} />;
 }
 
 async function getZennPosts(): Promise<ExternalPost[]> {
@@ -37,4 +38,17 @@ async function getZennPosts(): Promise<ExternalPost[]> {
     );
 
   return result;
+}
+
+function getPublishedPosts({
+  externalPosts,
+}: {
+  externalPosts: ExternalPost[];
+}) {
+  const allPosts = [...externalPosts, ...posts] as const;
+  return allPosts
+    .filter((post) => !post.draft)
+    .sort((a, b) => {
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    });
 }
