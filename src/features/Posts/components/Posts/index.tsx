@@ -1,25 +1,26 @@
-import { posts } from '#site/content';
 import Link from 'next/link';
 import { sva } from '@/styled-system/css';
 import { dateISO8601 } from '../../formatter/dateISO8601';
 import { ExternalPost } from '../../types';
+import { Post } from '../../../../../.velite';
+import { dateShort } from '../../formatter/dateShort';
 
 type Props = {
-  externalPosts: ExternalPost[];
+  posts: (ExternalPost | Post)[];
 };
 
-export function Posts({ externalPosts }: Props) {
+export function Posts({ posts }: Props) {
   const styles = style();
 
   return (
     <ol className={styles.root}>
-      {getPublishedPosts({ externalPosts }).map((post) => (
+      {posts.map((post) => (
         <li key={post.title} className={styles.item}>
           <time className={styles.time} dateTime={dateISO8601(post.date)}>
-            {post.date}
+            {dateShort(post.date)}
           </time>
           <Link href={post.path} className={styles.link}>
-            {post.title}
+            <span>{post.title}</span>
             {'type' in post && post.type === 'zenn' ? (
               <>
                 &nbsp;
@@ -31,19 +32,6 @@ export function Posts({ externalPosts }: Props) {
       ))}
     </ol>
   );
-}
-
-function getPublishedPosts({
-  externalPosts,
-}: {
-  externalPosts: ExternalPost[];
-}) {
-  const allPosts = [...externalPosts, ...posts] as const;
-  return allPosts
-    .filter((post) => !post.draft)
-    .sort((a, b) => {
-      return new Date(b.date).getTime() - new Date(a.date).getTime();
-    });
 }
 
 const style = sva({

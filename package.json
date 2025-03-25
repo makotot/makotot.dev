@@ -36,6 +36,7 @@
     "@pandacss/dev": "0.53.3",
     "@pandacss/eslint-plugin": "0.2.8",
     "@playwright/test": "1.51.1",
+    "@storybook/addon-a11y": "^8.6.9",
     "@storybook/addon-essentials": "8.6.9",
     "@storybook/addon-interactions": "8.6.9",
     "@storybook/addon-onboarding": "8.6.9",

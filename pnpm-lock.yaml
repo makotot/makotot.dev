@@ -48,6 +48,9 @@ importers:
       '@playwright/test':
         specifier: 1.51.1
         version: 1.51.1
+      '@storybook/addon-a11y':
+        specifier: ^8.6.9
+        version: 8.6.9(storybook@8.6.9(prettier@3.5.3))
       '@storybook/addon-essentials':
         specifier: 8.6.9
         version: 8.6.9(@types/react@19.0.12)(storybook@8.6.9(prettier@3.5.3))
@@ -1721,6 +1724,11 @@ packages:
 
   '@sinonjs/fake-timers@10.3.0':
     resolution: {integrity: sha512-V4BG07kuYSUkTCSBHG8G8TNhM+F19jXFWnQtzj+we8DrkpSBCee9Z3Ms8yiGer/dlmhe35/Xdgyo3/0rQKg7YA==}
+
+  '@storybook/addon-a11y@8.6.9':
+    resolution: {integrity: sha512-X5s5RFLORwFjDXcEJitFKar0MMIUgp9JUfcT9VhQfJjnvZf7urf+9M2UGD9TwWAta5EAUBpGDkt9cqDi2UvTxA==}
+    peerDependencies:
+      storybook: ^8.6.9
 
   '@storybook/addon-actions@8.6.9':
     resolution: {integrity: sha512-H2v17sMbSl8jhSulPxcOyChsFbzik9E7mgCWIf4P114KcIUokWLVuALnSOeqHME6lY0pPBZs3DgvVVMVMm7zNw==}
@@ -8433,6 +8441,14 @@ snapshots:
   '@sinonjs/fake-timers@10.3.0':
     dependencies:
       '@sinonjs/commons': 3.0.1
+
+  '@storybook/addon-a11y@8.6.9(storybook@8.6.9(prettier@3.5.3))':
+    dependencies:
+      '@storybook/addon-highlight': 8.6.9(storybook@8.6.9(prettier@3.5.3))
+      '@storybook/global': 5.0.0
+      '@storybook/test': 8.6.9(storybook@8.6.9(prettier@3.5.3))
+      axe-core: 4.10.2
+      storybook: 8.6.9(prettier@3.5.3)
 
   '@storybook/addon-actions@8.6.9(storybook@8.6.9(prettier@3.5.3))':
     dependencies:
