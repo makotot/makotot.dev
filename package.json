@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "3.3.1",
-    "@eslint/js": "9.24.0",
+    "@eslint/js": "9.25.0",
     "@pandacss/dev": "0.53.4",
     "@pandacss/eslint-plugin": "0.2.9",
     "@playwright/test": "1.52.0",
@@ -50,7 +50,7 @@
     "@types/react-dom": "19.1.2",
     "@vitest/eslint-plugin": "1.1.43",
     "concurrently": "9.1.2",
-    "eslint": "9.24.0",
+    "eslint": "9.25.0",
     "eslint-config-next": "15.3.1",
     "eslint-config-prettier": "10.1.2",
     "eslint-plugin-storybook": "0.12.0",
