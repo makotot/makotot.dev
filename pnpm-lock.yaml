@@ -73,8 +73,8 @@ importers:
         specifier: 8.6.14
         version: 8.6.14(storybook@8.6.14(prettier@3.5.3))
       '@storybook/test-runner':
-        specifier: 0.22.0
-        version: 0.22.0(@swc/helpers@0.5.15)(@types/node@22.15.30)(storybook@8.6.14(prettier@3.5.3))
+        specifier: 0.22.1
+        version: 0.22.1(@swc/helpers@0.5.15)(@types/node@22.15.30)(storybook@8.6.14(prettier@3.5.3))
       '@types/node':
         specifier: 22.15.30
         version: 22.15.30
@@ -2211,8 +2211,8 @@ packages:
       typescript:
         optional: true
 
-  '@storybook/test-runner@0.22.0':
-    resolution: {integrity: sha512-fKY6MTE/bcvMaulKXy+z0fPmRXJx1REkYMOMcGn8zn6uffyBigGgaVf/sZ+AZfibwvjzg/StWhJ9HvAM8pc14g==}
+  '@storybook/test-runner@0.22.1':
+    resolution: {integrity: sha512-F5omZH0Pj2Y0UXSqShl1RuPrnhLBbb/yPFnZbVWDSPWZHDSX+dfBuu1T2zVfJplNKd04RzJuMbWHPFtZ0mimSw==}
     engines: {node: ^16.10.0 || ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
@@ -2849,9 +2849,6 @@ packages:
   axe-core@4.10.2:
     resolution: {integrity: sha512-RE3mdQ7P3FRSe7eqCWoeQ/Z9QXrtniSjp1wUjt5nRC3WIpz5rSCve6o3fsZ2aCpJtrZjSZgjwXAoTO5k4tEI0w==}
     engines: {node: '>=4'}
-
-  axios@1.7.9:
-    resolution: {integrity: sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==}
 
   axios@1.8.2:
     resolution: {integrity: sha512-ls4GYBm5aig9vWx8AWDSGLpnpDQRtWAfrjU+EuytuODrFBkqesN2RkOQCBzrA1RQNHw1SmRMSDDDSwzNAYQ6Rg==}
@@ -5468,18 +5465,8 @@ packages:
   pkg-types@1.3.1:
     resolution: {integrity: sha512-/Jm5M4RvtBFVkKWRu2BLUTNP8/M2a+UwuAX+ae4770q1qVGtfjG+WTCupoZixokjmHiry8uI+dlY8KXYV5HVVQ==}
 
-  playwright-core@1.50.1:
-    resolution: {integrity: sha512-ra9fsNWayuYumt+NiM069M6OkcRb1FZSK8bgi66AtpFoWkg2+y0bJSNmkFrWhMbEBbVKC/EruAHH3g0zmtwGmQ==}
-    engines: {node: '>=18'}
-    hasBin: true
-
   playwright-core@1.52.0:
     resolution: {integrity: sha512-l2osTgLXSMeuLZOML9qYODUQoPPnUsKsb5/P6LJ2e6uPKXUdPK5WYhN4z03G+YNbWmGDY4YENauNu4ZKczreHg==}
-    engines: {node: '>=18'}
-    hasBin: true
-
-  playwright@1.50.1:
-    resolution: {integrity: sha512-G8rwsOQJ63XG6BbKj2w5rHeavFjy5zynBA9zsJMMtBoe/Uf757oG12NXz6e6OirF7RCrTVAKFXbLmn1RbL7Qaw==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -9354,7 +9341,7 @@ snapshots:
       '@storybook/test': 8.6.14(storybook@8.6.14(prettier@3.5.3))
       typescript: 5.8.3
 
-  '@storybook/test-runner@0.22.0(@swc/helpers@0.5.15)(@types/node@22.15.30)(storybook@8.6.14(prettier@3.5.3))':
+  '@storybook/test-runner@0.22.1(@swc/helpers@0.5.15)(@types/node@22.15.30)(storybook@8.6.14(prettier@3.5.3))':
     dependencies:
       '@babel/core': 7.26.9
       '@babel/generator': 7.26.9
@@ -9374,7 +9361,7 @@ snapshots:
       jest-serializer-html: 7.1.0
       jest-watch-typeahead: 2.2.2(jest@29.7.0(@types/node@22.15.30))
       nyc: 15.1.0
-      playwright: 1.50.1
+      playwright: 1.52.0
       storybook: 8.6.14(prettier@3.5.3)
     transitivePeerDependencies:
       - '@swc/helpers'
@@ -10144,14 +10131,6 @@ snapshots:
       possible-typed-array-names: 1.0.0
 
   axe-core@4.10.2: {}
-
-  axios@1.7.9:
-    dependencies:
-      follow-redirects: 1.15.9
-      form-data: 4.0.2
-      proxy-from-env: 1.1.0
-    transitivePeerDependencies:
-      - debug
 
   axios@1.8.2:
     dependencies:
@@ -12383,7 +12362,7 @@ snapshots:
       jest-process-manager: 0.4.0
       jest-runner: 29.7.0
       nyc: 15.1.0
-      playwright-core: 1.50.1
+      playwright-core: 1.52.0
       rimraf: 3.0.2
       uuid: 8.3.2
     transitivePeerDependencies:
@@ -13576,15 +13555,7 @@ snapshots:
       mlly: 1.7.4
       pathe: 2.0.3
 
-  playwright-core@1.50.1: {}
-
   playwright-core@1.52.0: {}
-
-  playwright@1.50.1:
-    dependencies:
-      playwright-core: 1.50.1
-    optionalDependencies:
-      fsevents: 2.3.2
 
   playwright@1.52.0:
     dependencies:
@@ -15026,7 +14997,7 @@ snapshots:
 
   wait-on@7.2.0:
     dependencies:
-      axios: 1.7.9
+      axios: 1.8.2
       joi: 17.13.3
       lodash: 4.17.21
       minimist: 1.2.8
