@@ -62,7 +62,7 @@
     "storybook": "8.6.14",
     "typescript": "5.8.3",
     "velite": "0.2.4",
-    "vitest": "3.2.2",
+    "vitest": "3.2.3",
     "wait-on": "8.0.3"
   },
   "volta": {
