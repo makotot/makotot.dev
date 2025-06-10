@@ -48,7 +48,7 @@
     "@types/node": "22.15.31",
     "@types/react": "19.1.7",
     "@types/react-dom": "19.1.6",
-    "@vitest/eslint-plugin": "1.2.1",
+    "@vitest/eslint-plugin": "1.2.2",
     "concurrently": "9.1.2",
     "eslint": "9.28.0",
     "eslint-config-next": "15.3.3",
