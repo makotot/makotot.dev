@@ -43,8 +43,8 @@ importers:
         specifier: 0.54.0
         version: 0.54.0(typescript@5.8.3)
       '@pandacss/eslint-plugin':
-        specifier: 0.2.9
-        version: 0.2.9(eslint@9.29.0(jiti@1.21.7))(typescript@5.8.3)
+        specifier: 0.2.11
+        version: 0.2.11(eslint@9.29.0(jiti@1.21.7))(typescript@5.8.3)
       '@playwright/test':
         specifier: 1.53.0
         version: 1.53.0
@@ -1732,8 +1732,8 @@ packages:
     resolution: {integrity: sha512-hzTp60IGcf4cs2cwS6vtCsFvoMJkWKl/y5DO1R5pTYA10k6BqpaMYaIUQXHMSNQRe6IZ5cu95xW7z9R9o0tFTg==}
     hasBin: true
 
-  '@pandacss/eslint-plugin@0.2.9':
-    resolution: {integrity: sha512-0KyxDGsx5yLuqglAEmcKT67JbfhdGS8PVC4lUhnABaIc6Mfgz0g/ZoxXFFDFye7SBr/29MemSmPmvTvH6Th3+A==}
+  '@pandacss/eslint-plugin@0.2.11':
+    resolution: {integrity: sha512-SzhYmwFEgB88UCVgADFrE9Az//1J6B1ZMdjHWCmIEl6O+ZJAChV/WL8XMQdsl9bMm6Gtiw/8vq3n7jkoyAJY4g==}
     peerDependencies:
       eslint: '*'
 
@@ -1748,9 +1748,6 @@ packages:
 
   '@pandacss/generator@0.54.0':
     resolution: {integrity: sha512-0/RKpBMnjm5Qt+LVIaIJpYyww0rlMBOb2B58UDveQqD6eaetpRbQ+FQy/64jKRq0g3yUuCBXRCs99ENzsc6sDw==}
-
-  '@pandacss/is-valid-prop@0.53.3':
-    resolution: {integrity: sha512-7hjfChTQOdfJKp1P4ZSYt/nJyx+1mf+Eqd6fGFdLqR02d7lnnHCc54wl9wRuOEcPKB2wqWaj/25RvDC6JBDymg==}
 
   '@pandacss/is-valid-prop@0.53.7':
     resolution: {integrity: sha512-cJX4ss3ALqlcLsvKygOG1eEIG3kuAv5dld96OXoBFoIXIz2IKLLzZmNnrFpt5Z3TiN/hG/Lj++6fmYPKbGE88w==}
@@ -8526,7 +8523,7 @@ snapshots:
   '@pandacss/core@0.53.3':
     dependencies:
       '@csstools/postcss-cascade-layers': 4.0.6(postcss@8.4.49)
-      '@pandacss/is-valid-prop': 0.53.3
+      '@pandacss/is-valid-prop': 0.53.7
       '@pandacss/logger': 0.53.3
       '@pandacss/shared': 0.53.3
       '@pandacss/token-dictionary': 0.53.3
@@ -8608,13 +8605,13 @@ snapshots:
       - jsdom
       - typescript
 
-  '@pandacss/eslint-plugin@0.2.9(eslint@9.29.0(jiti@1.21.7))(typescript@5.8.3)':
+  '@pandacss/eslint-plugin@0.2.11(eslint@9.29.0(jiti@1.21.7))(typescript@5.8.3)':
     dependencies:
-      '@pandacss/config': 0.53.3
+      '@pandacss/config': 0.53.7
       '@pandacss/generator': 0.53.3
       '@pandacss/node': 0.53.3(typescript@5.8.3)
-      '@pandacss/shared': 0.53.3
-      '@typescript-eslint/utils': 8.22.0(eslint@9.29.0(jiti@1.21.7))(typescript@5.8.3)
+      '@pandacss/shared': 0.53.7
+      '@typescript-eslint/utils': 8.32.1(eslint@9.29.0(jiti@1.21.7))(typescript@5.8.3)
       eslint: 9.29.0(jiti@1.21.7)
       hookable: 5.5.3
       synckit: 0.9.2
@@ -8644,7 +8641,7 @@ snapshots:
   '@pandacss/generator@0.53.3':
     dependencies:
       '@pandacss/core': 0.53.3
-      '@pandacss/is-valid-prop': 0.53.3
+      '@pandacss/is-valid-prop': 0.53.7
       '@pandacss/logger': 0.53.3
       '@pandacss/shared': 0.53.3
       '@pandacss/token-dictionary': 0.53.3
@@ -8668,8 +8665,6 @@ snapshots:
       pluralize: 8.0.0
       postcss: 8.4.49
       ts-pattern: 5.0.8
-
-  '@pandacss/is-valid-prop@0.53.3': {}
 
   '@pandacss/is-valid-prop@0.53.7': {}
 
