@@ -11,7 +11,6 @@ tags: ['textlint']
   - textlintはデフォルトでテキストファイルとマークダウンをサポートしているけど、他のフォーマットのサポートについてはプラグインが必要。
 - プラグインのパッケージ名は`textlint-plugin-<plugin-name>`の形式にする。
 - プロセッサー
-
   - `Processor`は必須。
   - ```ts
     export default {
@@ -67,6 +66,7 @@ tags: ['textlint']
     "plugins": ["plugin-name"]
   }
   ```
+
   - オプションがあるなら
     - ```json
       {

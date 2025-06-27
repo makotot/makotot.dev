@@ -38,7 +38,6 @@ tags: ['css']
       - [var() - CSS: カスケーディングスタイルシート | MDN](https://developer.mozilla.org/ja/docs/Web/CSS/var)
     - ゲームチェンジングとまでは言えないけども、ちょっとした嬉しさがある。
 - スタイルの唯一の源
-
   - 氏が記事の中で1つだけ選ぶとしたら、このTipsをと推している。
   - 特定のコンポーネントの中だけで、ある別のコンポーネント（`TextLink`という`a`要素のコンポーネントだと仮定）のスタイルを変更したい場合、どうするか。
   - ```tsx
@@ -84,6 +83,7 @@ tags: ['css']
       }
     `;
     ```
+
     - `TextLink`コンポーネントの中で`AsideWrapper`コンポーネントを参照して、そこで`TextLink`のスタイルを指定すれば`TextLink`コンポーネントのスタイルは予期しない形で書き換えられることはない。
     - `${AsideWrapper} &`で`TextLink`コンポーネントを子孫セレクターとして指定する形の`AsideWrapper`のセレクターが作れる。
       - `.Aside-Wrapper-def789 .TextLink-abc123`のような形。
