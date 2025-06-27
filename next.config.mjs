@@ -16,6 +16,10 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  experimental: {
+    reactCompiler: true,
+    typedEnv: true,
+  },
 };
 
 export default nextConfig;

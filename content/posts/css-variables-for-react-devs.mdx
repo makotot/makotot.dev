@@ -36,7 +36,6 @@ tags: ['css', 'react']
   - カスタムプロパティーの名前を`--`で始める必要がある。
   - デフォルト値は、`var(--primary-color, blue)`のように第2引数に渡すことができる。
 - Reactでstyled-componentsを使っていたりすると、定数で宣言した値を参照する実装が一般的。
-
   - ```ts
     const COLORS = {
       primary: 'red',
@@ -65,7 +64,6 @@ tags: ['css', 'react']
   - 型安全性という面では劣る部分があるけど、`var`関数で参照するだけで良いということは非常に便利。
 
 - ブレークポイントによる値の切り替えを1箇所に集約できる。JavaScriptだけだと各コンポーネントに切り替えロジックを書かないといけないが、CSSカスタムプロパティーを使うことで1箇所に集約できる。
-
   - ```ts
     const GlobalStyles = createGlobalStyle`
       html {

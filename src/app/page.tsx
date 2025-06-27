@@ -4,6 +4,8 @@ import { ExternalPost } from '@/src/features/Posts/types';
 import RssParser from 'rss-parser';
 import { posts } from '#site/content';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Page() {
   const externalPosts = await getZennPosts();
 
