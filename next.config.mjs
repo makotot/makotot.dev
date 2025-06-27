@@ -19,7 +19,6 @@ const nextConfig = {
   experimental: {
     reactCompiler: true,
     typedEnv: true,
-    typedRoutes: true,
   },
 };
 
