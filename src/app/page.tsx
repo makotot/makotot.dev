@@ -4,8 +4,6 @@ import { ExternalPost } from '@/src/features/Posts/types';
 import RssParser from 'rss-parser';
 import { posts } from '#site/content';
 
-export const dynamic = 'force-dynamic';
-
 export default async function Page() {
   const externalPosts = await getZennPosts();
 
@@ -14,7 +12,6 @@ export default async function Page() {
 
 async function getZennPosts(): Promise<ExternalPost[]> {
   const res = await fetch('https://zenn.dev/makotot/feed', {
-    cache: 'force-cache',
     next: { revalidate: 86400 },
   });
   const text = await res.text();
