@@ -21,14 +21,14 @@
     "test-storybook": "test-storybook"
   },
   "dependencies": {
-    "@shikijs/rehype": "3.7.0",
-    "@shikijs/transformers": "3.7.0",
+    "@shikijs/rehype": "3.8.0",
+    "@shikijs/transformers": "3.8.0",
     "next": "15.3.5",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-icons": "5.5.0",
     "rss-parser": "3.13.0",
-    "shiki": "3.7.0"
+    "shiki": "3.8.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "3.3.1",
