@@ -100,8 +100,8 @@ importers:
         specifier: 15.4.2
         version: 15.4.2(eslint@9.31.0(jiti@1.21.7))(typescript@5.8.3)
       eslint-config-prettier:
-        specifier: 10.1.7
-        version: 10.1.7(eslint@9.31.0(jiti@1.21.7))
+        specifier: 10.1.8
+        version: 10.1.8(eslint@9.31.0(jiti@1.21.7))
       eslint-plugin-storybook:
         specifier: 0.12.0
         version: 0.12.0(eslint@9.31.0(jiti@1.21.7))(typescript@5.8.3)
@@ -3784,9 +3784,8 @@ packages:
       typescript:
         optional: true
 
-  eslint-config-prettier@10.1.7:
-    resolution: {integrity: sha512-xztdELuHs7grBM+qdMUF4M4SjPpeOMN3kx7sGU6ifl5yibck/GRa0+0d+m1lPsGNkd+2bIWh2lUUTzX7MX/obw==}
-    deprecated: This is a malicious version, don't use
+  eslint-config-prettier@10.1.8:
+    resolution: {integrity: sha512-82GZUjRS0p/jganf6q1rEO25VSoHH0hKPCTrgillPjdI/3bgBhAE1QzHrHTizjpRvy6pGAvKjDJtk2pF9NDq8w==}
     hasBin: true
     peerDependencies:
       eslint: '>=7.0.0'
@@ -11406,7 +11405,7 @@ snapshots:
       - eslint-plugin-import-x
       - supports-color
 
-  eslint-config-prettier@10.1.7(eslint@9.31.0(jiti@1.21.7)):
+  eslint-config-prettier@10.1.8(eslint@9.31.0(jiti@1.21.7)):
     dependencies:
       eslint: 9.31.0(jiti@1.21.7)
 
