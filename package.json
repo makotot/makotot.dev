@@ -33,7 +33,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "3.3.1",
     "@eslint/js": "9.34.0",
-    "@pandacss/dev": "0.54.0",
+    "@pandacss/dev": "1.2.0",
     "@pandacss/eslint-plugin": "0.2.12",
     "@playwright/test": "1.55.0",
     "@storybook/addon-a11y": "8.6.14",
