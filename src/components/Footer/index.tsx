@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { SiBluesky, SiGithub, SiZenn } from 'react-icons/si';
+import { SiBluesky, SiGithub, SiZenn, SiX } from 'react-icons/si';
 import { sva } from '@/styled-system/css';
 
 export function Footer() {
@@ -16,6 +16,9 @@ export function Footer() {
           aria-label="BlueSky"
         >
           <SiBluesky size={20} aria-hidden />
+        </Link>
+        <Link href="https://x.com/makototdev" aria-label="X">
+          <SiX size={20} aria-hidden />
         </Link>
         <Link href="https://zenn.dev/makotot" aria-label="Zenn">
           <SiZenn size={20} aria-hidden />
