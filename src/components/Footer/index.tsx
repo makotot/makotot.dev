@@ -8,21 +8,21 @@ export function Footer() {
   return (
     <footer className={styles.root}>
       <div className={styles.list}>
-        <Link href="https://github.com/makotot/makotot.dev" aria-label="GitHub">
+        <a href="https://github.com/makotot/makotot.dev" aria-label="GitHub">
           <SiGithub size={20} aria-hidden />
-        </Link>
-        <Link
+        </a>
+        <a
           href="https://bsky.app/profile/makotottn.bsky.social"
           aria-label="BlueSky"
         >
           <SiBluesky size={20} aria-hidden />
-        </Link>
-        <Link href="https://x.com/makototdev" aria-label="X">
+        </a>
+        <a href="https://x.com/makototdev" aria-label="X">
           <SiX size={20} aria-hidden />
-        </Link>
-        <Link href="https://zenn.dev/makotot" aria-label="Zenn">
+        </a>
+        <a href="https://zenn.dev/makotot" aria-label="Zenn">
           <SiZenn size={20} aria-hidden />
-        </Link>
+        </a>
       </div>
     </footer>
   );
