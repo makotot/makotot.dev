@@ -16,6 +16,7 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  typedRoutes: true,
   experimental: {
     reactCompiler: true,
     typedEnv: true,
