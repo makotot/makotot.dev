@@ -67,7 +67,7 @@
     "wait-on": "8.0.5"
   },
   "volta": {
-    "node": "22.19.0"
+    "node": "22.20.0"
   },
   "eslintConfig": {
     "extends": [
