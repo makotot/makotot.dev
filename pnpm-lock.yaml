@@ -43,8 +43,8 @@ importers:
         specifier: 1.4.1
         version: 1.4.1(typescript@5.9.3)
       '@pandacss/eslint-plugin':
-        specifier: 0.2.12
-        version: 0.2.12(eslint@9.36.0(jiti@1.21.7))(typescript@5.9.3)
+        specifier: 0.2.13
+        version: 0.2.13(eslint@9.36.0(jiti@1.21.7))(typescript@5.9.3)
       '@playwright/test':
         specifier: 1.55.1
         version: 1.55.1
@@ -1267,12 +1267,6 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@eslint-community/eslint-utils@4.7.0':
-    resolution: {integrity: sha512-dyybb3AcajC7uha6CvhdVRJqaKyn7w2YKqKyAN37NKYgZT36w+iRb0Dymmc5qEJ549c/S31cMMSFd75bteCpCw==}
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-    peerDependencies:
-      eslint: ^6.0.0 || ^7.0.0 || >=8.0.0
-
   '@eslint-community/eslint-utils@4.8.0':
     resolution: {integrity: sha512-MJQFqrZgcW0UNYLGOuQpey/oTN59vyWwplvCGZztn1cKz9agZPPYpJB7h2OMmuu7VLqkvEjN8feFZJmxNF9D+Q==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
@@ -1796,8 +1790,8 @@ packages:
     resolution: {integrity: sha512-FG2+UNDziLe3Vb4kerqnGcupgsOjz7uV9GB06wSf0J+TT4z6ysON4UmW4ZS5eqg5R9/7H4EJEvv91wX4CxHPAg==}
     hasBin: true
 
-  '@pandacss/eslint-plugin@0.2.12':
-    resolution: {integrity: sha512-+wnwanzPAJHBjOjBUw/6gKExf1kd5FjHAsdSeCjUl2k1Rg6Tdn/MG1IHWRi3V/46XBXSq7eFv0bJNz5vFRUCXw==}
+  '@pandacss/eslint-plugin@0.2.13':
+    resolution: {integrity: sha512-NuLKfUN0vGGfZ/lq7A+fvqMvV3TDtTt1B/ej9UHe4SU6fxrfwBk2WcY+xLMh9rUCG/V3XYlEfAnAj+p+jPbeGA==}
     peerDependencies:
       eslint: '*'
 
@@ -8139,11 +8133,6 @@ snapshots:
   '@esbuild/win32-x64@0.25.9':
     optional: true
 
-  '@eslint-community/eslint-utils@4.7.0(eslint@9.36.0(jiti@1.21.7))':
-    dependencies:
-      eslint: 9.36.0(jiti@1.21.7)
-      eslint-visitor-keys: 3.4.3
-
   '@eslint-community/eslint-utils@4.8.0(eslint@9.36.0(jiti@1.21.7))':
     dependencies:
       eslint: 9.36.0(jiti@1.21.7)
@@ -8801,7 +8790,7 @@ snapshots:
       - jsdom
       - typescript
 
-  '@pandacss/eslint-plugin@0.2.12(eslint@9.36.0(jiti@1.21.7))(typescript@5.9.3)':
+  '@pandacss/eslint-plugin@0.2.13(eslint@9.36.0(jiti@1.21.7))(typescript@5.9.3)':
     dependencies:
       '@pandacss/config': 0.53.7
       '@pandacss/generator': 0.53.3
@@ -9910,7 +9899,7 @@ snapshots:
       fast-glob: 3.3.3
       is-glob: 4.0.3
       minimatch: 9.0.5
-      semver: 7.7.1
+      semver: 7.7.2
       ts-api-utils: 2.1.0(typescript@5.9.3)
       typescript: 5.9.3
     transitivePeerDependencies:
@@ -9929,7 +9918,7 @@ snapshots:
 
   '@typescript-eslint/utils@8.32.1(eslint@9.36.0(jiti@1.21.7))(typescript@5.9.3)':
     dependencies:
-      '@eslint-community/eslint-utils': 4.7.0(eslint@9.36.0(jiti@1.21.7))
+      '@eslint-community/eslint-utils': 4.8.0(eslint@9.36.0(jiti@1.21.7))
       '@typescript-eslint/scope-manager': 8.32.1
       '@typescript-eslint/types': 8.32.1
       '@typescript-eslint/typescript-estree': 8.32.1(typescript@5.9.3)
