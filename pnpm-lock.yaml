@@ -43,8 +43,8 @@ importers:
         specifier: 1.4.1
         version: 1.4.1(typescript@5.9.3)
       '@pandacss/eslint-plugin':
-        specifier: 0.2.13
-        version: 0.2.13(eslint@9.36.0(jiti@1.21.7))(typescript@5.9.3)
+        specifier: 0.2.14
+        version: 0.2.14(eslint@9.36.0(jiti@1.21.7))(typescript@5.9.3)
       '@playwright/test':
         specifier: 1.55.1
         version: 1.55.1
@@ -1790,8 +1790,8 @@ packages:
     resolution: {integrity: sha512-FG2+UNDziLe3Vb4kerqnGcupgsOjz7uV9GB06wSf0J+TT4z6ysON4UmW4ZS5eqg5R9/7H4EJEvv91wX4CxHPAg==}
     hasBin: true
 
-  '@pandacss/eslint-plugin@0.2.13':
-    resolution: {integrity: sha512-NuLKfUN0vGGfZ/lq7A+fvqMvV3TDtTt1B/ej9UHe4SU6fxrfwBk2WcY+xLMh9rUCG/V3XYlEfAnAj+p+jPbeGA==}
+  '@pandacss/eslint-plugin@0.2.14':
+    resolution: {integrity: sha512-G/6eTsbk0Eqkz5mLispvfowCePNO4vWxuFObsLHB/aTRxA1S+3bvJXmUlUnK9Wi3H6A5qEU+XNrbKfBCo06P1Q==}
     peerDependencies:
       eslint: '*'
 
@@ -8790,7 +8790,7 @@ snapshots:
       - jsdom
       - typescript
 
-  '@pandacss/eslint-plugin@0.2.13(eslint@9.36.0(jiti@1.21.7))(typescript@5.9.3)':
+  '@pandacss/eslint-plugin@0.2.14(eslint@9.36.0(jiti@1.21.7))(typescript@5.9.3)':
     dependencies:
       '@pandacss/config': 0.53.7
       '@pandacss/generator': 0.53.3
