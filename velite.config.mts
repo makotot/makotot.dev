@@ -32,7 +32,7 @@ export default defineConfig({
       [
         rehypeShiki,
         {
-          theme: 'min-dark',
+          theme: 'vesper',
           transformerNotationHighlight,
           transformerNotationFocus,
           transformerMetaHighlight,
