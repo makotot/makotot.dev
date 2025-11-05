@@ -15,5 +15,6 @@ interface MDXProps {
 // https://velite.js.org/guide/using-mdx
 export function MDXContent({ code, components }: MDXProps) {
   const Component = useMDXComponent(code);
+  // eslint-disable-next-line react-hooks/static-components
   return <Component components={{ ...sharedComponents, ...components }} />;
 }

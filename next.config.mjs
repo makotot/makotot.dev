@@ -13,12 +13,8 @@ const nextConfig = {
       fullUrl: true,
     },
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   typedRoutes: true,
   experimental: {
-    reactCompiler: true,
     typedEnv: true,
   },
 };
