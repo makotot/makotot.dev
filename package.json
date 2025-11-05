@@ -11,7 +11,7 @@
     "dev": "pnpm run style:generate && run-p dev:*",
     "build": "pnpm run style:generate && run-s build:*",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "tsc": "tsc",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
