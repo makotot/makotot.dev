@@ -1,9 +1,11 @@
 import { defineConfig, s } from 'velite';
 import rehypeShiki from '@shikijs/rehype';
 import {
-  transformerMetaHighlight,
+  transformerNotationDiff,
   transformerNotationFocus,
   transformerNotationHighlight,
+  transformerNotationErrorLevel,
+  transformerMetaHighlight,
 } from '@shikijs/transformers';
 import { dateShort } from '@/src/features/Posts/formatter/dateShort';
 
@@ -32,10 +34,14 @@ export default defineConfig({
       [
         rehypeShiki,
         {
-          theme: 'min-dark',
-          transformerNotationHighlight,
-          transformerNotationFocus,
-          transformerMetaHighlight,
+          theme: 'vesper',
+          transformers: [
+            transformerNotationDiff({ matchAlgorithm: 'v3' }),
+            transformerNotationHighlight({ matchAlgorithm: 'v3' }),
+            transformerNotationFocus({ matchAlgorithm: 'v3' }),
+            transformerNotationErrorLevel({ matchAlgorithm: 'v3' }),
+            transformerMetaHighlight(),
+          ],
         },
       ],
     ],
