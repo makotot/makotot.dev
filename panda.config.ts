@@ -31,28 +31,6 @@ export default defineConfig({
       minHeight: '100vh',
       flexDirection: 'column',
     },
-
-    // For highlighting code blocks inside prose <START>
-    '.prose pre': {
-      // Ensure preserved newlines don't create extra line boxes
-      lineHeight: '0 !important',
-    },
-    '.prose pre > code': {
-      display: 'block',
-    },
-    '.prose pre > code .line': {
-      display: 'block',
-      marginBlock: '0',
-      paddingBlock: '0',
-
-      // Restore readable line height for actual code lines
-      lineHeight: '1.6',
-    },
-    '.prose pre > code .line.highlighted': {
-      // subtle yellow-ish highlight; adjust as desired
-      background: 'rgba(255, 213, 0, 0.14)',
-    },
-    // For highlighting code blocks inside prose <END>
   },
 
   utilities: {
