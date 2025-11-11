@@ -59,7 +59,7 @@
     "typescript": "5.9.3",
     "velite": "0.3.0",
     "vitest": "4.0.8",
-    "wait-on": "9.0.1",
+    "wait-on": "9.0.3",
     "@storybook/addon-docs": "10.0.6"
   },
   "volta": {
