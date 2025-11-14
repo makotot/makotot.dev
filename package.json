@@ -42,7 +42,7 @@
     "@storybook/test-runner": "0.24.1",
     "@types/node": "24.10.1",
     "@types/react": "19.2.3",
-    "@types/react-dom": "19.2.2",
+    "@types/react-dom": "19.2.3",
     "@vitest/eslint-plugin": "1.4.2",
     "babel-plugin-react-compiler": "19.1.0-rc.3",
     "concurrently": "9.2.1",
@@ -73,7 +73,7 @@
   "pnpm": {
     "overrides": {
       "@types/react": "19.2.3",
-      "@types/react-dom": "19.2.2"
+      "@types/react-dom": "19.2.3"
     }
   }
 }
