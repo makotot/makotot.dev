@@ -58,7 +58,7 @@
     "storybook": "10.0.8",
     "typescript": "5.9.3",
     "velite": "0.3.0",
-    "vitest": "4.0.12",
+    "vitest": "4.0.13",
     "wait-on": "9.0.3",
     "@storybook/addon-docs": "10.0.8"
   },
