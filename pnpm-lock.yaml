@@ -65,8 +65,8 @@ importers:
         specifier: 10.1.0
         version: 10.1.0(@swc/core@1.10.18(@swc/helpers@0.5.15))(esbuild@0.25.9)(next@16.0.5(@babel/core@7.28.5)(@playwright/test@1.57.0)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(storybook@10.1.0(@testing-library/dom@10.4.0)(prettier@3.7.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(type-fest@2.19.0)(typescript@5.9.3)(vite@6.1.1(@types/node@24.10.1)(jiti@1.21.7)(lightningcss@1.25.1)(terser@5.43.1)(yaml@2.7.0))(webpack-hot-middleware@2.26.1)(webpack@5.98.0(@swc/core@1.10.18(@swc/helpers@0.5.15))(esbuild@0.25.9))
       '@storybook/test-runner':
-        specifier: 0.24.1
-        version: 0.24.1(@swc/helpers@0.5.15)(@types/node@24.10.1)(esbuild-register@3.6.0(esbuild@0.25.9))(storybook@10.1.0(@testing-library/dom@10.4.0)(prettier@3.7.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))
+        specifier: 0.24.2
+        version: 0.24.2(@swc/helpers@0.5.15)(@types/node@24.10.1)(esbuild-register@3.6.0(esbuild@0.25.9))(storybook@10.1.0(@testing-library/dom@10.4.0)(prettier@3.7.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))
       '@types/node':
         specifier: 24.10.1
         version: 24.10.1
@@ -2092,8 +2092,8 @@ packages:
       typescript:
         optional: true
 
-  '@storybook/test-runner@0.24.1':
-    resolution: {integrity: sha512-hDBoQz6wJj7CumdfccsVGMYpJ9lfozwMXWd7rvyhy46Mwo6eZnOWv6xNbZRNZeNtZsCFUai6o8K1Ts9Qd+nzQg==}
+  '@storybook/test-runner@0.24.2':
+    resolution: {integrity: sha512-76DbflDTGAKq8Af6uHbWTGnKzKHhjLbJaZXRFhVnKqFocoXcej58C9DpM0BJ3addu7fSDJmPwfR97OINg16XFQ==}
     engines: {node: '>=20.0.0'}
     hasBin: true
     peerDependencies:
@@ -2853,9 +2853,6 @@ packages:
   axe-core@4.10.2:
     resolution: {integrity: sha512-RE3mdQ7P3FRSe7eqCWoeQ/Z9QXrtniSjp1wUjt5nRC3WIpz5rSCve6o3fsZ2aCpJtrZjSZgjwXAoTO5k4tEI0w==}
     engines: {node: '>=4'}
-
-  axios@1.12.2:
-    resolution: {integrity: sha512-vMJzPewAlRyOgxV2dU0Cuz2O8zzzx9VYtbJOaBgXFeLc4IV/Eg50n4LowmehOOR61S8ZMpc2K5Sa7g6A4jfkUw==}
 
   axios@1.13.2:
     resolution: {integrity: sha512-VPk9ebNqPcy5lRGuSlKx752IlDatOjT9paPlm8A7yOuW2Fbvp4X3JznJtT4f0GzGLLiWE9W8onz51SqLYwzGaA==}
@@ -5545,18 +5542,8 @@ packages:
   pkg-types@2.3.0:
     resolution: {integrity: sha512-SIqCzDRg0s9npO5XQ3tNZioRY1uK06lA41ynBC1YmFTmnY6FjUjVt6s4LoADmwoig1qqD0oK8h1p/8mlMx8Oig==}
 
-  playwright-core@1.56.1:
-    resolution: {integrity: sha512-hutraynyn31F+Bifme+Ps9Vq59hKuUCz7H1kDOcBs+2oGguKkWTU50bBWrtz34OUWmIwpBTWDxaRPXrIXkgvmQ==}
-    engines: {node: '>=18'}
-    hasBin: true
-
   playwright-core@1.57.0:
     resolution: {integrity: sha512-agTcKlMw/mjBWOnD6kFZttAAGHgi/Nw0CZ2o6JqWSbMlI219lAFLZZCyqByTsvVAJq5XA5H8cA6PrvBRpBWEuQ==}
-    engines: {node: '>=18'}
-    hasBin: true
-
-  playwright@1.56.1:
-    resolution: {integrity: sha512-aFi5B0WovBHTEvpM3DzXTUaeN6eN0qWnTkKx4NQaH4Wvcmc153PdaY2UBdSYKaGYw+UyWXSVyxDUg5DoPEttjw==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -9394,7 +9381,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@storybook/test-runner@0.24.1(@swc/helpers@0.5.15)(@types/node@24.10.1)(esbuild-register@3.6.0(esbuild@0.25.9))(storybook@10.1.0(@testing-library/dom@10.4.0)(prettier@3.7.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))':
+  '@storybook/test-runner@0.24.2(@swc/helpers@0.5.15)(@types/node@24.10.1)(esbuild-register@3.6.0(esbuild@0.25.9))(storybook@10.1.0(@testing-library/dom@10.4.0)(prettier@3.7.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))':
     dependencies:
       '@babel/core': 7.28.5
       '@babel/generator': 7.28.5
@@ -9413,8 +9400,8 @@ snapshots:
       jest-serializer-html: 7.1.0
       jest-watch-typeahead: 3.0.1(jest@30.2.0(@types/node@24.10.1)(esbuild-register@3.6.0(esbuild@0.25.9)))
       nyc: 15.1.0
-      playwright: 1.56.1
-      playwright-core: 1.56.1
+      playwright: 1.57.0
+      playwright-core: 1.57.0
       rimraf: 3.0.2
       storybook: 10.1.0(@testing-library/dom@10.4.0)(prettier@3.7.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       uuid: 8.3.2
@@ -10293,14 +10280,6 @@ snapshots:
       possible-typed-array-names: 1.0.0
 
   axe-core@4.10.2: {}
-
-  axios@1.12.2:
-    dependencies:
-      follow-redirects: 1.15.9
-      form-data: 4.0.4
-      proxy-from-env: 1.1.0
-    transitivePeerDependencies:
-      - debug
 
   axios@1.13.2:
     dependencies:
@@ -13747,15 +13726,7 @@ snapshots:
       exsolve: 1.0.7
       pathe: 2.0.3
 
-  playwright-core@1.56.1: {}
-
   playwright-core@1.57.0: {}
-
-  playwright@1.56.1:
-    dependencies:
-      playwright-core: 1.56.1
-    optionalDependencies:
-      fsevents: 2.3.2
 
   playwright@1.57.0:
     dependencies:
@@ -15268,7 +15239,7 @@ snapshots:
 
   wait-on@7.2.0:
     dependencies:
-      axios: 1.12.2
+      axios: 1.13.2
       joi: 17.13.3
       lodash: 4.17.21
       minimist: 1.2.8
