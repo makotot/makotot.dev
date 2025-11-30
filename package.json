@@ -34,7 +34,7 @@
     "@eslint/eslintrc": "3.3.1",
     "@eslint/js": "9.39.1",
     "@pandacss/dev": "1.5.1",
-    "@pandacss/eslint-plugin": "0.2.14",
+    "@pandacss/eslint-plugin": "0.3.0",
     "@playwright/test": "1.57.0",
     "@storybook/addon-a11y": "10.1.0",
     "@storybook/addon-onboarding": "10.1.0",
