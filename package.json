@@ -39,7 +39,7 @@
     "@storybook/addon-a11y": "10.1.0",
     "@storybook/addon-onboarding": "10.1.0",
     "@storybook/nextjs": "10.1.0",
-    "@storybook/test-runner": "0.24.1",
+    "@storybook/test-runner": "0.24.2",
     "@types/node": "24.10.1",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
