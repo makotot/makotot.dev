@@ -77,8 +77,8 @@ importers:
         specifier: 19.2.3
         version: 19.2.3(@types/react@19.2.7)
       '@vitest/eslint-plugin':
-        specifier: 1.5.0
-        version: 1.5.0(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3)(vitest@4.0.14(@types/node@24.10.1)(jiti@1.21.7)(lightningcss@1.25.1)(terser@5.43.1)(yaml@2.7.0))
+        specifier: 1.5.1
+        version: 1.5.1(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3)(vitest@4.0.14(@types/node@24.10.1)(jiti@1.21.7)(lightningcss@1.25.1)(terser@5.43.1)(yaml@2.7.0))
       babel-plugin-react-compiler:
         specifier: 19.1.0-rc.3
         version: 19.1.0-rc.3
@@ -2481,8 +2481,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@vitest/eslint-plugin@1.5.0':
-    resolution: {integrity: sha512-j3uuIAPTYWYnSit9lspb08/EKsxEmGqjQf+Wpb1DQkxc+mMkhL58ZknDCgjYhY4Zu76oxZ0hVWTHlmRW0mJq5w==}
+  '@vitest/eslint-plugin@1.5.1':
+    resolution: {integrity: sha512-t49CNERe/YadnLn90NTTKJLKzs99xBkXElcoUTLodG6j1G0Q7jy3mXqqiHd3N5aryG2KkgOg4UAoGwgwSrZqKQ==}
     engines: {node: '>=18'}
     peerDependencies:
       eslint: '>=8.57.0'
@@ -9753,7 +9753,7 @@ snapshots:
   '@unrs/resolver-binding-win32-x64-msvc@1.11.1':
     optional: true
 
-  '@vitest/eslint-plugin@1.5.0(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3)(vitest@4.0.14(@types/node@24.10.1)(jiti@1.21.7)(lightningcss@1.25.1)(terser@5.43.1)(yaml@2.7.0))':
+  '@vitest/eslint-plugin@1.5.1(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3)(vitest@4.0.14(@types/node@24.10.1)(jiti@1.21.7)(lightningcss@1.25.1)(terser@5.43.1)(yaml@2.7.0))':
     dependencies:
       '@typescript-eslint/scope-manager': 8.46.3
       '@typescript-eslint/utils': 8.46.3(eslint@9.39.1(jiti@1.21.7))(typescript@5.9.3)
