@@ -40,7 +40,7 @@
     "@storybook/addon-onboarding": "10.1.4",
     "@storybook/nextjs": "10.1.4",
     "@storybook/test-runner": "0.24.2",
-    "@types/node": "24.10.1",
+    "@types/node": "24.10.2",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
     "@vitest/eslint-plugin": "1.5.2",
