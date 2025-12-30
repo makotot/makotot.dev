@@ -31,6 +31,7 @@ const nextConfig = {
               "img-src 'self' data: https:",
               "font-src 'self' data:",
               "connect-src 'self' https://zenn.dev",
+              "frame-src 'self' https://www.youtube.com",
               "frame-ancestors 'none'",
               "base-uri 'self'",
               "form-action 'self'",
