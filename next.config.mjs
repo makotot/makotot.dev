@@ -28,7 +28,7 @@ const nextConfig = {
               "default-src 'self'",
               "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
               "style-src 'self' 'unsafe-inline'",
-              "img-src 'self' data: https:",
+              "img-src 'self' data:",
               "font-src 'self' data:",
               "connect-src 'self' https://zenn.dev",
               "frame-src 'self' https://www.youtube.com",
