@@ -7,6 +7,14 @@ import { Main } from '@/src/components/Main';
 export const metadata: Metadata = {
   title: 'makotot.dev',
   description: '',
+  openGraph: {
+    title: 'makotot.dev',
+    description: '',
+    url: 'https://makotot.dev',
+    siteName: 'makotot.dev',
+    locale: 'ja_JP',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({

@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { SiBluesky, SiGithub, SiZenn, SiX } from 'react-icons/si';
 import { sva } from '@/styled-system/css';
 
