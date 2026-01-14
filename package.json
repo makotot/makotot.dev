@@ -63,7 +63,7 @@
     "@storybook/addon-docs": "10.1.11"
   },
   "volta": {
-    "node": "24.12.0"
+    "node": "24.13.0"
   },
   "pnpm": {
     "overrides": {
