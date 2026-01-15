@@ -62,9 +62,6 @@
     "wait-on": "9.0.3",
     "@storybook/addon-docs": "10.1.11"
   },
-  "volta": {
-    "node": "24.13.0"
-  },
   "pnpm": {
     "overrides": {
       "@types/react": "19.2.8",
