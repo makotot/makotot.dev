@@ -25,6 +25,7 @@
     "@shikijs/transformers": "3.21.0",
     "next": "16.1.1",
     "react": "19.2.3",
+    "react-aria-components": "1.14.0",
     "react-dom": "19.2.3",
     "react-icons": "5.5.0",
     "rss-parser": "3.13.0",
@@ -37,6 +38,7 @@
     "@pandacss/eslint-plugin": "0.3.0",
     "@playwright/test": "1.57.0",
     "@storybook/addon-a11y": "10.1.11",
+    "@storybook/addon-docs": "10.1.11",
     "@storybook/addon-onboarding": "10.1.11",
     "@storybook/nextjs": "10.1.11",
     "@storybook/test-runner": "0.24.2",
@@ -59,8 +61,7 @@
     "typescript": "5.9.3",
     "velite": "0.3.1",
     "vitest": "4.0.17",
-    "wait-on": "9.0.3",
-    "@storybook/addon-docs": "10.1.11"
+    "wait-on": "9.0.3"
   },
   "pnpm": {
     "overrides": {
