@@ -1,33 +1,37 @@
 import { SiBluesky, SiGithub, SiZenn, SiX } from 'react-icons/si';
 import { sva } from '@/styled-system/css';
+import { SocialLink } from '@/src/components/SocialLink';
 
 export function Footer() {
-  const styles = style();
-
   return (
     <footer className={styles.root}>
       <div className={styles.list}>
-        <a href="https://github.com/makotot/makotot.dev" aria-label="GitHub">
-          <SiGithub size={20} aria-hidden />
-        </a>
-        <a
+        <SocialLink
+          href="https://github.com/makotot/makotot.dev"
+          label="GitHub"
+          icon={<SiGithub size={20} aria-hidden />}
+        />
+        <SocialLink
           href="https://bsky.app/profile/makotottn.bsky.social"
-          aria-label="BlueSky"
-        >
-          <SiBluesky size={20} aria-hidden />
-        </a>
-        <a href="https://x.com/makototdev" aria-label="X">
-          <SiX size={20} aria-hidden />
-        </a>
-        <a href="https://zenn.dev/makotot" aria-label="Zenn">
-          <SiZenn size={20} aria-hidden />
-        </a>
+          label="BlueSky"
+          icon={<SiBluesky size={20} aria-hidden />}
+        />
+        <SocialLink
+          href="https://x.com/makototdev"
+          label="X"
+          icon={<SiX size={20} aria-hidden />}
+        />
+        <SocialLink
+          href="https://zenn.dev/makotot"
+          label="Zenn"
+          icon={<SiZenn size={20} aria-hidden />}
+        />
       </div>
     </footer>
   );
 }
 
-const style = sva({
+const styles = sva({
   slots: ['root', 'list'],
   base: {
     root: {
@@ -48,4 +52,4 @@ const style = sva({
       gap: '4',
     },
   },
-});
+})();
