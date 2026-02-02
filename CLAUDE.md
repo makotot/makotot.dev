@@ -18,6 +18,7 @@ pnpm test-storybook   # Run Storybook tests
 ## Architecture
 
 ### Tech Stack
+
 - **Next.js 16** with App Router and Turbopack
 - **Velite** for MDX content management (compiles posts from `/content/posts` to `.velite`)
 - **Panda CSS** for styling (generates utilities to `/styled-system`)
@@ -47,6 +48,7 @@ pnpm test-storybook   # Run Storybook tests
 ### Styling Patterns
 
 Two Panda CSS APIs used:
+
 - `css()` - Atomic utility API for element-specific styles
 - `sva()` - Slot variant API for component composition (see `Posts` component)
 
