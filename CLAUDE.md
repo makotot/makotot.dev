@@ -60,6 +60,30 @@ MDX posts support custom components: `<Callout>` and `<Tweet>`
 - `panda.config.ts` - CSS configuration with typography preset
 - `next.config.mjs` - Auto-triggers Velite build, enables typedRoutes
 
+### Testing
+
+**Framework**: Vitest + @storybook/addon-vitest + Playwright
+
+**Test Types**:
+
+- **Unit tests** (`*.test.ts`): Pure logic tests using Vitest
+- **Component tests** (`*.stories.tsx`): Storybook stories run as browser tests via addon-vitest
+
+**Commands**:
+
+- `pnpm test` - Run all Vitest tests (unit + storybook)
+- `pnpm test-storybook` - Run only Storybook component tests
+
+**Configuration**:
+
+- `vitest.config.ts` - Main config with storybook project using Playwright browser
+- `.storybook/vitest.setup.ts` - Setup file for Storybook tests (a11y annotations)
+
+**Test Location**:
+
+- Co-locate tests with source: `src/features/Posts/formatter/dateShort/index.test.ts`
+- Co-locate stories with components: `src/components/Header/index.stories.tsx`
+
 ### Conventions
 
 - Feature-first architecture: features contain related components, types, formatters

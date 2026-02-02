@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path | select(endswith(\".mjs\") or endswith(\".md\") or endswith(\".ts\") or endswith(\".json\") or endswith(\".tsx\") or endswith(\".yaml\"))' | xargs -r npx prettier --write"
+          }
+        ]
+      }
+    ]
+  }
+}
