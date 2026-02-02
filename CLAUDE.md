@@ -10,9 +10,9 @@ pnpm build            # Production build (Panda codegen + Velite + Next.js)
 pnpm lint             # ESLint
 pnpm format:check     # Prettier check
 pnpm format:write     # Prettier write
-pnpm test             # Vitest unit tests
+pnpm test:unit        # Vitest unit tests
+pnpm test:storybook   # Storybook component tests (requires Playwright)
 pnpm storybook        # Component development UI (port 6006)
-pnpm test-storybook   # Run Storybook tests
 ```
 
 ## Architecture
@@ -71,8 +71,8 @@ MDX posts support custom components: `<Callout>` and `<Tweet>`
 
 **Commands**:
 
-- `pnpm test` - Run all Vitest tests (unit + storybook)
-- `pnpm test-storybook` - Run only Storybook component tests
+- `pnpm test:unit` - Run unit tests (no browser required)
+- `pnpm test:storybook` - Run Storybook component tests (requires Playwright browsers)
 
 **Configuration**:
 

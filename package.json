@@ -15,10 +15,10 @@
     "tsc": "tsc",
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
-    "test": "vitest run",
+    "test:unit": "vitest run --project=unit",
+    "test:storybook": "vitest run --project=storybook",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "test-storybook": "vitest run --project=storybook"
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@shikijs/rehype": "3.22.0",
@@ -36,11 +36,11 @@
     "@eslint/js": "9.39.2",
     "@pandacss/dev": "1.8.1",
     "@pandacss/eslint-plugin": "0.3.0",
-    "@storybook/addon-vitest": "10.2.0",
-    "@storybook/nextjs-vite": "10.1.11",
     "@storybook/addon-a11y": "10.2.3",
     "@storybook/addon-docs": "10.2.3",
     "@storybook/addon-onboarding": "10.2.3",
+    "@storybook/addon-vitest": "10.2.3",
+    "@storybook/nextjs-vite": "10.2.3",
     "@types/node": "24.10.9",
     "@types/react": "19.2.10",
     "@types/react-dom": "19.2.3",
