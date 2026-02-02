@@ -43,7 +43,7 @@
     "@storybook/nextjs": "10.2.0",
     "@storybook/test-runner": "0.24.2",
     "@types/node": "24.10.9",
-    "@types/react": "19.2.9",
+    "@types/react": "19.2.10",
     "@types/react-dom": "19.2.3",
     "@vitest/eslint-plugin": "1.6.6",
     "babel-plugin-react-compiler": "19.1.0-rc.3",
@@ -65,7 +65,7 @@
   },
   "pnpm": {
     "overrides": {
-      "@types/react": "19.2.9",
+      "@types/react": "19.2.10",
       "@types/react-dom": "19.2.3"
     }
   }
