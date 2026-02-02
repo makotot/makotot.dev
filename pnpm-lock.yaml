@@ -107,7 +107,7 @@ importers:
         specifier: 0.1.6
         version: 0.1.6(@pandacss/dev@1.8.1(hono@4.11.7)(typescript@5.9.3))
       playwright:
-        specifier: ^1.58.1
+        specifier: 1.58.1
         version: 1.58.1
       postcss:
         specifier: 8.5.6
