@@ -16,7 +16,9 @@
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
     "test:unit": "vitest run --project=unit",
+    "test:unit:coverage": "vitest run --project=unit --coverage",
     "test:storybook": "vitest run --project=storybook",
+    "test:storybook:coverage": "vitest run --project=storybook --coverage",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
