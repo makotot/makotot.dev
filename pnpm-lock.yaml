@@ -50,8 +50,8 @@ importers:
         specifier: 1.8.2
         version: 1.8.2(hono@4.11.7)(typescript@5.9.3)
       '@pandacss/eslint-plugin':
-        specifier: 0.3.0
-        version: 0.3.0(eslint@9.39.2(jiti@1.21.7))(typescript@5.9.3)
+        specifier: 0.3.1
+        version: 0.3.1(eslint@9.39.2(jiti@1.21.7))(typescript@5.9.3)
       '@storybook/addon-a11y':
         specifier: 10.2.8
         version: 10.2.8(storybook@10.2.8(@testing-library/dom@10.4.1)(prettier@3.8.1)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))
@@ -961,8 +961,8 @@ packages:
     resolution: {integrity: sha512-M7R9MVWuJG+ffos/yM2tzanTNRWso2/jq27kaqe4tUATRNyqfC/bIpBso1iqcYTL5lmQU90uV6xPpNIqx4F34Q==}
     hasBin: true
 
-  '@pandacss/eslint-plugin@0.3.0':
-    resolution: {integrity: sha512-WTf3S7SKm3pCw4Z0CVyOZF9cnUjUDnktmaGgwmDpVBKTMbJwc2t9wffx/PF0coKyCqGeN+fwalLWRoWnUqkQFg==}
+  '@pandacss/eslint-plugin@0.3.1':
+    resolution: {integrity: sha512-JCGHl+ly6SXt3hKPjozRfkQLP1/CsBoHwXhkeQkvlg+lLEwiGIPJdXlRBdeOYFJjtYndgUUmLAuLT5Y7WLsVyQ==}
     peerDependencies:
       eslint: '*'
 
@@ -6074,13 +6074,13 @@ snapshots:
       - supports-color
       - typescript
 
-  '@pandacss/eslint-plugin@0.3.0(eslint@9.39.2(jiti@1.21.7))(typescript@5.9.3)':
+  '@pandacss/eslint-plugin@0.3.1(eslint@9.39.2(jiti@1.21.7))(typescript@5.9.3)':
     dependencies:
       '@pandacss/config': 0.53.7
       '@pandacss/generator': 0.53.7
       '@pandacss/node': 0.53.7(typescript@5.9.3)
       '@pandacss/shared': 0.53.7
-      '@typescript-eslint/utils': 8.54.0(eslint@9.39.2(jiti@1.21.7))(typescript@5.9.3)
+      '@typescript-eslint/utils': 8.55.0(eslint@9.39.2(jiti@1.21.7))(typescript@5.9.3)
       eslint: 9.39.2(jiti@1.21.7)
       hookable: 5.5.3
       micromatch: 4.0.8
@@ -7807,8 +7807,8 @@ snapshots:
 
   '@typescript-eslint/project-service@8.54.0(typescript@5.9.3)':
     dependencies:
-      '@typescript-eslint/tsconfig-utils': 8.54.0(typescript@5.9.3)
-      '@typescript-eslint/types': 8.54.0
+      '@typescript-eslint/tsconfig-utils': 8.55.0(typescript@5.9.3)
+      '@typescript-eslint/types': 8.55.0
       debug: 4.4.3
       typescript: 5.9.3
     transitivePeerDependencies:
