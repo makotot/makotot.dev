@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "3.3.3",
-    "@eslint/js": "9.39.3",
+    "@eslint/js": "10.0.1",
     "@pandacss/dev": "1.8.2",
     "@pandacss/eslint-plugin": "0.3.1",
     "@storybook/addon-a11y": "10.2.10",
@@ -50,7 +50,7 @@
     "@vitest/coverage-v8": "4.0.18",
     "@vitest/eslint-plugin": "1.6.9",
     "babel-plugin-react-compiler": "19.1.0-rc.3",
-    "eslint": "9.39.3",
+    "eslint": "10.0.1",
     "eslint-config-next": "16.1.6",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-storybook": "10.2.10",
