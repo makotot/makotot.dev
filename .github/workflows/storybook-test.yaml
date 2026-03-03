@@ -2,6 +2,9 @@ name: 'Storybook Tests'
 
 on: push
 
+permissions:
+  contents: read
+
 jobs:
   test:
     timeout-minutes: 30
