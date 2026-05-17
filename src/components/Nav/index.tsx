@@ -8,7 +8,7 @@ export function Nav() {
     <nav className={styles.root}>
       <ul className={styles.list}>
         <li>
-          <Link href="/posts" className={styles.link}>
+          <Link href="/" className={styles.link}>
             Posts
           </Link>
         </li>
