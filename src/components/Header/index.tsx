@@ -1,20 +1,24 @@
 import { sva } from '@/styled-system/css';
 import { Logo } from '../Logo';
+import { Nav } from '../Nav';
 
 export function Header() {
   const styles = style();
 
   return (
     <header className={styles.root}>
-      <div className={styles.logo}>
-        <Logo />
+      <div className={styles.inner}>
+        <div className={styles.logo}>
+          <Logo />
+        </div>
+        <Nav />
       </div>
     </header>
   );
 }
 
 const style = sva({
-  slots: ['root', 'logo'],
+  slots: ['root', 'inner', 'logo'],
   base: {
     root: {
       marginInline: 'auto',
@@ -25,6 +29,11 @@ const style = sva({
         width: '2/3',
         padding: '8',
       },
+    },
+    inner: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: '6',
     },
     logo: {
       display: 'flex',
