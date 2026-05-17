@@ -28,6 +28,23 @@ export default defineConfig({
           date: dateShort(post.date),
         })),
     },
+    til: {
+      name: 'Til',
+      pattern: `til/**/*.mdx`,
+      schema: s
+        .object({
+          title: s.string(),
+          draft: s.boolean(),
+          date: s.isodate(),
+          tags: s.array(s.string()),
+          path: s.path(),
+          code: s.mdx(),
+        })
+        .transform((til) => ({
+          ...til,
+          date: dateShort(til.date),
+        })),
+    },
   },
   mdx: {
     rehypePlugins: [

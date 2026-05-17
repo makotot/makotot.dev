@@ -11,32 +11,34 @@ export default async function Page() {
 }
 
 async function getZennPosts(): Promise<ExternalPost[]> {
-  const res = await fetch('https://zenn.dev/makotot/feed', {
-    next: { revalidate: 86400 },
-  });
-  const text = await res.text();
+  try {
+    const res = await fetch('https://zenn.dev/makotot/feed', {
+      next: { revalidate: 86400 },
+    });
+    const text = await res.text();
 
-  const parser = new RssParser();
-  const feed = await parser.parseString(text);
+    const parser = new RssParser();
+    const feed = await parser.parseString(text);
 
-  const result = feed.items
-    .map((item) => {
-      return {
-        title: item.title,
-        date: item.pubDate ? dateShort(item.pubDate) : '',
-        tags: [] as string[],
-        draft: false,
-        code: '',
-        path: item.link,
-        type: 'zenn',
-      };
-    })
-    .filter(
-      (post): post is ExternalPost =>
-        !!post.title && !!post.date && !!post.path,
-    );
-
-  return result;
+    return feed.items
+      .map((item) => {
+        return {
+          title: item.title,
+          date: item.pubDate ? dateShort(item.pubDate) : '',
+          tags: [] as string[],
+          draft: false,
+          code: '',
+          path: item.link,
+          type: 'zenn',
+        };
+      })
+      .filter(
+        (post): post is ExternalPost =>
+          !!post.title && !!post.date && !!post.path,
+      );
+  } catch {
+    return [];
+  }
 }
 
 function getPublishedPosts({
