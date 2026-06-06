@@ -43,7 +43,7 @@
     "@storybook/addon-onboarding": "10.4.2",
     "@storybook/addon-vitest": "10.4.2",
     "@storybook/nextjs-vite": "10.4.2",
-    "@types/node": "24.12.4",
+    "@types/node": "24.13.0",
     "@types/react": "19.2.16",
     "@types/react-dom": "19.2.3",
     "@vitest/browser-playwright": "4.1.8",
