@@ -1,0 +1,21 @@
+---
+title: git stash で特定ファイルだけをスタッシュできる
+draft: false
+date: '2026-05-17'
+tags:
+  - git
+---
+
+`git stash push` にパスを指定すると、特定のファイルだけをスタッシュできる。
+
+```bash
+git stash push src/some-file.ts
+```
+
+`--` を使って明示的にパスを区切ることもできる。
+
+```bash
+git stash push -- src/some-file.ts
+```
+
+`git stash` (オプションなし) はすべての変更をスタッシュするので、作業中の変更を残しながら一部だけ退避させたいときに便利。
