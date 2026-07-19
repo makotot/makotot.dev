@@ -58,7 +58,7 @@
     "pandacss-preset-typography": "0.1.6",
     "playwright": "1.61.1",
     "postcss": "8.5.19",
-    "prettier": "3.8.5",
+    "prettier": "3.9.5",
     "storybook": "10.4.6",
     "typescript": "6.0.3",
     "velite": "0.4.0",
