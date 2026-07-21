@@ -57,7 +57,7 @@
     "npm-run-all2": "9.0.2",
     "pandacss-preset-typography": "0.1.6",
     "playwright": "1.61.1",
-    "postcss": "8.5.19",
+    "postcss": "8.5.20",
     "prettier": "3.9.5",
     "storybook": "10.5.2",
     "typescript": "6.0.3",
