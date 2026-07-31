@@ -54,7 +54,7 @@
     "eslint-config-next": "16.2.12",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-storybook": "10.5.5",
-    "npm-run-all2": "9.0.2",
+    "npm-run-all2": "9.0.3",
     "pandacss-preset-typography": "0.1.6",
     "playwright": "1.62.0",
     "postcss": "8.5.24",
