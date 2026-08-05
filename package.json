@@ -48,7 +48,7 @@
     "@types/react-dom": "19.2.4",
     "@vitest/browser-playwright": "4.1.10",
     "@vitest/coverage-v8": "4.1.10",
-    "@vitest/eslint-plugin": "1.6.25",
+    "@vitest/eslint-plugin": "1.6.26",
     "babel-plugin-react-compiler": "19.1.0-rc.3",
     "eslint": "9.39.5",
     "eslint-config-next": "16.2.12",
