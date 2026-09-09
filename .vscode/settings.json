@@ -3,7 +3,7 @@
   "editor.quickSuggestions": {
     "strings": "on"
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.formatOnSave": true,
   "workbench.colorCustomizations": {},
   "typescript.preferences.importModuleSpecifier": "relative"

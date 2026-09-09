@@ -4,6 +4,7 @@ import panda from '@pandacss/eslint-plugin';
 import storybook from 'eslint-plugin-storybook';
 import prettier from 'eslint-config-prettier';
 import vitest from '@vitest/eslint-plugin';
+import oxlint from 'eslint-plugin-oxlint';
 
 const eslintConfig = defineConfig([
   // Next.js base + TypeScript setup (flat config array)
@@ -33,6 +34,8 @@ const eslintConfig = defineConfig([
     'build/**',
     'styled-system/**',
     'next-env.d.ts',
+    'storybook-static/**',
+    'coverage/**',
   ]),
 
   // Project-specific rules
@@ -41,6 +44,11 @@ const eslintConfig = defineConfig([
       'func-style': ['error', 'declaration'],
     },
   },
+
+  // Turn off ESLint rules already covered by oxlint, so ESLint only
+  // checks what oxlint can't (e.g. eslint-plugin-storybook rules).
+  // Must stay last so it overrides everything above.
+  ...oxlint.buildFromOxlintConfigFile('./.oxlintrc.json'),
 ]);
 
 export default eslintConfig;

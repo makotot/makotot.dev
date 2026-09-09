@@ -7,9 +7,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```bash
 pnpm dev              # Start dev server (runs Panda codegen + parallel Velite watch + Next.js Turbopack)
 pnpm build            # Production build (Panda codegen + Velite + Next.js)
-pnpm lint             # ESLint
-pnpm format:check     # Prettier check
-pnpm format:write     # Prettier write
+pnpm lint             # oxlint + ESLint
+pnpm format:check     # oxfmt check
+pnpm format:write     # oxfmt write
 pnpm test:unit        # Vitest unit tests
 pnpm test:storybook   # Storybook component tests (requires Playwright)
 pnpm storybook        # Component development UI (port 6006)
