@@ -27,7 +27,7 @@
   "dependencies": {
     "@shikijs/rehype": "4.4.3",
     "@shikijs/transformers": "4.4.3",
-    "next": "16.3.4",
+    "next": "16.3.5",
     "react": "19.3.0",
     "react-aria-components": "1.21.1",
     "react-dom": "19.3.0",
@@ -53,7 +53,7 @@
     "@vitest/eslint-plugin": "1.6.27",
     "babel-plugin-react-compiler": "19.1.0-rc.3",
     "eslint": "9.39.5",
-    "eslint-config-next": "16.3.4",
+    "eslint-config-next": "16.3.5",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-oxlint": "1.82.0",
     "eslint-plugin-storybook": "10.6.0",
