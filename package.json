@@ -58,7 +58,7 @@
     "eslint-plugin-oxlint": "1.83.0",
     "eslint-plugin-storybook": "10.6.0",
     "npm-run-all2": "9.0.3",
-    "oxfmt": "0.68.0",
+    "oxfmt": "0.70.0",
     "oxlint": "1.83.0",
     "oxlint-tsgolint": "7.0.2002",
     "pandacss-preset-typography": "0.1.6",
