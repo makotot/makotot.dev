@@ -6,16 +6,18 @@ import prettier from 'eslint-config-prettier';
 import vitest from '@vitest/eslint-plugin';
 import oxlint from 'eslint-plugin-oxlint';
 
+// Panda CSS's recommended config is now an async factory that preloads the
+// Panda project (config load + compiler) so rule visitors run synchronously.
+const pandaRecommended = await panda.configs.recommended({
+  configPath: './panda.config.ts',
+});
+
 const eslintConfig = defineConfig([
   // Next.js base + TypeScript setup (flat config array)
   ...nextVitals,
 
-  // Panda CSS rules (convert legacy recommended to flat by injecting plugin + rules)
-  {
-    name: 'panda/recommended',
-    plugins: { '@pandacss': panda },
-    rules: panda.configs.recommended.rules,
-  },
+  // Panda CSS rules
+  { ...pandaRecommended, name: 'panda/recommended' },
 
   // Storybook flat recommended config
   ...storybook.configs['flat/recommended'],
