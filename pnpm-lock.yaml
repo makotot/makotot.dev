@@ -206,6 +206,12 @@ importers:
       '@pandacss/eslint-plugin':
         specifier: 2.0.1
         version: 2.0.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(eslint@9.39.5(jiti@1.21.7)(supports-color@7.2.0))
+      '@pandacss/preset-base':
+        specifier: 2.0.1
+        version: 2.0.1
+      '@pandacss/preset-panda':
+        specifier: 2.0.1
+        version: 2.0.1
       '@storybook/addon-a11y':
         specifier: 10.6.1
         version: 10.6.1(storybook@10.6.1(@types/react@19.3.0)(prettier@3.9.6)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))
@@ -1845,6 +1851,14 @@ packages:
     engines: {node: '>=22'}
     peerDependencies:
       postcss: '>=8'
+
+  '@pandacss/preset-base@2.0.1':
+    resolution: {integrity: sha512-kqnBbdjBOio+x2kRBs6RB3iRvSyYCgoKcVCKIJgN7JUmFvK/72Fr1stJxmZbpvG7rev6q2FrE18fAzGITERfUg==}
+    engines: {node: '>=22'}
+
+  '@pandacss/preset-panda@2.0.1':
+    resolution: {integrity: sha512-1tU7WWzZ7k5WoAtv0xSgTG07yamynmJ1nJUJMY6d2G5LzzLAfanwwMocXf4aGmy5y9xd6hXkkEWVY8Dp7W/dpA==}
+    engines: {node: '>=22'}
 
   '@pandacss/types@2.0.1':
     resolution: {integrity: sha512-e47ROgprzZYEIjHLWcrvz8icw09Xr0yvy/pX9CoBzs293l4/bWDLAViQ1FkAD/ISmFisZj/Sbe4RjoEbdB1hEA==}
@@ -6252,6 +6266,14 @@ snapshots:
     transitivePeerDependencies:
       - '@emnapi/core'
       - '@emnapi/runtime'
+
+  '@pandacss/preset-base@2.0.1':
+    dependencies:
+      '@pandacss/types': 2.0.1
+
+  '@pandacss/preset-panda@2.0.1':
+    dependencies:
+      '@pandacss/types': 2.0.1
 
   '@pandacss/types@2.0.1': {}
 

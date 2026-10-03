@@ -40,6 +40,8 @@
     "@eslint/js": "9.39.5",
     "@pandacss/dev": "2.0.1",
     "@pandacss/eslint-plugin": "2.0.1",
+    "@pandacss/preset-base": "2.0.1",
+    "@pandacss/preset-panda": "2.0.1",
     "@storybook/addon-a11y": "10.6.1",
     "@storybook/addon-docs": "10.6.1",
     "@storybook/addon-onboarding": "10.6.1",
