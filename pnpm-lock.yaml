@@ -201,17 +201,17 @@ importers:
         specifier: 9.39.5
         version: 9.39.5
       '@pandacss/dev':
-        specifier: 2.0.1
-        version: 2.0.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(postcss@8.5.28)
+        specifier: 2.1.0
+        version: 2.1.0(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(postcss@8.5.28)
       '@pandacss/eslint-plugin':
-        specifier: 2.0.1
-        version: 2.0.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(eslint@9.39.5(jiti@1.21.7)(supports-color@7.2.0))
+        specifier: 2.1.0
+        version: 2.1.0(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(eslint@9.39.5(jiti@1.21.7)(supports-color@7.2.0))
       '@pandacss/preset-base':
-        specifier: 2.0.1
-        version: 2.0.1
+        specifier: 2.1.0
+        version: 2.1.0
       '@pandacss/preset-panda':
-        specifier: 2.0.1
-        version: 2.0.1
+        specifier: 2.1.0
+        version: 2.1.0
       '@storybook/addon-a11y':
         specifier: 10.6.1
         version: 10.6.1(storybook@10.6.1(@types/react@19.3.0)(prettier@3.9.6)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))
@@ -277,7 +277,7 @@ importers:
         version: 7.0.2003
       pandacss-preset-typography:
         specifier: 0.1.6
-        version: 0.1.6(@pandacss/dev@2.0.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(postcss@8.5.28))
+        version: 0.1.6(@pandacss/dev@2.1.0(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(postcss@8.5.28))
       playwright:
         specifier: 1.63.0
         version: 1.63.0
@@ -1761,77 +1761,77 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@pandacss/cli@2.0.1':
-    resolution: {integrity: sha512-1KQ/8CpzaRN13rL9Q/xaN7IYnk8K5cTrBME4g/rTH3qBRi1jJSK+zqaQLp1kr/g/K058TFtmpeEefID79oEQyg==}
+  '@pandacss/cli@2.1.0':
+    resolution: {integrity: sha512-tpyyDhRtcy3/nH0J8M9BRmKqSLlOjMPafIURNRrZJVt/rA6BVcpFC04sx8mBUTVYk94upQwdMFcOOKkAG5voOA==}
     engines: {node: '>=22'}
     hasBin: true
 
-  '@pandacss/compiler-darwin-arm64@2.0.1':
-    resolution: {integrity: sha512-o9vlPLvy5SkDUQStsVZQl3N+6YULso+P5Xz1Rp3twyXugJnBSmlNZ139nrwk+k18Jw3u6keB1t56ozxStpMlKQ==}
+  '@pandacss/compiler-darwin-arm64@2.1.0':
+    resolution: {integrity: sha512-ib49yMNoXF/I4zC1ZVavxNMgqxXzDFzkZmyt6sEbYxTwbaF4/TsR5N3BBaByoEn5s8soQSMzAEmj6IorEkj08A==}
     engines: {node: '>=22'}
     cpu: [arm64]
     os: [darwin]
 
-  '@pandacss/compiler-darwin-x64@2.0.1':
-    resolution: {integrity: sha512-JWsOTLH6DHlo+FSuYk5Q95Kk/OaTQ7jz14juwODBHS+0/zKHh6ns2/PHCunaaV8GYtISl741WFOpYNDxy7FBtw==}
+  '@pandacss/compiler-darwin-x64@2.1.0':
+    resolution: {integrity: sha512-9t7ZiHaqeiJyYBFAW1oMSkleCw9LvZeUJYqSr2G4McbiajqroyofAtl5jSAU4yws7qzGHpQKCQ0tGASRzVS8nA==}
     engines: {node: '>=22'}
     cpu: [x64]
     os: [darwin]
 
-  '@pandacss/compiler-linux-arm64-gnu@2.0.1':
-    resolution: {integrity: sha512-tkZZcGpLhQEPZC3XAORW2BMKTfpAq7RHinnzA1pF2jbMNPM1rbr8M+W4iWMlnBik67BG7P84W0UEAniarD/ggg==}
+  '@pandacss/compiler-linux-arm64-gnu@2.1.0':
+    resolution: {integrity: sha512-zkBb7TjsdrP8erRqFQO5TMQXT2ln6WzjqBsPcfhmCfUKm0exLRgVPOFGhrRKDMlMj/SAwzj+N/rBLYDHs5Avag==}
     engines: {node: '>=22'}
     cpu: [arm64]
     os: [linux]
     libc: [glibc]
 
-  '@pandacss/compiler-linux-arm64-musl@2.0.1':
-    resolution: {integrity: sha512-glfE1dsHKOLsvBroW171t/FAyyGgdTyUsqRdYNBU03z68CdED/Zthpxxz40NkvUVpclrNyn0pMBt8eoCriGtCw==}
+  '@pandacss/compiler-linux-arm64-musl@2.1.0':
+    resolution: {integrity: sha512-cdNi17Nu2NmmHKqDZpL+MSkEeoKOozQZPHleJ/+cD+Yn6uxzpr8LaTdpb/Rmart9IwlXpHcOIpyjxGPTlcGDlQ==}
     engines: {node: '>=22'}
     cpu: [arm64]
     os: [linux]
     libc: [musl]
 
-  '@pandacss/compiler-linux-x64-gnu@2.0.1':
-    resolution: {integrity: sha512-ZMesxwYmemVjuWUnY27RmMaOWKuEI3dBQbJLrAT445YvtQAZmhl/RyGKFNQ3gjDkNxHcHakoFS14rmg+iQlwkA==}
+  '@pandacss/compiler-linux-x64-gnu@2.1.0':
+    resolution: {integrity: sha512-4FaIVkJuPCf53U1Zvnp9kygLKaN5NvEFvQUmGh3gAXHLe9kelZFd1RYiBnnnSOfDCjPJWHoY/ACjPsIpSQdEzA==}
     engines: {node: '>=22'}
     cpu: [x64]
     os: [linux]
     libc: [glibc]
 
-  '@pandacss/compiler-linux-x64-musl@2.0.1':
-    resolution: {integrity: sha512-bhdJUxZRhJXBAvFI9mcEYR4WFZpfk/QFykyOifJdXzNQplA95Ip20NFn/vUWX0cywKqxhAET/78/ceA01OsvqA==}
+  '@pandacss/compiler-linux-x64-musl@2.1.0':
+    resolution: {integrity: sha512-2xMWubI+dCDbDLfCsPR/N5dYl539FvLcp4HKwIiPfW7JYxsLd2u7CRzaIQWz01vSsKcVyHpMrVenqM7TZuGnMQ==}
     engines: {node: '>=22'}
     cpu: [x64]
     os: [linux]
     libc: [musl]
 
-  '@pandacss/compiler-shared@2.0.1':
-    resolution: {integrity: sha512-Sy98ny1AIlqrX08mVeVJnVOdGkISO0meXw3uleaW6y67BVS1nZ+D+FddVNXxTcBV/wj6ztjQo7Q02s3L9LeEsQ==}
+  '@pandacss/compiler-shared@2.1.0':
+    resolution: {integrity: sha512-c7pbntZM6CZnRvAAcPqPtnWeiLsfj3kA9HpdOxUeWkbUYD52KlxrcdKDLTEpBHsA0FOAy+Iqr1K2dlYA5WMcmA==}
     engines: {node: '>=22'}
 
-  '@pandacss/compiler-win32-arm64-msvc@2.0.1':
-    resolution: {integrity: sha512-sm5kOX0wqvWDu1KFBwh8nWNoHVGUbUDF+ZybFYGLQklkka9OIZ1vQkIHRM7JC0U6o+k1Cn4NYrKkP4QxY9iVPA==}
+  '@pandacss/compiler-win32-arm64-msvc@2.1.0':
+    resolution: {integrity: sha512-Wo7OYElDTmMTHbmet0m055Tbe+K9GfgZpdNwH6YDtd20T11Il0UeK62LobW5vry3+HQRsUbD8aa41xndmKkf/Q==}
     engines: {node: '>=22'}
     cpu: [arm64]
     os: [win32]
 
-  '@pandacss/compiler-win32-x64-msvc@2.0.1':
-    resolution: {integrity: sha512-W0zmJt1GBQ/6Gt6vJ6mo4YRddaX3uHfRkkFZLbvD5C31AM/lE4cIZVoyIUosrlWg9Gt2HjBXPcBqjWXlLlBcwQ==}
+  '@pandacss/compiler-win32-x64-msvc@2.1.0':
+    resolution: {integrity: sha512-HBqNaLrguQtK/pzBQLkpoxii1uJXZ7NngFqmd6n/dVEYcjhdLDHjFZZ/cdI6nuph6vLHZkiAsAT+uuOTHTwH0Q==}
     engines: {node: '>=22'}
     cpu: [x64]
     os: [win32]
 
-  '@pandacss/compiler@2.0.1':
-    resolution: {integrity: sha512-7gg6y35ulyahZ87bNnMDbXwJYcXUf1eIGhdtLOTA8Umz2qkUEimennWVEF04viqV14M0qO63XfRGpu4h+/PvaQ==}
+  '@pandacss/compiler@2.1.0':
+    resolution: {integrity: sha512-i28WQjfIkZTLTGtJUXM7y38Na01/MeZpUMMK5gCgIhnrIiAI97tlfmzDG/c7baMseisFoBouV7vcWrsoWVNUVQ==}
     engines: {node: '>=22'}
 
-  '@pandacss/config@2.0.1':
-    resolution: {integrity: sha512-gsoRTIkofd0isAvJc4VHsb9bzMl5p2M/PAoJy8RWqT6SyOscSLO7ooIUt2OHaQsXSnm/r/NIRpV34ok7a/Ybdg==}
+  '@pandacss/config@2.1.0':
+    resolution: {integrity: sha512-98vLm0hBmXNvkyIYe5/MyU66kHTUFZg8DY9erZ8JXSA7LsKGESvLkB8PnLQPpX4+8dJQQHm8+L0i0k84slXPNQ==}
     engines: {node: '>=22'}
 
-  '@pandacss/dev@2.0.1':
-    resolution: {integrity: sha512-zjk0c4hLJn2kA10K7GZabqwzuQBf6syyu9pflDljOsCPAhS9p8UiVluSl+cOsGb/u3FnerATJEhhE/7IfuXhvw==}
+  '@pandacss/dev@2.1.0':
+    resolution: {integrity: sha512-4mWhqgXKHh1uwlv09FK9F8ivzy7+j12IMQ3FuWvhEdR+2yekz6wabXBLXJzTdQEpahFPSDaym+QKwYPQj9j0WQ==}
     engines: {node: '>=22'}
     hasBin: true
     peerDependencies:
@@ -1840,28 +1840,28 @@ packages:
       postcss:
         optional: true
 
-  '@pandacss/eslint-plugin@2.0.1':
-    resolution: {integrity: sha512-UIDke1ypEEB5BLR7hwqVQz4t0PaTZaJk0X74wRI6dHnYG7BM2t9TulQBCUQudhHFpotqeHHq3f5XgcUiVp6e/g==}
+  '@pandacss/eslint-plugin@2.1.0':
+    resolution: {integrity: sha512-kWytwFjirG5leYIzTJxQ+Mx0Uwo/6O7SFPtwtkm2BJ6d7IZOZOuAUmbBb8J+NGVyxq1vRjcK9fAZq29HUvBJvg==}
     engines: {node: '>=22'}
     peerDependencies:
       eslint: '>=9'
 
-  '@pandacss/postcss@2.0.1':
-    resolution: {integrity: sha512-WFsfi8jPC4pEg6O9qj6l856e12cdu5EMrtp8lzFAN0tGHVWkEmVTsCsgmhuGsgAT3wSokWkfoha69LVN5z3XQQ==}
+  '@pandacss/postcss@2.1.0':
+    resolution: {integrity: sha512-iViE3S4Vh3+4dVLVc0bYp8c5rAxBtCIUcVs/2BUaD+Xk1TE2AE7tSvi1Y1G9FgLh7khUFHzen04Qkqc0tE2jBQ==}
     engines: {node: '>=22'}
     peerDependencies:
       postcss: '>=8'
 
-  '@pandacss/preset-base@2.0.1':
-    resolution: {integrity: sha512-kqnBbdjBOio+x2kRBs6RB3iRvSyYCgoKcVCKIJgN7JUmFvK/72Fr1stJxmZbpvG7rev6q2FrE18fAzGITERfUg==}
+  '@pandacss/preset-base@2.1.0':
+    resolution: {integrity: sha512-48bQ8Pl2QZE0HWE+OMmR2S3ePyuj4uRLk2DuRRKyoStwx8AHOi+Q31/ooR5W+uYqGgKEJJww9BbrWKebtnfrwg==}
     engines: {node: '>=22'}
 
-  '@pandacss/preset-panda@2.0.1':
-    resolution: {integrity: sha512-1tU7WWzZ7k5WoAtv0xSgTG07yamynmJ1nJUJMY6d2G5LzzLAfanwwMocXf4aGmy5y9xd6hXkkEWVY8Dp7W/dpA==}
+  '@pandacss/preset-panda@2.1.0':
+    resolution: {integrity: sha512-+tcgz5TFw9VkyebuYrZ/S/P9HII6EI7lu+qgoyoG5rnTORaEZFz1GIqwtpneSvbeONn7mBQ70+NCxL6Vwi4UOQ==}
     engines: {node: '>=22'}
 
-  '@pandacss/types@2.0.1':
-    resolution: {integrity: sha512-e47ROgprzZYEIjHLWcrvz8icw09Xr0yvy/pX9CoBzs293l4/bWDLAViQ1FkAD/ISmFisZj/Sbe4RjoEbdB1hEA==}
+  '@pandacss/types@2.1.0':
+    resolution: {integrity: sha512-/NlGSiLyoNreV1uymm3g8yOfAm7uYS4dPNuuV/eMgIBv9nBekZOrF35zEpYGoW6YQAgpRJiAw2kUTEI8jmNUgg==}
     engines: {node: '>=22'}
 
   '@parcel/watcher-android-arm64@2.5.6':
@@ -6161,13 +6161,13 @@ snapshots:
   '@oxlint/binding-win32-x64-msvc@1.86.0':
     optional: true
 
-  '@pandacss/cli@2.0.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)':
+  '@pandacss/cli@2.1.0(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)':
     dependencies:
       '@clack/prompts': 1.7.0
-      '@pandacss/compiler': 2.0.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)
-      '@pandacss/compiler-shared': 2.0.1
-      '@pandacss/config': 2.0.1
-      '@pandacss/types': 2.0.1
+      '@pandacss/compiler': 2.1.0(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)
+      '@pandacss/compiler-shared': 2.1.0
+      '@pandacss/config': 2.1.0
+      '@pandacss/types': 2.1.0
       '@parcel/watcher': 2.5.6
       citty: 0.2.2
       fflate: 0.8.3
@@ -6177,57 +6177,57 @@ snapshots:
       - '@emnapi/core'
       - '@emnapi/runtime'
 
-  '@pandacss/compiler-darwin-arm64@2.0.1':
+  '@pandacss/compiler-darwin-arm64@2.1.0':
     optional: true
 
-  '@pandacss/compiler-darwin-x64@2.0.1':
+  '@pandacss/compiler-darwin-x64@2.1.0':
     optional: true
 
-  '@pandacss/compiler-linux-arm64-gnu@2.0.1':
+  '@pandacss/compiler-linux-arm64-gnu@2.1.0':
     optional: true
 
-  '@pandacss/compiler-linux-arm64-musl@2.0.1':
+  '@pandacss/compiler-linux-arm64-musl@2.1.0':
     optional: true
 
-  '@pandacss/compiler-linux-x64-gnu@2.0.1':
+  '@pandacss/compiler-linux-x64-gnu@2.1.0':
     optional: true
 
-  '@pandacss/compiler-linux-x64-musl@2.0.1':
+  '@pandacss/compiler-linux-x64-musl@2.1.0':
     optional: true
 
-  '@pandacss/compiler-shared@2.0.1':
+  '@pandacss/compiler-shared@2.1.0':
     dependencies:
-      '@pandacss/types': 2.0.1
+      '@pandacss/types': 2.1.0
 
-  '@pandacss/compiler-win32-arm64-msvc@2.0.1':
+  '@pandacss/compiler-win32-arm64-msvc@2.1.0':
     optional: true
 
-  '@pandacss/compiler-win32-x64-msvc@2.0.1':
+  '@pandacss/compiler-win32-x64-msvc@2.1.0':
     optional: true
 
-  '@pandacss/compiler@2.0.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)':
+  '@pandacss/compiler@2.1.0(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)':
     dependencies:
       '@napi-rs/wasm-runtime': 1.2.2(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)
-      '@pandacss/compiler-shared': 2.0.1
-      '@pandacss/config': 2.0.1
-      '@pandacss/types': 2.0.1
+      '@pandacss/compiler-shared': 2.1.0
+      '@pandacss/config': 2.1.0
+      '@pandacss/types': 2.1.0
     optionalDependencies:
-      '@pandacss/compiler-darwin-arm64': 2.0.1
-      '@pandacss/compiler-darwin-x64': 2.0.1
-      '@pandacss/compiler-linux-arm64-gnu': 2.0.1
-      '@pandacss/compiler-linux-arm64-musl': 2.0.1
-      '@pandacss/compiler-linux-x64-gnu': 2.0.1
-      '@pandacss/compiler-linux-x64-musl': 2.0.1
-      '@pandacss/compiler-win32-arm64-msvc': 2.0.1
-      '@pandacss/compiler-win32-x64-msvc': 2.0.1
+      '@pandacss/compiler-darwin-arm64': 2.1.0
+      '@pandacss/compiler-darwin-x64': 2.1.0
+      '@pandacss/compiler-linux-arm64-gnu': 2.1.0
+      '@pandacss/compiler-linux-arm64-musl': 2.1.0
+      '@pandacss/compiler-linux-x64-gnu': 2.1.0
+      '@pandacss/compiler-linux-x64-musl': 2.1.0
+      '@pandacss/compiler-win32-arm64-msvc': 2.1.0
+      '@pandacss/compiler-win32-x64-msvc': 2.1.0
     transitivePeerDependencies:
       - '@emnapi/core'
       - '@emnapi/runtime'
 
-  '@pandacss/config@2.0.1':
+  '@pandacss/config@2.1.0':
     dependencies:
-      '@pandacss/compiler-shared': 2.0.1
-      '@pandacss/types': 2.0.1
+      '@pandacss/compiler-shared': 2.1.0
+      '@pandacss/types': 2.1.0
       acorn: 8.18.0
       acorn-walk: 8.3.5
       javascript-stringify: 2.1.0
@@ -6235,47 +6235,47 @@ snapshots:
       microdiff: 1.5.0
       rolldown: 1.2.7
 
-  '@pandacss/dev@2.0.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(postcss@8.5.28)':
+  '@pandacss/dev@2.1.0(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(postcss@8.5.28)':
     dependencies:
-      '@pandacss/cli': 2.0.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)
-      '@pandacss/compiler': 2.0.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)
-      '@pandacss/config': 2.0.1
-      '@pandacss/postcss': 2.0.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(postcss@8.5.28)
-      '@pandacss/types': 2.0.1
+      '@pandacss/cli': 2.1.0(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)
+      '@pandacss/compiler': 2.1.0(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)
+      '@pandacss/config': 2.1.0
+      '@pandacss/postcss': 2.1.0(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(postcss@8.5.28)
+      '@pandacss/types': 2.1.0
     optionalDependencies:
       postcss: 8.5.28
     transitivePeerDependencies:
       - '@emnapi/core'
       - '@emnapi/runtime'
 
-  '@pandacss/eslint-plugin@2.0.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(eslint@9.39.5(jiti@1.21.7)(supports-color@7.2.0))':
+  '@pandacss/eslint-plugin@2.1.0(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(eslint@9.39.5(jiti@1.21.7)(supports-color@7.2.0))':
     dependencies:
-      '@pandacss/compiler': 2.0.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)
-      '@pandacss/compiler-shared': 2.0.1
-      '@pandacss/config': 2.0.1
+      '@pandacss/compiler': 2.1.0(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)
+      '@pandacss/compiler-shared': 2.1.0
+      '@pandacss/config': 2.1.0
       eslint: 9.39.5(jiti@1.21.7)(supports-color@7.2.0)
     transitivePeerDependencies:
       - '@emnapi/core'
       - '@emnapi/runtime'
 
-  '@pandacss/postcss@2.0.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(postcss@8.5.28)':
+  '@pandacss/postcss@2.1.0(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(postcss@8.5.28)':
     dependencies:
-      '@pandacss/compiler': 2.0.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)
-      '@pandacss/compiler-shared': 2.0.1
+      '@pandacss/compiler': 2.1.0(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)
+      '@pandacss/compiler-shared': 2.1.0
       postcss: 8.5.28
     transitivePeerDependencies:
       - '@emnapi/core'
       - '@emnapi/runtime'
 
-  '@pandacss/preset-base@2.0.1':
+  '@pandacss/preset-base@2.1.0':
     dependencies:
-      '@pandacss/types': 2.0.1
+      '@pandacss/types': 2.1.0
 
-  '@pandacss/preset-panda@2.0.1':
+  '@pandacss/preset-panda@2.1.0':
     dependencies:
-      '@pandacss/types': 2.0.1
+      '@pandacss/types': 2.1.0
 
-  '@pandacss/types@2.0.1': {}
+  '@pandacss/types@2.1.0': {}
 
   '@parcel/watcher-android-arm64@2.5.6':
     optional: true
@@ -7076,7 +7076,7 @@ snapshots:
 
   acorn-walk@8.3.5:
     dependencies:
-      acorn: 8.15.0
+      acorn: 8.18.0
 
   acorn@8.15.0: {}
 
@@ -9064,9 +9064,9 @@ snapshots:
     dependencies:
       p-limit: 3.1.0
 
-  pandacss-preset-typography@0.1.6(@pandacss/dev@2.0.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(postcss@8.5.28)):
+  pandacss-preset-typography@0.1.6(@pandacss/dev@2.1.0(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(postcss@8.5.28)):
     dependencies:
-      '@pandacss/dev': 2.0.1(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(postcss@8.5.28)
+      '@pandacss/dev': 2.1.0(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(postcss@8.5.28)
       '@tailwindcss/typography': 0.5.19(tailwindcss@3.4.19)
       tailwindcss: 3.4.19
     transitivePeerDependencies:
