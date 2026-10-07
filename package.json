@@ -65,7 +65,7 @@
     "oxlint-tsgolint": "7.0.2003",
     "pandacss-preset-typography": "0.1.6",
     "playwright": "1.63.0",
-    "postcss": "8.5.28",
+    "postcss": "8.5.29",
     "storybook": "10.6.1",
     "typescript": "6.0.3",
     "velite": "0.4.0",
