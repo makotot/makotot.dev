@@ -62,7 +62,7 @@
     "npm-run-all2": "9.0.3",
     "oxfmt": "0.72.0",
     "oxlint": "1.87.0",
-    "oxlint-tsgolint": "7.0.2003",
+    "oxlint-tsgolint": "7.0.2004",
     "pandacss-preset-typography": "0.1.6",
     "playwright": "1.64.0",
     "postcss": "8.5.29",
