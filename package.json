@@ -57,7 +57,7 @@
     "eslint": "9.39.5",
     "eslint-config-next": "16.3.8",
     "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-oxlint": "1.87.0",
+    "eslint-plugin-oxlint": "1.88.0",
     "eslint-plugin-storybook": "10.6.2",
     "npm-run-all2": "9.0.3",
     "oxfmt": "0.73.0",
