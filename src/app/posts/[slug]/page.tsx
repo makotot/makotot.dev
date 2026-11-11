@@ -1,12 +1,16 @@
 import { posts } from '#site/content';
 import { Post } from '@/src/features/Posts/components/Post';
+import {
+  getPublishedPostBySlug,
+  getPublishedSlugs,
+} from '@/src/features/Posts/utils/publishedPosts';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-function getPostBySlug(slug: string) {
-  return posts.find((post) => {
-    return post.path.split('posts/').at(-1) === slug;
-  });
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return getPublishedSlugs(posts);
 }
 
 type PageProps = {
@@ -19,7 +23,7 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = getPublishedPostBySlug(posts, slug);
 
   if (!post) {
     return {
@@ -34,7 +38,7 @@ export async function generateMetadata({
 
 export default async function Page({ params }: PageProps) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = getPublishedPostBySlug(posts, slug);
   if (!post) {
     return notFound();
   }

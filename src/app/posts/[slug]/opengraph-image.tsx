@@ -1,5 +1,10 @@
-import { ImageResponse } from 'next/og';
 import { posts } from '#site/content';
+import { ImageResponse } from 'next/og';
+import { notFound } from 'next/navigation';
+import {
+  getPublishedPostBySlug,
+  getPublishedSlugs,
+} from '@/src/features/Posts/utils/publishedPosts';
 
 export const size = {
   width: 1200,
@@ -7,32 +12,22 @@ export const size = {
 };
 export const contentType = 'image/png';
 
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return getPublishedSlugs(posts);
+}
+
 export default async function Image({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = getPublishedPostBySlug(posts, slug);
 
   if (!post) {
-    return new ImageResponse(
-      <div
-        style={{
-          fontSize: 48,
-          background: '#222222',
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: '#FFFFFF',
-        }}
-      >
-        Post not found
-      </div>,
-      { ...size },
-    );
+    notFound();
   }
 
   return new ImageResponse(
@@ -105,10 +100,4 @@ export default async function Image({
     </div>,
     { ...size },
   );
-}
-
-function getPostBySlug(slug: string) {
-  return posts.find((post) => {
-    return post.path.split('posts/').at(-1) === slug;
-  });
 }

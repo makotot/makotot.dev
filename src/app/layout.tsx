@@ -5,6 +5,7 @@ import { Footer } from '@/src/components/Footer';
 import { Main } from '@/src/components/Main';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://makotot.dev'),
   title: 'makotot.dev',
   description: '',
   openGraph: {
