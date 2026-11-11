@@ -33,7 +33,7 @@ async function getZennPosts(): Promise<ExternalPost[]> {
     })
     .filter(
       (post): post is ExternalPost =>
-        !!post.title && !!post.date && !!post.path,
+        !!post.title && !!post.date && !!post.path?.startsWith('https://'),
     );
 
   return result;

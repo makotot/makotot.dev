@@ -4,7 +4,6 @@ import { dateISO8601 } from '../../formatter/dateISO8601';
 import { ExternalPost } from '../../types';
 import { Post } from '../../../../../.velite';
 import { dateShort } from '../../formatter/dateShort';
-import { Route } from 'next';
 
 type Props = {
   posts: (ExternalPost | Post)[];
@@ -20,7 +19,7 @@ export function Posts({ posts }: Props) {
           <time className={styles.time} dateTime={dateISO8601(post.date)}>
             {dateShort(post.date)}
           </time>
-          <Link href={post.path as Route} className={styles.link}>
+          <Link href={toHref(post)} className={styles.link}>
             <span>{post.title}</span>
             {'type' in post && post.type === 'zenn' ? (
               <>
@@ -33,6 +32,19 @@ export function Posts({ posts }: Props) {
       ))}
     </ol>
   );
+}
+
+/**
+ * Local post paths from Velite are relative (e.g. 'posts/foo'), so build '/posts/foo'.
+ * External posts already have absolute URLs.
+ */
+function toHref(
+  post: ExternalPost | Post,
+): ExternalPost['path'] | `/posts/${string}` {
+  if ('type' in post && post.type === 'zenn') {
+    return post.path;
+  }
+  return `/posts/${post.path.replace('posts/', '')}`;
 }
 
 const style = sva({

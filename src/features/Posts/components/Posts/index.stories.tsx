@@ -14,7 +14,7 @@ const meta: Meta<ComponentType> = {
         tags: [],
         draft: false,
         code: 'post-1-code',
-        path: '/posts/post-1',
+        path: 'posts/post-1',
       },
       {
         title: 'Post 2 from Zenn',
@@ -22,7 +22,7 @@ const meta: Meta<ComponentType> = {
         tags: [],
         draft: false,
         code: 'post-2-code',
-        path: '/posts/post-2',
+        path: 'https://zenn.dev/makotot/articles/post-2',
         type: 'zenn',
       },
     ],
