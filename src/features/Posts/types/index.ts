@@ -1,3 +1,6 @@
 import { type Post } from '#site/content';
 
-export type ExternalPost = Post & { type: 'zenn' };
+export type ExternalPost = Omit<Post, 'path'> & {
+  type: 'zenn';
+  path: `https://${string}`;
+};
